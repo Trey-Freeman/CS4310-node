@@ -1,5 +1,6 @@
 var express = require('express');
 var passport = require('passport');
+var path = require('path');
 var Account = require('../models/account');
 var router = express.Router();
 
@@ -46,6 +47,11 @@ router.get('/logout', function(req, res) {
 
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
+});
+
+/* GET the js for the registration page*/
+router.get('/public/javascripts/register.js', function (req, res, next) {
+    res.sendFile(path.resolve('public/javascripts/register.js'));
 });
 
 module.exports = router;
