@@ -50,8 +50,22 @@ router.get('/ping', function(req, res){
 });
 
 /* GET the js for the registration page*/
-router.get('/public/javascripts/register.js', function (req, res, next) {
+router.get('/public/javascripts/register.js', function (req, res) {
     res.sendFile(path.resolve('public/javascripts/register.js'));
 });
 
+/* GET the js for the index page (will use as demo for video chat)*/
+router.get('/public/javascripts/index.js', function(req, res) {
+    res.sendFile(path.resolve('public/javascripts/index.js'));
+});
+
+/* GET the js for the index page (will use as demo for video chat)*/
+router.get('/public/javascripts/rtc.min.js', function(req, res) {
+    res.sendFile(path.resolve('public/javascripts/rtc.min.js'));
+});
+
+/* GET the js for the index page (will use as demo for video chat)*/
+router.get('/public/javascripts/rtc.min.js.map', function(req, res) {
+    res.sendFile(path.resolve('public/javascripts/rtc.min.js.map'));
+});
 module.exports = router;

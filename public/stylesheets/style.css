@@ -5,3 +5,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+#l-video {
+	min-height: 200px;
+}
+
+video {
+	min-height: 200px;
+}

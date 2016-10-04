@@ -1,1 +1,9 @@
 extends layout
+
+block content
+  #messages(contenteditable)
+  #l-video
+  #r-video
+block scripts
+  script(src='../public/javascripts/rtc.min.js')
+  script(src='../public/javascripts/index.js')
