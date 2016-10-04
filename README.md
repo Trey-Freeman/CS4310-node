@@ -1,6 +1,8 @@
 # Group project for CS4130 at CSU East Bay
 
-## Team Name: Alfa  (Authors)
+## Team Name: Alfa
+
+### Authors
 - Andrea Sánchez Blanco
 - Steven Rivera-James
 - Thomas “Trey” Freeman

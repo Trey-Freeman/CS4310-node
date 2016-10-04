@@ -45,8 +45,8 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
-router.get('/ping', function(req, res){
-    res.status(200).send("pong!");
+router.get('/profile', function(req, res) {
+    res.render('profile', { user : req.user });
 });
 
 /* GET the js for the registration page*/
