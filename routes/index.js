@@ -90,10 +90,14 @@ router.get('/public/javascripts/register.js', function (req, res) {
 });
 
 /* GET the js for the index page (will use as demo for video chat)*/
-router.get('/public/javascripts/index.js', function(req, res) {
-    res.sendFile(path.resolve('public/javascripts/index.js'));
+router.get('/public/javascripts/chat.js', function(req, res) {
+    res.sendFile(path.resolve('public/javascripts/chat.js'));
 });
 
+/* GET the js for the index page*/
+router.get('/public/javascripts/main.js', function(req, res) {
+    res.sendFile(path.resolve('public/javascripts/main.js'));
+});
 /* GET the js for the index page (will use as demo for video chat)*/
 router.get('/public/javascripts/rtc.min.js', function(req, res) {
     res.sendFile(path.resolve('public/javascripts/rtc.min.js'));

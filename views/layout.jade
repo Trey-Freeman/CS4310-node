@@ -18,7 +18,7 @@ html
           a.navbar-brand(href="/") HR Hub
    
       #navbar-inverse.collapse.navbar-collapse
-          ul.nav.navbar-nav
+          ul#nav-buttons.nav.navbar-nav
             li.active: a( href="/") Home
             li: a( href="#timesheet" ) Timesheet
             li.dropdown
@@ -43,6 +43,7 @@ html
       block content
     footer
       p Footer Here
+    script(src='../public/javascripts/main.js')
     block scripts
 
 
