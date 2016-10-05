@@ -13,7 +13,11 @@ router.all('/action/*', function(req, res, next) {
 
 /* GET Handle request to render te index page. If a user is logged in, dispay that user */
 router.get('/', function (req, res) {
-    res.render('index', { user : req.user });
+    if(!req.isAuthenticated())
+        return res.render('index', {tickets: []});
+    Ticket.find({account: req.user._id}, function(err, tickets) {
+        res.render('index', {user: req.user, tickets: tickets});
+    });
 });
 
 /* GET Handle request for registration page. Render registration page */
