@@ -13,11 +13,7 @@ router.all('/action/*', function(req, res, next) {
 
 /* GET Handle request to render te index page. If a user is logged in, dispay that user */
 router.get('/', function (req, res) {
-    if(!req.isAuthenticated())
-        return res.render('index', {tickets: []});
-    Ticket.find({account: req.user._id}, function(err, tickets) {
-        res.render('index', {user: req.user, tickets: tickets});
-    });
+    res.render('index', {user: req.user});
 });
 
 /* GET Handle request for registration page. Render registration page */
@@ -27,6 +23,14 @@ router.get('/register', function(req, res) {
 
 router.get('/trip', function(req, res) {
     res.render('trip');
+});
+
+router.get('/action/tickets', function(req, res) {
+    if(!req.isAuthenticated())
+        return res.render('tickets', {tickets: []});
+    Ticket.find({account: req.user._id}, function(err, tickets) {
+        res.render('tickets', {user: req.user, tickets: tickets});
+    });
 });
 
 router.post('/action/ticket', function(req, res) {

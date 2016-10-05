@@ -1,0 +1,13 @@
+extend layout
+
+block content
+  h3 Tickets for #{user.username}
+  ul#tickets
+      if (!tickets)
+        li Sorry, no tickets.
+      else
+        each ticket, i in tickets
+            h4 Ticket #{i}
+              li= ticket.location
+              li= ticket.distance
+block scripts
