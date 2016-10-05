@@ -1,13 +1,14 @@
 extend layout
 
 block content
-  form(role='form', action="/action/ticket",method="post", style='max-width: 300px;')
-    .form-group
-      input.form-control(type='text', name="location", placeholder='Local')
-    .form-group
-      input.form-control(type='text', name="distance", placeholder='Distance')
-    button.btn.btn-default(type='submit') Submit
-      a(href='/')
-    button.btn.btn-primary(type="button") Cancel
+  .row
+    form(role='form', action="/action/ticket",method="post", style='max-width: 300px;')
+      .form-group
+        input.form-control(type='text', name="location", placeholder='Local')
+      .form-group
+        input.form-control(type='text', name="distance", placeholder='Distance')
+      button.btn.btn-default(type='submit') Submit
+        a(href='/')
+      button.btn.btn-primary(type="button") Cancel
 
 block scripts

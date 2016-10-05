@@ -76,6 +76,10 @@ router.get('/profile', function(req, res) {
     res.render('profile', { user : req.user });
 });
 
+router.get('/action/chat', function(req, res) {
+    res.render('chat', {user : req.user});
+})
+
 /* GET the js for the registration page*/
 router.get('/public/javascripts/register.js', function (req, res) {
     res.sendFile(path.resolve('public/javascripts/register.js'));

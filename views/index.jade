@@ -1,12 +1,1 @@
 extends layout
-
-block content
-  #messages(contenteditable)
-  #l-video.col-md-5.col-md-offset-1
-  #r-video.col-md-5.col-md-offset-1
-  ul#tickets
-    for ticket in tickets
-      li= ticket.location
-block scripts
-  script(src='../public/javascripts/rtc.min.js')
-  script(src='../public/javascripts/index.js')
