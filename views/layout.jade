@@ -21,7 +21,14 @@ html
           ul.nav.navbar-nav
             li.active: a( href="/") Home
             li: a( href="#timesheet" ) Timesheet
-            li: a( href="/trip" ) Trip Tickets
+            li.dropdown
+              a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Trip Tickets 
+                  span.caret
+              ul.dropdown-menu( role="menu" )
+                    li: a( href="/trip" ) New Ticket
+                    li: a( href="/action/tickets" ) View Tickets
+                    li: a( href="#" ) Edit Tickets
+                    li: a( href="#" ) Delete Tickets
             li: a( href="#dropdown" ) Directions
             li: a( href="#contact") Live Chat
 
