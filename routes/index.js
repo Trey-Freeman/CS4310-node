@@ -2,7 +2,14 @@ var express = require('express');
 var passport = require('passport');
 var path = require('path');
 var Account = require('../models/account');
+var Ticket = require('../models/ticket');
 var router = express.Router();
+
+router.all('/action/*', function(req, res, next) {
+    if(!req.isAuthenticated())
+        return res.redirect('/login');
+    next();
+});
 
 /* GET Handle request to render te index page. If a user is logged in, dispay that user */
 router.get('/', function (req, res) {
@@ -12,6 +19,22 @@ router.get('/', function (req, res) {
 /* GET Handle request for registration page. Render registration page */
 router.get('/register', function(req, res) {
     res.render('register');
+});
+
+router.get('/trip', function(req, res) {
+    res.render('trip');
+});
+
+router.post('/action/ticket', function(req, res) {
+    var ticket = req.body;
+    Ticket.create({
+        account: req.user._id,
+        location: ticket.location,
+        distance: ticket.distance
+        }, function(err) {
+            if(err) return res.status(500).send(err);
+            res.redirect('/');
+        });
 });
 
 /* POST Handle a registration through post. If a username and password is provided, then set new account entry in mongo */

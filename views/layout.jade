@@ -21,7 +21,7 @@ html
           ul.nav.navbar-nav
             li.active: a( href="/") Home
             li: a( href="#timesheet" ) Timesheet
-            li: a( href="#trip" ) Trip Tickets
+            li: a( href="/trip" ) Trip Tickets
             li: a( href="#dropdown" ) Directions
             li: a( href="#contact") Live Chat
 
@@ -32,7 +32,7 @@ html
             if (user)
               li: p You are currently logged in as #{user.username}
               li: a(href="/logout") Logout
-    .main-content
+    .main-content.row
       block content
     footer
       p Footer Here
