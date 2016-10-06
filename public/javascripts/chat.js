@@ -1,4 +1,4 @@
-// Set RTC options.
+/*// Set RTC options.
 var rtcOpts = {
     room: 'test-room'
   };
@@ -36,4 +36,24 @@ $(localVideo).append(rtc.local);
 $(remoteVideo).append(rtc.remote);
 
 // Detect when RTC has established a session
-rtc.on('ready', init);
+rtc.on('ready', init);*/
+
+(function() {
+  //Create a new peer object
+  var peer = new Peer({key: 'zsbti8t1df91kyb9'});
+
+  //Open a connection
+  //Whenever a a new conenciton is opened, we are supplied with a unique id, whcihc we use for connecting to other peers
+  peer.on('open', function(id) {
+    console.log('My peer ID is: ' +id);
+  })
+
+  peer.on('connection', function(conn) {
+    console.log('Connected');
+  });
+
+  var conn = peer.connect('');
+
+
+
+})();
