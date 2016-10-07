@@ -40,7 +40,7 @@ rtc.on('ready', init);*/
 
 (function() {
   //Create a new peer object
-  var peer = new Peer({key: 'zsbti8t1df91kyb9'});
+  peer = new Peer({key: 'zsbti8t1df91kyb9'});
 
   //Open a connection
   //Whenever a a new conenciton is opened, we are supplied with a unique id, whcihc we use for connecting to other peers
@@ -51,9 +51,4 @@ rtc.on('ready', init);*/
   peer.on('connection', function(conn) {
     console.log('Connected');
   });
-
-  var conn = peer.connect('');
-
-
-
 })();
