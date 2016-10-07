@@ -39,8 +39,18 @@ $(remoteVideo).append(rtc.remote);
 rtc.on('ready', init);*/
 
 (function() {
+  $(document).ready(function() {
+    $('#message-button').on('click', function() {
+      sendMessage();
+    });
+    $('#message-box').on('keypress', function(e) {
+      if(e.which === 13)
+        sendMessage();
+    });
+  });
+
   //Create a new peer object
-  peer = new Peer({
+  var peer = new Peer({
     host: location.hostname,
     port: location.port || (location.protocol === 'https:' ? 443 : 80),
     path: '/peerjs'
@@ -51,7 +61,7 @@ rtc.on('ready', init);*/
   peer.on('open', function(id) {
     console.log('My peer ID is: ' + id);
   })
-
+  //Handling a connection
   peer.on('connection', function(conn) {
     console.log('Connected');
   });
@@ -72,6 +82,18 @@ rtc.on('ready', init);*/
     window.localStream = stream;
     onReceiveStream(stream, 'my-camera');
   });
+
+  function handleMessage(data) {
+    $('#messages').append('<p>' + data + '</p>');
+  }
+
+  function sendMessage() {
+    var text = $('#message-box').val();
+    var data;
+    handleMessage(text);
+    $('#messages').scrollTop($('#messages')[0].scrollHeight)
+    $('#message-box').val('');
+  }
 
 
 })();

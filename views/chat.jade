@@ -1,12 +1,22 @@
 extends layout
 
 block content
-  #messages(contenteditable)
-  #l-video.col-md-5.col-md-offset-1
-  #r-video.col-md-5.col-md-offset-1
   .row
-    #my-camera.camera.col-md-4
-      video(height="200")
+    #my-camera.camera.col-md-4.col-md-offset-2
+      video
+    #their-camera.col-md-4.col.col-md-offset2
+      video
+      
+  .row
+    #messages.col-xs-8.col-xs-offset-2
+  .row
+    #message-box-wrapper.col-xs-8.col-xs-offset-2
+      .input-group
+        input#message-box.form-control
+        span.input-group-btn
+          button#message-button.btn.btn-default(type='button') Submit
+
+
 block scripts
   script(src='../public/javascripts/peer.js')
   script(src='../public/javascripts/chat.js')
