@@ -1,13 +1,16 @@
 extend layout
 
 block content
-  h3 Tickets for #{user.username}
-  ul#tickets
-      if (!tickets)
-        li Sorry, no tickets.
-      else
-        each ticket, i in tickets
-            h4 Ticket #{i}
-              li= ticket.location
-              li= ticket.distance
+  .container
+    .col-md-6.col-centered
+      h3 Tickets for #{user}
+        if (!tickets)
+          li Sorry, no tickets.
+        else
+          each ticket, i in tickets
+            ul.tickets
+              .row.row-centered
+                h4 Ticket #{i}
+                  li= ticket.location
+                  li= ticket.distance
 block scripts
