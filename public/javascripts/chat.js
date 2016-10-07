@@ -40,7 +40,11 @@ rtc.on('ready', init);*/
 
 (function() {
   //Create a new peer object
-  peer = new Peer({key: 'zsbti8t1df91kyb9'});
+  peer = new Peer({
+    host: location.hostname,
+    port: location.port || (location.protocol === 'https:' ? 443 : 80),
+    path: '/peerjs'
+  });
 
   //Open a connection
   //Whenever a a new conenciton is opened, we are supplied with a unique id, whcihc we use for connecting to other peers
