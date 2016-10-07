@@ -29,7 +29,9 @@ router.get('/action/tickets', function(req, res) {
     if(!req.isAuthenticated())
         return res.render('tickets', {tickets: []});
     Ticket.find({account: req.user._id}, function(err, tickets) {
-        res.render('tickets', {user: req.user, tickets: tickets});
+        //Username to TitleCase
+        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
+        res.render('tickets', {user: username, tickets: tickets});
     });
 });
 
