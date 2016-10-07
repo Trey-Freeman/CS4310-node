@@ -94,6 +94,11 @@ router.get('/public/javascripts/chat.js', function(req, res) {
     res.sendFile(path.resolve('public/javascripts/chat.js'));
 });
 
+/* GET the js for the index page (will use as demo for video chat)*/
+router.get('/public/javascripts/peer.js', function(req, res) {
+    res.sendFile(path.resolve('public/javascripts/peer.js'));
+});
+
 /* GET the js for the index page*/
 router.get('/public/javascripts/main.js', function(req, res) {
     res.sendFile(path.resolve('public/javascripts/main.js'));

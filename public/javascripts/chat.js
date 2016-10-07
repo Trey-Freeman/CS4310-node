@@ -47,12 +47,31 @@ rtc.on('ready', init);*/
   });
 
   //Open a connection
-  //Whenever a a new conenciton is opened, we are supplied with a unique id, whcihc we use for connecting to other peers
+  //Whenever a a new conenciton is opened, we are supplied with a unique id, which we use for connecting to other peers
   peer.on('open', function(id) {
-    console.log('My peer ID is: ' +id);
+    console.log('My peer ID is: ' + id);
   })
 
   peer.on('connection', function(conn) {
     console.log('Connected');
   });
+
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+  function getVideo(callback) {
+    navigator.getUserMedia({audio: true, video: true}, callback, function(error) {alert('An error occurred'); console.log(error);});
+  }
+
+  function onReceiveStream(stream, elementID){
+    var video = $('#' + elementID + ' video')[0];
+    video.src = window.URL.createObjectURL(stream);
+    window.peer_stream = stream;
+  }
+
+  getVideo(function(stream) {
+    window.localStream = stream;
+    onReceiveStream(stream, 'my-camera');
+  });
+
+
 })();

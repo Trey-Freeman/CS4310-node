@@ -835,6 +835,7 @@ Peer.prototype._retrieveId = function(cb) {
     this.options.path + this.options.key + '/id';
   var queryString = '?ts=' + new Date().getTime() + '' + Math.random();
   url += queryString;
+  console.log(url);
 
   // If there's no ID we need to wait for one before trying to init socket.
   http.open('get', url, true);

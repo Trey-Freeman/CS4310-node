@@ -4,6 +4,10 @@ block content
   #messages(contenteditable)
   #l-video.col-md-5.col-md-offset-1
   #r-video.col-md-5.col-md-offset-1
+  .row
+    #my-camera.camera.col-md-4
+      video(height="200")
 block scripts
-  script(src="//cdn.peerjs.com/0.3/peer.min.js")
+  script(src='../public/javascripts/peer.js')
   script(src='../public/javascripts/chat.js')
+  
