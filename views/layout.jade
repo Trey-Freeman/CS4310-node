@@ -37,8 +37,9 @@ html
               li: a(href="/login") Login
               li: a(href="/register") Register
             if (user)
-              li: p You are currently logged in as #{user.username}
+              li: p #{user.username}
               li: a(href="/logout") Logout
+              #hidden-username(data-username= '#{user.username}' hidden)
     .main-content.container-fluid
       block content
     footer

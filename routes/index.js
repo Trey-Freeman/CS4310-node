@@ -4,6 +4,7 @@ var path = require('path');
 var Account = require('../models/account');
 var Ticket = require('../models/ticket');
 var router = express.Router();
+var rooms = {};
 
 router.all('/action/*', function(req, res, next) {
     if(!req.isAuthenticated())
@@ -82,9 +83,39 @@ router.get('/profile', function(req, res) {
     res.render('profile', { user : req.user });
 });
 
+router.get('/action/join', function(req, res) {
+    res.render('join', { user : req.user });
+});
+
+/* POST handle a user tryin to join or create a room.
+ * If a room exists and invalid password is provided, then send error
+ * If the password is valid, send a success signal
+ * If it doesn't exist, then create it and add the user to the room*/
+/*router.post('/action/checkChat', function(req, res) {
+    if (req.body.name in rooms) {
+        if (req.body.password !== rooms[req.body.name])
+            return res.status(500).send('Invaliad room password');
+        return res.send('Success!');
+    }
+    rooms[req.body.name] = {password: req.body.password, users: [req.user]};
+});*/
+
+/* */
+/*router.post('/action/chat', function(req, res) {
+    if(req.body.name in rooms) {
+        //TODO: find a better way to error out for this
+        if (req.body.password !== rooms[req.body.name])
+            return next();
+        rooms[req.body.name].users.push(req.user);
+        return res.render('chat', {user: req.user});
+    }
+    rooms[req.body.name] = {password: req.body.password, users: [req.user]};
+    res.render('chat', {user: req.user});
+});*/
+
 router.get('/action/chat', function(req, res) {
-    res.render('chat', {user : req.user});
-})
+    res.render('chat', {user: req.user});
+});
 
 /* GET the js for the registration page*/
 router.get('/public/javascripts/register.js', function (req, res) {
@@ -113,5 +144,10 @@ router.get('/public/javascripts/rtc.min.js', function(req, res) {
 /* GET the js for the index page (will use as demo for video chat)*/
 router.get('/public/javascripts/rtc.min.js.map', function(req, res) {
     res.sendFile(path.resolve('public/javascripts/rtc.min.js.map'));
+});
+
+/* GET socket.io-client */
+router.get('/public/javascripts/socket.io.js', function(req, res) {
+    res.sendFile(path.resolve('public/javascripts/socket.io.js'));
 });
 module.exports = router;

@@ -16,13 +16,47 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server and Peer Server
+ * Create HTTP server, Peer Server, and testing with socket.io
  */
 
 var server = http.createServer(app);
 var ExpressPeerServer = require('peer').ExpressPeerServer;
 var expressPeerServer = ExpressPeerServer(server, {debug: true});
 app.use('/peerjs', expressPeerServer);
+
+var io = require('socket.io')(server);
+var rooms = {};
+
+/* handle incoming connections from clients */
+io.sockets.on('connection', function(socket) {
+  //handle a user trying to join a room
+  	socket.on('room', function(data) {
+  		if (data.room in rooms) {
+        	if (data.password !== rooms[data.room].password)
+            	socket.emit('failed login');
+        	else {
+        		socket.join(data.room);
+        		rooms[data.room].users.push(socket.id);
+        		socket.emit('joined', {room: data.room, id: socket.id});
+        	}
+    	} else {
+    		rooms[data.room] = {password: data.password, users: [data.user]};
+    		socket.join(data.room);
+        socket.emit('joined', {room: data.room, id: socket.id});
+    	}
+  	});
+	
+	socket.on('message', function(data) {
+		if (data.room in rooms && rooms[data.room].users.indexOf(data.user) !== -1) {
+			io.to(data.room).emit('message', data.message);
+			socket.to(data.room).emit('message', data.message);
+		} else {
+			console.log(000);
+		}
+	});
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

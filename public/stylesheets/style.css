@@ -36,3 +36,8 @@ ul {
 	border-style: solid;
 	border-width: 0px thin thin thin;
 }
+
+#invalid-password-message {
+	color: red;
+	font-weight: thick;
+}

@@ -22,6 +22,6 @@
     "peerjs": "^0.3.14",
     "rtc": "^3.4.0",
     "serve-favicon": "~2.3.0",
-    "socket.io": "^1.4.8"
+    "socket.io": "^1.5.0"
   }
 }

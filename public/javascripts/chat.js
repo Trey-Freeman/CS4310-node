@@ -39,61 +39,104 @@ $(remoteVideo).append(rtc.remote);
 rtc.on('ready', init);*/
 
 (function() {
-  $(document).ready(function() {
-    $('#message-button').on('click', function() {
-      sendMessage();
-    });
-    $('#message-box').on('keypress', function(e) {
-      if(e.which === 13)
-        sendMessage();
-    });
-  });
+	var socket = io.connect();
+	var room;
+	var user;
 
-  //Create a new peer object
-  var peer = new Peer({
-    host: location.hostname,
-    port: location.port || (location.protocol === 'https:' ? 443 : 80),
-    path: '/peerjs'
-  });
+	$(document).ready(function() {
+		user = $('#hidden-username').attr('data-val')
+		//On click, submit to socketio t0 join a room
+		$('#submit').on('click', function() {
+			console.log('joining');
+			room = $('#room-name').val()
+			socket.emit('room', {room: room,
+				user: user,
+				password: $('#room-password').val()});
+		});
 
-  //Open a connection
-  //Whenever a a new conenciton is opened, we are supplied with a unique id, which we use for connecting to other peers
-  peer.on('open', function(id) {
-    console.log('My peer ID is: ' + id);
-  })
-  //Handling a connection
-  peer.on('connection', function(conn) {
-    console.log('Connected');
-  });
+		//If message button is clicked, then send the message
+		$('#message-button').on('click', function() {
+			sendMessage();
+		});
 
-  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		//If user clicks enter while typing message, then send message
+		$('#message-box').on('keypress', function(e) {
+			if(e.which === 13)
+				sendMessage();
+		});
+	});
 
-  function getVideo(callback) {
-    navigator.getUserMedia({audio: true, video: true}, callback, function(error) {alert('An error occurred'); console.log(error);});
-  }
+	//If the user joined/created a room successfully, do animation
+	socket.on('joined', function(data) {
+		//For sanity
+		room = data.room;
+	    $('#join-view').slideUp(1000, function() {
+	    	$('#chat-view').slideDown(1000);
+	    });
+	    
+	});
+	//If the user received a message, then show that message
+	socket.on('message', function(data) {
+		handleMessage(data);
+		console.log('Incoming message:', data);
+	});
 
-  function onReceiveStream(stream, elementID){
-    var video = $('#' + elementID + ' video')[0];
-    video.src = window.URL.createObjectURL(stream);
-    window.peer_stream = stream;
-  }
+	socket.on('failed login', function() {
+		$('#invalid-password-message').show();
+	});
 
-  getVideo(function(stream) {
-    window.localStream = stream;
-    onReceiveStream(stream, 'my-camera');
-  });
+	//Create a new peer object
+	var peer = new Peer({
+		host: location.hostname,
+		port: location.port || (location.protocol === 'https:' ? 443 : 80),
+		path: '/peerjs'
+	});
 
-  function handleMessage(data) {
-    $('#messages').append('<p>' + data + '</p>');
-  }
+	//Open a connection
+	//Whenever a a new conenciton is opened, we are supplied with a unique id, which we use for connecting to other peers
+	peer.on('open', function(id) {
+		console.log('My peer ID is: ' + id);
+	})
+	//Handling a connection
+	peer.on('connection', function(conn) {
+		console.log('Connected');
+	});
 
-  function sendMessage() {
-    var text = $('#message-box').val();
-    var data;
-    handleMessage(text);
-    $('#messages').scrollTop($('#messages')[0].scrollHeight)
-    $('#message-box').val('');
-  }
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+	/* Tell the navigator to get user's webcam feed (video and audio included) */
+	function getVideo(callback) {
+		navigator.getUserMedia({audio: true, video: true}, callback, function(error) {alert('An error occurred'); console.log(error);});
+	}
+
+	/* What to do when a user starts receiving a stream (local or remote)
+	* Display it to the video object for the given video element */
+	function onReceiveStream(stream, elementID){
+		var video = $('#' + elementID + ' video')[0];
+		video.src = window.URL.createObjectURL(stream);
+		window.peer_stream = stream;
+	}
+
+	/* Get video from webcam */
+	getVideo(function(stream) {
+		window.localStream = stream;
+	//display the stream in the local camera video elements
+	onReceiveStream(stream, 'my-camera');
+	});
+
+	function handleMessage(data) {
+		$('#messages').append('<p>' + data + '</p>');
+	}
+
+	function sendMessage() {
+		var text = $('#message-box').val();
+		var data;
+		$('#messages').scrollTop($('#messages')[0].scrollHeight)
+		$('#message-box').val('');
+		socket.emit('message', {room: room, user: user, message: text});
+	}
+
+  /* Testing socket.io stuff */
 
 
 })();
