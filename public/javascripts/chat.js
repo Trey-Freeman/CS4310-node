@@ -126,12 +126,12 @@ rtc.on('ready', init);*/
 
 	function handleMessage(data) {
 		$('#messages').append('<p>' + data + '</p>');
+		$('#messages').scrollTop($('#messages')[0].scrollHeight);
 	}
 
 	function sendMessage() {
 		var text = $('#message-box').val();
 		var data;
-		$('#messages').scrollTop($('#messages')[0].scrollHeight)
 		$('#message-box').val('');
 		socket.emit('message', {room: room, user: user, message: text});
 	}

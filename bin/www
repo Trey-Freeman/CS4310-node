@@ -21,7 +21,9 @@ app.set('port', port);
 
 var server = http.createServer(app);
 var ExpressPeerServer = require('peer').ExpressPeerServer;
-var expressPeerServer = ExpressPeerServer(server, {debug: true});
+var expressPeerServer = ExpressPeerServer(server, {
+	debug: true
+});
 app.use('/peerjs', expressPeerServer);
 
 var io = require('socket.io')(server);
@@ -29,23 +31,33 @@ var rooms = {};
 
 /* handle incoming connections from clients */
 io.sockets.on('connection', function(socket) {
-  //handle a user trying to join a room
-  	socket.on('room', function(data) {
-  		if (data.room in rooms) {
-        	if (data.password !== rooms[data.room].password)
-            	socket.emit('failed login');
-        	else {
-        		socket.join(data.room);
-        		rooms[data.room].users.push(socket.id);
-        		socket.emit('joined', {room: data.room, id: socket.id});
-        	}
-    	} else {
-    		rooms[data.room] = {password: data.password, users: [data.user]};
-    		socket.join(data.room);
-        socket.emit('joined', {room: data.room, id: socket.id});
-    	}
-  	});
-	
+	//handle a user trying to join a room
+	socket.on('room', function(data) {
+		//if room doesn't exist, create one. If wrong password is provided, send back an error
+		if (data.room in rooms) {
+			if (data.password !== rooms[data.room].password)
+				socket.emit('failed login');
+			else {
+				socket.join(data.room);
+				rooms[data.room].users.push(socket.id);
+				socket.emit('joined', {
+					room: data.room,
+					id: socket.id
+				});
+			}
+		} else { //create the room and add the user (need to handle removing users from a room)
+			rooms[data.room] = {
+				password: data.password,
+				users: [data.user]
+			};
+			socket.join(data.room);
+			socket.emit('joined', {
+				room: data.room,
+				id: socket.id
+			});
+		}
+	});
+	//when message is received, send message to all users in the room
 	socket.on('message', function(data) {
 		if (data.room in rooms && rooms[data.room].users.indexOf(data.user) !== -1) {
 			io.to(data.room).emit('message', data.message);
@@ -59,9 +71,9 @@ io.sockets.on('connection', function(socket) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 // error handlers
@@ -69,23 +81,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
+	app.use(function(err, req, res, next) {
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	});
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+	res.status(err.status || 500);
+	res.render('error', {
+		message: err.message,
+		error: {}
+	});
 });
 
 /**
@@ -101,19 +113,19 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+	var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+	if (isNaN(port)) {
+		// named pipe
+		return val;
+	}
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+	if (port >= 0) {
+		// port number
+		return port;
+	}
 
-  return false;
+	return false;
 }
 
 /**
@@ -121,27 +133,27 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+	if (error.syscall !== 'listen') {
+		throw error;
+	}
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+	var bind = typeof port === 'string' ?
+		'Pipe ' + port :
+		'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+	// handle specific listen errors with friendly messages
+	switch (error.code) {
+		case 'EACCES':
+			console.error(bind + ' requires elevated privileges');
+			process.exit(1);
+			break;
+		case 'EADDRINUSE':
+			console.error(bind + ' is already in use');
+			process.exit(1);
+			break;
+		default:
+			throw error;
+	}
 }
 
 /**
@@ -149,9 +161,9 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+	var addr = server.address();
+	var bind = typeof addr === 'string' ?
+		'pipe ' + addr :
+		'port ' + addr.port;
+	debug('Listening on ' + bind);
 }
