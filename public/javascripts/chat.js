@@ -68,12 +68,19 @@ rtc.on('ready', init);*/
 
 	//If the user joined/created a room successfully, do animation
 	socket.on('joined', function(data) {
+		/* Get video from webcam */
+		getVideo(function(stream) {
+			window.localStream = stream;
+			//display the stream in the local camera video elements
+			onReceiveStream(stream, 'my-camera');
+		});
+
 		//For sanity
 		room = data.room;
 	    $('#join-view').slideUp(1000, function() {
 	    	$('#chat-view').slideDown(1000);
 	    });
-	    console.log(user);
+
 	    //Create a new peer object
 		var peer = new Peer(user, {
 			host: location.hostname,
@@ -86,8 +93,24 @@ rtc.on('ready', init);*/
 		peer.on('open', function(id) {
 			console.log('My peer ID is: ' + id);
 		})
+
+		//variable to generate a unique video id (only using this now for testing until I find some better alternative)
+		var id = 0;
+
+		//On receiving a call, answer the call and stream our local stream
+		//added their content to a new video element
+		peer.on('call', function(call) {
+			call.answer(window.localStream);
+			console.log(call);
+			$('#vid-streams').append("<video id='video-" + id + "'class='col-md-4 col-md-offset-2'></video>");
+			var remote = id;
+			id++;
+			call.on('stream', function(stream) {
+				onReceiveStream(stream, 'video-' + remote);
+			});
+		});
 		//Handling a connection
-		peer.on('connection', function(conn) {
+		/*peer.on('connection', function(conn) {
 			console.log('Connected');
 			//Possibly send video here
 			conn.send(getVideo(function(stream) {
@@ -98,12 +121,12 @@ rtc.on('ready', init);*/
 				$('#vid-streams').append("<video id='" + conn.id + "'class='col-md-4 col-md-offset-2'></video>");
 				onReceiveStream(data, conn.id);
 			});
-		});
+		});*/
 		console.log(data);
 		//Connect to all the users in the current room
 		data.users.forEach(function(roomUser) {
 			console.log(roomUser);
-			peer.connect(roomUser);
+			peer.call(roomUser, window.localStream);
 		}); 
 	});
 	//If the user received a message, then show that message
@@ -130,13 +153,6 @@ rtc.on('ready', init);*/
 		video.src = window.URL.createObjectURL(stream);
 		window.peer_stream = stream;
 	}
-
-	/* Get video from webcam */
-	getVideo(function(stream) {
-		window.localStream = stream;
-	//display the stream in the local camera video elements
-	onReceiveStream(stream, 'my-camera');
-	});
 
 	function handleMessage(data) {
 		$('#messages').append('<p>' + data + '</p>');
