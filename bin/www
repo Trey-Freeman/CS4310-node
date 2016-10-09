@@ -38,12 +38,15 @@ io.sockets.on('connection', function(socket) {
 			if (data.password !== rooms[data.room].password)
 				socket.emit('failed login');
 			else {
+				//join the room
 				socket.join(data.room);
-				rooms[data.room].users.push(socket.id);
+				//send back the room, socket id, and send the users
 				socket.emit('joined', {
 					room: data.room,
-					id: socket.id
+					id: socket.id,
+					users: rooms[data.room].users
 				});
+				rooms[data.room].users.push(socket.id);
 			}
 		} else { //create the room and add the user (need to handle removing users from a room)
 			rooms[data.room] = {

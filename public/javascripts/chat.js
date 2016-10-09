@@ -73,7 +73,38 @@ rtc.on('ready', init);*/
 	    $('#join-view').slideUp(1000, function() {
 	    	$('#chat-view').slideDown(1000);
 	    });
-	    
+
+	    //Create a new peer object
+		var peer = new Peer({
+			host: location.hostname,
+			port: location.port || (location.protocol === 'https:' ? 443 : 80),
+			path: '/peerjs'
+		});
+
+		//Open a connection
+		//Whenever a a new conenciton is opened, we are supplied with a unique id, which we use for connecting to other peers
+		peer.on('open', function(id) {
+			console.log('My peer ID is: ' + id);
+		})
+		//Handling a connection
+		peer.on('connection', function(conn) {
+			console.log('Connected');
+			//Possibly send video here
+			conn.send(getVideo(function(stream) {
+				return stream;
+			}));
+			//What to do when receiving a video
+			conn.on('data', function('data') {
+				$('#vid-streams').append("<video id='" + conn.id "'class='col-md-4 col-md-offset-2'></video>");
+				onReceiveStream(data, conn.id);
+			});
+		});
+
+		//Connect to all the users in the current room
+		data.users.forEach(function(roomUser) {
+			console.log(roomUser);
+			peer.connect(roomUser);
+		}); 
 	});
 	//If the user received a message, then show that message
 	socket.on('message', function(data) {
@@ -83,23 +114,6 @@ rtc.on('ready', init);*/
 
 	socket.on('failed login', function() {
 		$('#invalid-password-message').show();
-	});
-
-	//Create a new peer object
-	var peer = new Peer({
-		host: location.hostname,
-		port: location.port || (location.protocol === 'https:' ? 443 : 80),
-		path: '/peerjs'
-	});
-
-	//Open a connection
-	//Whenever a a new conenciton is opened, we are supplied with a unique id, which we use for connecting to other peers
-	peer.on('open', function(id) {
-		console.log('My peer ID is: ' + id);
-	})
-	//Handling a connection
-	peer.on('connection', function(conn) {
-		console.log('Connected');
 	});
 
 	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
