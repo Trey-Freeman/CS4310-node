@@ -81,7 +81,7 @@ rtc.on('ready', init);*/
 		    });
 
 		    //Create a new peer object
-			var peer = new Peer(user, {
+			peer = new Peer(user, {
 				host: location.hostname,
 				port: location.port || (location.protocol === 'https:' ? 443 : 80),
 				path: '/peerjs'
