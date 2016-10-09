@@ -95,7 +95,7 @@ rtc.on('ready', init);*/
 			}));
 			//What to do when receiving a video
 			conn.on('data', function(data) {
-				$('#vid-streams').append("<video id='" + conn.id "'class='col-md-4 col-md-offset-2'></video>");
+				$('#vid-streams').append("<video id='" + conn.id + "'class='col-md-4 col-md-offset-2'></video>");
 				onReceiveStream(data, conn.id);
 			});
 		});
