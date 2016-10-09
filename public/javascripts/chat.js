@@ -64,79 +64,82 @@ rtc.on('ready', init);*/
 			if(e.which === 13)
 				sendMessage();
 		});
-	});
 
-	//If the user joined/created a room successfully, do animation
-	socket.on('joined', function(data) {
-		/* Get video from webcam */
-		getVideo(function(stream) {
-			window.localStream = stream;
-			//display the stream in the local camera video elements
-			onReceiveStream(stream, 'my-camera');
-		});
-
-		//For sanity
-		room = data.room;
-	    $('#join-view').slideUp(1000, function() {
-	    	$('#chat-view').slideDown(1000);
-	    });
-
-	    //Create a new peer object
-		var peer = new Peer(user, {
-			host: location.hostname,
-			port: location.port || (location.protocol === 'https:' ? 443 : 80),
-			path: '/peerjs'
-		});
-
-		//Open a connection
-		//Whenever a a new conenciton is opened, we are supplied with a unique id, which we use for connecting to other peers
-		peer.on('open', function(id) {
-			console.log('My peer ID is: ' + id);
-		})
-
-		//variable to generate a unique video id (only using this now for testing until I find some better alternative)
-		var id = 0;
-		//Also create an array of calls for testing
-		var calls = [];
-
-		//On receiving a call, answer the call and stream our local stream
-		//added their content to a new video element
-		peer.on('call', function(call) {
-			call.answer(window.localStream);
-		});
-		//Handling a connection
-		/*peer.on('connection', function(conn) {
-			console.log('Connected');
-			//Possibly send video here
-			conn.send(getVideo(function(stream) {
-				return stream;
-			}));
-			//What to do when receiving a video
-			conn.on('data', function(data) {
-				$('#vid-streams').append("<video id='" + conn.id + "'class='col-md-4 col-md-offset-2'></video>");
-				onReceiveStream(data, conn.id);
+		//If the user joined/created a room successfully, do animation
+		socket.on('joined', function(data) {
+			/* Get video from webcam */
+			getVideo(function(stream) {
+				window.localStream = stream;
+				//display the stream in the local camera video elements
+				onReceiveStream(stream, 'my-camera');
 			});
-		});*/
-		console.log(data);
-		//Connect to all the users in the current room
-		data.users.forEach(function(roomUser) {
-			console.log(roomUser);
-			var call = peer.call(roomUser, window.localStream);
-			call.on('stream', function(stream) {
-				$('#vid-streams').append("<video id='video-" + id + "'class='col-md-4 col-md-offset-2'></video>");
+
+			//For sanity
+			room = data.room;
+		    $('#join-view').slideUp(1000, function() {
+		    	$('#chat-view').slideDown(1000);
+		    });
+
+		    //Create a new peer object
+			var peer = new Peer(user, {
+				host: location.hostname,
+				port: location.port || (location.protocol === 'https:' ? 443 : 80),
+				path: '/peerjs'
+			});
+
+			//Open a connection
+			//Whenever a a new conenciton is opened, we are supplied with a unique id, which we use for connecting to other peers
+			peer.on('open', function(id) {
+				console.log('My peer ID is: ' + id);
+			})
+
+			//variable to generate a unique video id (only using this now for testing until I find some better alternative)
+			var id = 0;
+
+			//On receiving a call, answer the call and stream our local stream
+			//added their content to a new video element
+			peer.on('call', function(call) {
+				console.log('Receiving Call');
+				call.answer(window.localStream);
+				var videoDivId = "video-" + id;
+				$('#vid-streams').append("<video id='" + videoDivId + "' class='col-md-4 col-md-offset-2'></video>");
 				id++;
+				console.log('finished receiving call');
+				call.on('stream', function(stream) {
+					console.log('streaming');
+					onReceiveStream(stream, videoDivId);
+				});
 			});
-			calls.push(call);
-		}); 
-	});
-	//If the user received a message, then show that message
-	socket.on('message', function(data) {
-		handleMessage(data);
-		console.log('Incoming message:', data);
-	});
+			//Handling a connection
+			/*peer.on('connection', function(conn) {
+				console.log('Connected');
+				//Possibly send video here
+				conn.send(getVideo(function(stream) {
+					return stream;
+				}));
+				//What to do when receiving a video
+				conn.on('data', function(data) {
+					$('#vid-streams').append("<video id='" + conn.id + "'class='col-md-4 col-md-offset-2'></video>");
+					onReceiveStream(data, conn.id);
+				});
+			});*/
+			console.log(data);
+			//Connect to all the users in the current room
+			data.users.forEach(function(roomUser) {
+				console.log(roomUser);
+				var call = peer.call(roomUser, window.localStream);
+				console.log(call);
+			}); 
+		});
+		//If the user received a message, then show that message
+		socket.on('message', function(data) {
+			handleMessage(data);
+			console.log('Incoming message:', data);
+		});
 
-	socket.on('failed login', function() {
-		$('#invalid-password-message').show();
+		socket.on('failed login', function() {
+			$('#invalid-password-message').show();
+		});
 	});
 
 	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
