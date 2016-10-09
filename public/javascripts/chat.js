@@ -44,7 +44,7 @@ rtc.on('ready', init);*/
 	var user;
 
 	$(document).ready(function() {
-		user = $('#hidden-username').attr('data-username')
+		user = $('#hidden-username').attr('data-val')
 		//On click, submit to socketio t0 join a room
 		$('#submit').on('click', function() {
 			console.log('joining');
@@ -95,11 +95,6 @@ rtc.on('ready', init);*/
 
 			//variable to generate a unique video id (only using this now for testing until I find some better alternative)
 			var id = 0;
-
-			//peer messaging
-			peer.on('data', function(data) {
-				console.log(data);
-			});
 
 			//On receiving a call, answer the call and stream our local stream
 			//added their content to a new video element
@@ -171,6 +166,7 @@ rtc.on('ready', init);*/
 		var text = $('#message-box').val();
 		var data;
 		$('#message-box').val('');
+		console.log(user);
 		socket.emit('message', {room: room, user: user, message: text});
 	}
 

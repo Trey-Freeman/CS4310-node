@@ -46,8 +46,7 @@ io.sockets.on('connection', function(socket) {
 					id: socket.id,
 					users: rooms[data.room].users
 				});
-				rooms[data.room].users.push(socket.id);
-			}
+				rooms[data.room].users.push(data.user);			}
 		} else { //create the room and add the user (need to handle removing users from a room)
 			rooms[data.room] = {
 				password: data.password,

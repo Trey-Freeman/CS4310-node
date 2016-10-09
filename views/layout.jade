@@ -39,7 +39,7 @@ html
             if (user)
               li: p #{user.username}
               li: a(href="/logout") Logout
-              #hidden-username(data-username= '#{user.username}' hidden)
+              #hidden-username(data-val= '#{user.username}' hidden)
     .main-content.container-fluid
       block content
     footer
