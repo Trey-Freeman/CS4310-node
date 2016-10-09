@@ -44,7 +44,7 @@ rtc.on('ready', init);*/
 	var user;
 
 	$(document).ready(function() {
-		user = $('#hidden-username').attr('data-val')
+		user = $('#hidden-username').attr('data-username')
 		//On click, submit to socketio t0 join a room
 		$('#submit').on('click', function() {
 			console.log('joining');
@@ -73,9 +73,9 @@ rtc.on('ready', init);*/
 	    $('#join-view').slideUp(1000, function() {
 	    	$('#chat-view').slideDown(1000);
 	    });
-
+	    console.log(user);
 	    //Create a new peer object
-		var peer = new Peer({
+		var peer = new Peer(user, {
 			host: location.hostname,
 			port: location.port || (location.protocol === 'https:' ? 443 : 80),
 			path: '/peerjs'
