@@ -96,6 +96,11 @@ rtc.on('ready', init);*/
 			//variable to generate a unique video id (only using this now for testing until I find some better alternative)
 			var id = 0;
 
+			//peer messaging
+			peer.on('data', function(data) {
+				console.log(data);
+			});
+
 			//On receiving a call, answer the call and stream our local stream
 			//added their content to a new video element
 			peer.on('call', function(call) {
