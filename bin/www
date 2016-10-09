@@ -56,7 +56,8 @@ io.sockets.on('connection', function(socket) {
 			socket.join(data.room);
 			socket.emit('joined', {
 				room: data.room,
-				id: socket.id
+				id: socket.id,
+				users: []
 			});
 		}
 	});

@@ -99,7 +99,7 @@ rtc.on('ready', init);*/
 				onReceiveStream(data, conn.id);
 			});
 		});
-
+		console.log(data);
 		//Connect to all the users in the current room
 		data.users.forEach(function(roomUser) {
 			console.log(roomUser);
