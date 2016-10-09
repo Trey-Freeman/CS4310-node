@@ -96,18 +96,13 @@ rtc.on('ready', init);*/
 
 		//variable to generate a unique video id (only using this now for testing until I find some better alternative)
 		var id = 0;
+		//Also create an array of calls for testing
+		var calls = [];
 
 		//On receiving a call, answer the call and stream our local stream
 		//added their content to a new video element
 		peer.on('call', function(call) {
 			call.answer(window.localStream);
-			console.log(call);
-			$('#vid-streams').append("<video id='video-" + id + "'class='col-md-4 col-md-offset-2'></video>");
-			var remote = id;
-			id++;
-			call.on('stream', function(stream) {
-				onReceiveStream(stream, 'video-' + remote);
-			});
 		});
 		//Handling a connection
 		/*peer.on('connection', function(conn) {
@@ -126,7 +121,12 @@ rtc.on('ready', init);*/
 		//Connect to all the users in the current room
 		data.users.forEach(function(roomUser) {
 			console.log(roomUser);
-			peer.call(roomUser, window.localStream);
+			var call = peer.call(roomUser, window.localStream);
+			call.on('stream', function(stream) {
+				$('#vid-streams').append("<video id='video-" + id + "'class='col-md-4 col-md-offset-2'></video>");
+				id++;
+			});
+			calls.push(call);
 		}); 
 	});
 	//If the user received a message, then show that message
