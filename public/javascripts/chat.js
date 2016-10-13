@@ -39,12 +39,22 @@ $(remoteVideo).append(rtc.remote);
 rtc.on('ready', init);*/
 
 (function() {
-	var socket = io.connect();
+	var socket;
 	var room;
 	var user;
 
 	$(document).ready(function() {
+		//Set the username retreived from the hidden elements containing this user's username
 		user = $('#hidden-username').attr('data-val')
+		
+		//initialize our socket
+		socket = io.connect();
+		
+		//Add user upon connection
+		socket.on('connect', function() {
+			socket.emit('addUser', {user: user});
+		});
+
 		//On click, submit to socketio t0 join a room
 		$('#submit').on('click', function() {
 			console.log('joining');
@@ -73,6 +83,7 @@ rtc.on('ready', init);*/
 				//display the stream in the local camera video elements
 				onReceiveStream(stream, 'my-camera');
 			});
+			console.log('joined');
 
 			//For sanity
 			room = data.room;
@@ -84,7 +95,8 @@ rtc.on('ready', init);*/
 			peer = new Peer(user, {
 				host: location.hostname,
 				port: location.port || (location.protocol === 'https:' ? 443 : 80),
-				path: '/peerjs'
+				path: '/peerjs',
+				debug: 3
 			});
 
 			//Open a connection
@@ -102,7 +114,7 @@ rtc.on('ready', init);*/
 				console.log('Receiving Call');
 				call.answer(window.localStream);
 				var videoDivId = "video-" + id;
-				$('#vid-streams').append("<video id='" + videoDivId + "' class='col-md-4 col-md-offset-2'></video>");
+				$('#vid-streams').append("<div id='" + videoDivId + "' class='camera col-md-4 col-md-offset-2'><video></video></div>");
 				id++;
 				console.log('finished receiving call');
 				call.on('stream', function(stream) {
@@ -127,7 +139,11 @@ rtc.on('ready', init);*/
 			//Connect to all the users in the current room
 			data.users.forEach(function(roomUser) {
 				console.log(roomUser);
+				console.log(peer);
 				var call = peer.call(roomUser, window.localStream);
+				call.on('error', function(e) {
+					console.log(e);
+				});
 				console.log(call);
 			}); 
 		});
@@ -142,10 +158,11 @@ rtc.on('ready', init);*/
 		});
 	});
 
-	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+	navigator.mediagetUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 	/* Tell the navigator to get user's webcam feed (video and audio included) */
 	function getVideo(callback) {
+		//navigator.mediaDevices.getUserMedia({audio: true, video: true}).then(callback).catch(function(error){alert('An error occured'); console.log(error);});
 		navigator.getUserMedia({audio: true, video: true}, callback, function(error) {alert('An error occurred'); console.log(error);});
 	}
 
@@ -154,7 +171,6 @@ rtc.on('ready', init);*/
 	function onReceiveStream(stream, elementID){
 		var video = $('#' + elementID + ' video')[0];
 		video.src = window.URL.createObjectURL(stream);
-		window.peer_stream = stream;
 	}
 
 	function handleMessage(data) {

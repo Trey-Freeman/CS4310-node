@@ -117,37 +117,4 @@ router.get('/action/chat', function(req, res) {
     res.render('chat', {user: req.user});
 });
 
-/* GET the js for the registration page*/
-router.get('/public/javascripts/register.js', function (req, res) {
-    res.sendFile(path.resolve('public/javascripts/register.js'));
-});
-
-/* GET the js for the index page (will use as demo for video chat)*/
-router.get('/public/javascripts/chat.js', function(req, res) {
-    res.sendFile(path.resolve('public/javascripts/chat.js'));
-});
-
-/* GET the js for the index page (will use as demo for video chat)*/
-router.get('/public/javascripts/peer.js', function(req, res) {
-    res.sendFile(path.resolve('public/javascripts/peer.js'));
-});
-
-/* GET the js for the index page*/
-router.get('/public/javascripts/main.js', function(req, res) {
-    res.sendFile(path.resolve('public/javascripts/main.js'));
-});
-/* GET the js for the index page (will use as demo for video chat)*/
-router.get('/public/javascripts/rtc.min.js', function(req, res) {
-    res.sendFile(path.resolve('public/javascripts/rtc.min.js'));
-});
-
-/* GET the js for the index page (will use as demo for video chat)*/
-router.get('/public/javascripts/rtc.min.js.map', function(req, res) {
-    res.sendFile(path.resolve('public/javascripts/rtc.min.js.map'));
-});
-
-/* GET socket.io-client */
-router.get('/public/javascripts/socket.io.js', function(req, res) {
-    res.sendFile(path.resolve('public/javascripts/socket.io.js'));
-});
 module.exports = router;

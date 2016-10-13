@@ -28,9 +28,14 @@ app.use('/peerjs', expressPeerServer);
 
 var io = require('socket.io')(server);
 var rooms = {};
+var users = {};
 
 /* handle incoming connections from clients */
 io.sockets.on('connection', function(socket) {
+	//Add User to global users list
+	socket.on('addUser', function(data) {
+		users[socket.id] = data.user;
+	});
 	//handle a user trying to join a room
 	socket.on('room', function(data) {
 		//if room doesn't exist, create one. If wrong password is provided, send back an error
@@ -68,6 +73,7 @@ io.sockets.on('connection', function(socket) {
 			//Do something
 		}
 	});
+	
 });
 
 

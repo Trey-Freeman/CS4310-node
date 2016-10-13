@@ -1002,7 +1002,9 @@ Peer.prototype.connect = function(peer, options) {
  * complete list of options.
  */
 Peer.prototype.call = function(peer, stream, options) {
+  console.log('calling');
   if (this.disconnected) {
+    console.log('disconnected');
     util.warn('You cannot connect to a new Peer because you called ' +
       '.disconnect() on this Peer and ended your connection with the ' +
       'server. You can create a new Peer to reconnect.');
@@ -1010,6 +1012,7 @@ Peer.prototype.call = function(peer, stream, options) {
     return;
   }
   if (!stream) {
+    console.log('no Stream');
     util.error('To call a peer, you must provide a stream from your browser\'s `getUserMedia`.');
     return;
   }
