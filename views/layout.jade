@@ -40,10 +40,9 @@ html
               li: p #{user.username}
               li: a(href="/logout") Logout
               #hidden-username(data-val= '#{user.username}' hidden)
+
     .main-content.container-fluid
-      block content
     footer
-      p Footer Here
      img.img-responsive(src='/images/header.png', alt='Responsive image')
     .main-content.container-fluid
       block content
