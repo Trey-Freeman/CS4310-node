@@ -39,22 +39,18 @@ html
             if (user)
               li: p #{user.username}
               li: a(href="/logout") Logout
-<<<<<<< HEAD
               #hidden-username(data-val= '#{user.username}' hidden)
     .main-content.container-fluid
       block content
     footer
       p Footer Here
-    script(src='/javascripts/main.js')
-=======
-              #hidden-username(data-username= '#{user.username}' hidden)
      img.img-responsive(src='/images/header.png', alt='Responsive image')
     .main-content.container-fluid
       block content
     footer
       img.img-responsive(src='/images/footer.png', alt='Responsive image')
       script(src='/javascripts/main.js')
->>>>>>> Inital head, footer, homepage
+
     block scripts
 
 
