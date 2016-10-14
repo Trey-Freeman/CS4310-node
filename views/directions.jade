@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    .container
+        .col-md-3
+            #directionsPanel
+              a#useGPS(href='#geoLocation') Use Current Location
+              .directionInputs
+                form
+                  p
+                    label Origin
+                    input#dirSource.form-control(type='text', value='')
+                  p
+                    label Destination
+                    input#dirDestination.form-control(type='text', value='')
+                  a#getDirections(href='#getDirections') Get Directions
+                  br
+                  br
+                  a#paneReset(href='#reset') Reset
+              #directionSteps
+                p.msg Direction Steps Will Render Here
+              a#paneToggle.out(href='#toggleBtn')
+        .col-md-9
+            #mapCanvas
+
+script(type='text/javascript', src='javascripts/map.js')
+script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
+link(href='stylesheets/style1.css', type='text/css', rel='stylesheet')
+script(src='//code.jquery.com/jquery.js')
+script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+//script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?key=&sensor=false')
+

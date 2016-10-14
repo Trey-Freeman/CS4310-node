@@ -117,4 +117,8 @@ router.get('/action/chat', function(req, res) {
     res.render('chat', {user: req.user});
 });
 
+router.get('/directions', function(req, res) {
+    res.render('directions', {user: req.user});
+});
+
 module.exports = router;
