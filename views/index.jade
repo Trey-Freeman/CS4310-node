@@ -1,5 +1,122 @@
 extends layout
 
 block content
+  body
+    .container
+      h3#regional(align='center')  Welcome to Transport-Hub 
+    p.lead Login  
+    br
+    .col-md-3
+      form(role='form', action="/login",method="post", style='max-width: 300px;')
+        .form-group
+        input.form-control(type='text', name="username", placeholder='Enter Username')
+        .form-group
+        input.form-control(type='password', name="password", placeholder='Password')
+        br
+        button.btn.btn-default(type='submit' class="btn btn-primary btn-block") Submit
+        &nbsp;
+        a(href='/logout')
+         button.btn.btn-primary(type="button" class="btn btn-warning btn-block" ) Logout     
+  .col-md-9
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    section.features_table
+      .col-sm-3.col-3.no-padding
+        .features-table
+          ul
+            h1 Features
+            li Quote 
+            li Directions
+            li Contact Us
+            li Mailing List
+            li Admin Settings
+            li Memes?
+      .col-sm-1.col-1.no-padding
+        .features-table-free
+          ul
+            h1 Free
+            li
+              i.fa.fa-times
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-times
+            li
+              i.fa.fa-times
+      .col-xs-2.col-1.no-padding
+        .features-table-free
+          ul
+            h1 "FREE"
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-times
+            li
+              i.fa.fa-times
+      .col-md-1.col-1.no-padding
+        .features-table-paid
+          ul
+            h1 PRO
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+            li
+              i.fa.fa-check
+  .col-md-12
+    #myCarousel.carousel.slide.text-center(data-ride='carousel')
+      // Indicators
+      ol.carousel-indicators
+        li.active(data-target='#myCarousel', data-slide-to='0')
+        li(data-target='#myCarousel', data-slide-to='1')
+        li(data-target='#myCarousel', data-slide-to='2')
+      // Wrapper for slides
+      .carousel-inner(role='listbox')
+        .item.active
+          h4
+            | "This company is the best. I am so happy with the result!"
+            br
+            span(style='font-style:normal;') Michael Roe, Vice President, Comment Box
+        .item
+          h4
+            | "One word... WOW!!"
+            br
+            span(style='font-style:normal;') John Doe, Salesman, Rep Inc
+        .item
+          h4
+            | "Could I... BE any more happy with this company?"
+            br
+            span(style='font-style:normal;') Chandler Bing, Actor, FriendsAlot
+        // Left and right controls
+        a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+          span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+          span.sr-only Previous
+        a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+          span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+          span.sr-only Next
+script.
+  var jumboHeight = $('.jumbotron').outerHeight();
+  function parallax(){
+  var scrolled = $(window).scrollTop();
+  $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+  }
+  $(window).scroll(function(e){
+  parallax();
+  });
 
-block scripts
+  

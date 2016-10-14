@@ -4,7 +4,7 @@ html
     title= title
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
   body
     script(src='//code.jquery.com/jquery.js')
     script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
@@ -39,12 +39,22 @@ html
             if (user)
               li: p #{user.username}
               li: a(href="/logout") Logout
+<<<<<<< HEAD
               #hidden-username(data-val= '#{user.username}' hidden)
     .main-content.container-fluid
       block content
     footer
       p Footer Here
     script(src='/javascripts/main.js')
+=======
+              #hidden-username(data-username= '#{user.username}' hidden)
+     img.img-responsive(src='/images/header.png', alt='Responsive image')
+    .main-content.container-fluid
+      block content
+    footer
+      img.img-responsive(src='/images/footer.png', alt='Responsive image')
+      script(src='/javascripts/main.js')
+>>>>>>> Inital head, footer, homepage
     block scripts
 
 
