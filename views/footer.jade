@@ -1,0 +1,24 @@
+html
+  body
+  footer
+    .col-md-10
+      c:if(test='${requestScope.msg!=null}')   //if there is an error message show it here
+        .alert.alert-success ${msg== null ? 'Yay! ' : msg}
+      c:if(test='${requestScope.errMsg!=null}')
+        .alert.alert-danger ${errMsg== null ? 'The following error occured ' : errMsg} // if error message show it here
+      p
+        | Posted by: Alpha
+        br
+        |     Your Password will be collected.
+      p
+        | Contact information: 
+        a(href='mailto:someone@example.com')
+          | someone@example.com
+        | .
+      p © Copyright 2016 Alpha
+    a(href='..public/images/footer.png')
+      img.img-responsive(src='/images/footer.png', alt='Responsive image')
+
+
+
+        p #{username}
