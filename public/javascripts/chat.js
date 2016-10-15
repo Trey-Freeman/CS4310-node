@@ -1,43 +1,3 @@
-/*// Set RTC options.
-var rtcOpts = {
-    room: 'test-room'
-  };
-// call RTC module
-var rtc = RTC(rtcOpts);
-// A div element to show our local video stream
-var localVideo = $('#l-video');
-// A div element to show our remote video streams
-var remoteVideo = $('#r-video');
-// A contenteditable element to show our messages
-var messageWindow = $('#messages');
-
-// Bind to events happening on the data channel
-function bindDataChannelEvents(id, channel, attributes, connection) {
-
-  // Receive message
-  channel.onmessage = function (evt) {
-    messageWindow.innerHTML = evt.data;
-  };
-
-  // Send message
-  messageWindow.onkeyup = function () {
-    channel.send(this.innerHTML);
-  };
-}
-
-// Start working with the established session
-function init(session) {
-  session.createDataChannel('chat');
-  session.on('channel:opened:chat', bindDataChannelEvents);
-}
-
-// Display local and remote video streams
-$(localVideo).append(rtc.local);
-$(remoteVideo).append(rtc.remote);
-
-// Detect when RTC has established a session
-rtc.on('ready', init);*/
-
 (function() {
 	var socket;
 	var room;
@@ -77,6 +37,11 @@ rtc.on('ready', init);*/
 
 		//If the user joined/created a room successfully, do animation
 		socket.on('joined', function(data) {
+			socket.emit('list-user', {
+				room,
+				user: user
+			});
+			console.log(data);
 			/* Get video from webcam */
 			getVideo(function(stream) {
 				window.localStream = stream;
@@ -117,10 +82,10 @@ rtc.on('ready', init);*/
 				$('#vid-streams').append("<div id='" + videoDivId + "' class='camera col-md-4 col-md-offset-2'><video></video></div>");
 				id++;
 				console.log('finished receiving call');
-				call.on('stream', function(stream) {
+				/*call.on('stream', function(stream) {
 					console.log('streaming');
 					onReceiveStream(stream, videoDivId);
-				});
+				});*/
 			});
 			//Handling a connection
 			/*peer.on('connection', function(conn) {
@@ -140,10 +105,8 @@ rtc.on('ready', init);*/
 			data.users.forEach(function(roomUser) {
 				console.log(roomUser);
 				console.log(peer);
+				$('#user-list').append('<li>' + roomUser + '</li>');
 				var call = peer.call(roomUser, window.localStream);
-				call.on('error', function(e) {
-					console.log(e);
-				});
 				console.log(call);
 			}); 
 		});
@@ -151,6 +114,10 @@ rtc.on('ready', init);*/
 		socket.on('message', function(data) {
 			handleMessage(data);
 			console.log('Incoming message:', data);
+		});
+
+		socket.on('list-user', function(newUser) {
+			$('#user-list').append('<li>' + newUser + '</li>');
 		});
 
 		socket.on('failed login', function() {
@@ -163,7 +130,7 @@ rtc.on('ready', init);*/
 	/* Tell the navigator to get user's webcam feed (video and audio included) */
 	function getVideo(callback) {
 		//navigator.mediaDevices.getUserMedia({audio: true, video: true}).then(callback).catch(function(error){alert('An error occured'); console.log(error);});
-		navigator.getUserMedia({audio: true, video: true}, callback, function(error) {alert('An error occurred'); console.log(error);});
+		navigator.getUserMedia({audio: true, video: true}, callback, function(error) {alert('Camera is inaccessible'); console.log(error);});
 	}
 
 	/* What to do when a user starts receiving a stream (local or remote)
@@ -179,10 +146,9 @@ rtc.on('ready', init);*/
 	}
 
 	function sendMessage() {
-		var text = $('#message-box').val();
+		var text = "<span class='username-span'>" + user + ": </span>" + $('#message-box').val();
 		var data;
 		$('#message-box').val('');
-		console.log(user);
 		socket.emit('message', {room: room, user: user, message: text});
 	}
 

@@ -44,25 +44,33 @@ io.sockets.on('connection', function(socket) {
 				socket.emit('failed login');
 			else {
 				//join the room
-				socket.join(data.room);
+				socket.join(data.room);	
 				//send back the room, socket id, and send the users
 				socket.emit('joined', {
 					room: data.room,
 					id: socket.id,
 					users: rooms[data.room].users
 				});
-				rooms[data.room].users.push(data.user);			}
+				//Add user to this room's users
+				rooms[data.room].users.push(data.user);
+				//Send notification to the other users that this user joined
+				io.to(data.room).emit('list-user', data.user);		
+			}
 		} else { //create the room and add the user (need to handle removing users from a room)
 			rooms[data.room] = {
 				password: data.password,
 				users: [data.user]
 			};
 			socket.join(data.room);
+			//Add user to this room's users
+			rooms[data.room].users.push(data.user);	
 			socket.emit('joined', {
 				room: data.room,
 				id: socket.id,
 				users: []
 			});
+			//Send notification to the other users that this user joined
+			io.to(data.room).emit('list-user', data.user);	
 		}
 	});
 	//when message is received, send message to all users in the room
@@ -73,7 +81,6 @@ io.sockets.on('connection', function(socket) {
 			//Do something
 		}
 	});
-	
 });
 
 

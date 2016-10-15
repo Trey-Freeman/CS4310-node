@@ -37,13 +37,12 @@ html
               li: a(href="/login") Login
               li: a(href="/register") Register
             if (user)
-              li: p #{user.username}
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button') #{user.username}
               li: a(href="/logout") Logout
               #hidden-username(data-val= '#{user.username}' hidden)
-
-    .main-content.container-fluid
-    footer
-     img.img-responsive(src='/images/smlheader.png', alt='Responsive image', id='head')
+    header
+          img.img-responsive(src='/images/smlheader.png', alt='Responsive image', id='head')
     .main-content.container-fluid
       block content
     footer
