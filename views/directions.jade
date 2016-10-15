@@ -1,9 +1,12 @@
 extends layout
 
 block content
+    script.
+      var image_x = document.getElementById('head');
+      image_x.parentNode.removeChild(image_x);
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
     link(href='stylesheets/style1.css', type='text/css', rel='stylesheet')
-
+    br
     .container
         .col-md-3
             #directionsPanel
