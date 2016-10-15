@@ -10,7 +10,7 @@ block content
     .container
         .col-md-3
             #directionsPanel
-              a#useGPS(href='#geoLocation') Use Current Location
+              a#useGPS(class="btn btn-info btn-block" href='#geoLocation') Use Current Location
               .directionInputs
                 form
                   p
@@ -19,10 +19,10 @@ block content
                   p
                     label Destination
                     input#dirDestination.form-control(type='text', value='')
-                  a#getDirections(href='#getDirections') Get Directions
+                  a#getDirections(href='#getDirections' class="btn btn-success btn-block") Get Directions
                   br
                   br
-                  a#paneReset(href='#reset') Reset
+                  a#paneReset(href='#reset' class="btn btn-danger btn-block") Reset
               #directionSteps
                 p.msg Direction Steps Will Render Here
               a#paneToggle.out(href='#toggleBtn')
