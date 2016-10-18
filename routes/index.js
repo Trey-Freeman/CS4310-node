@@ -121,4 +121,8 @@ router.get('/directions', function(req, res) {
     res.render('directions', {user: req.user});
 });
 
+router.get('/contact', function(req, res) {
+    res.render('contact', {user: req.user});
+});
+
 module.exports = router;
