@@ -158,5 +158,10 @@ router.get('/email', function(req, res) {
     res.render('email', {user: req.user});
 });
 
+router.get('/quote', function(req, res) {
+    res.render('quote', {user: req.user});
+});
+
+
 
 module.exports = router;
