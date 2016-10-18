@@ -1,0 +1,47 @@
+extends layout
+
+block content
+
+  .container
+    title Alpha's Mailing List
+    h1 Join our email list
+    p
+      | To join our email list, enter your name and
+      | email address below.
+    p
+      i
+    .row
+      .col-md-4
+        .form-group
+          form.form-horizontal(action="/action/email", method='post', role='form')
+            //input(type='hidden', name='action', value='add')
+            label Email: 
+            input#email-field.form-control(type='email', name='email', value='email@google.com')
+            br
+            label First Name: 
+            input#firstname-field.form-control(type='text', name='firstname', value='firstname')
+            br
+            label Last Name: 
+            input#lastname-field.form-control(type='text', name='lastname', value='lastname')
+            br
+            input.btn.btn-primary.btn-block(type='submit', value='Join Now')
+          h3 Contact Us
+          form(action='//flipmail.co/api/fAB9a3bjgAPrDVJfU2UN', method='post')
+            label Name : 
+            input.form-control(type='text', name='name')
+            label Email: 
+            input.form-control(type='email', name='email')
+            input(type='text', name='_honey', value='', style='display:none')
+            input(type='hidden', name='_confirmation', value='<b>Thank you!</b> We have received your message and will get back to you asap.')
+            label Comment: 
+            textarea.form-control(rows='5', name='message')
+            br
+            label File attachment : 
+            input(type='file', name='file')
+            br
+            button.btn.btn-primary.btn-block(type='submit') Submit Form
+      .col-md-2
+      .col-md-6
+        img#head.img-responsive.center-block(src='images/MailingList.png', alt='Responsive image')
+
+    //script(type='text/javascript', src='/javascripts/email.js')

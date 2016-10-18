@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var path = require('path');
+var Email = require('../models/email');
 var Account = require('../models/account');
 var Ticket = require('../models/ticket');
 var router = express.Router();
@@ -61,6 +62,34 @@ router.post('/register', function(req, res) {
     });
 });
 
+
+router.post('/action/email', function(req, res) {
+    var email = req.body;
+    Email.create({
+        firstname: email.firstname,
+        lastname: email.lastname,
+        email: email.email
+        }, function(err) {
+            if(err) return res.status(500).send(err);
+            res.redirect('/');
+        });
+});
+
+
+/* POST Handle a mailing list through post. If a first name, last name and email is provided, then set new email entry in mongo */
+
+/*router.post('/email', function(req, res) {
+    Email.register(new Email({ email : req.body.email }), req.body.email, function(err, email) {
+        if (err) {
+            return res.render('email', { email : email });
+        }
+        //Log user in and redirect to the root
+        passport.authenticate('local')(req, res, function () {
+            res.redirect('/');
+        });
+    });
+});
+*/
 /* GET handle request for the login page. If a user is already signed in, then redirect to root */
 router.get('/login', function(req, res) {
     //If User is already logged in, then return to the index page
@@ -124,5 +153,10 @@ router.get('/directions', function(req, res) {
 router.get('/contact', function(req, res) {
     res.render('contact', {user: req.user});
 });
+
+router.get('/email', function(req, res) {
+    res.render('email', {user: req.user});
+});
+
 
 module.exports = router;
