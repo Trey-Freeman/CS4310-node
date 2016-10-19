@@ -19,7 +19,7 @@ html
    
       #navbar-inverse.collapse.navbar-collapse
           ul#nav-buttons.nav.navbar-nav
-            li.active: a( href="/") Home
+            li: a( href="/") Home
             li: a( href="/quote") Quote
             li: a( href="#timesheet" ) Timesheet
             li.dropdown
@@ -31,7 +31,7 @@ html
                     li: a( href="#" ) Edit Tickets
                     li: a( href="#" ) Delete Tickets
             li: a( href="/directions" ) Directions
-             li: a( href="/email" ) Mailing List
+            li: a( href="/email" ) Mailing List
             li: a( href="/action/chat") Live Chat
             li: a( href="/contact") Contact Us
 
@@ -44,8 +44,6 @@ html
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button') #{user.username}
               li: a(href="/logout") Logout
               #hidden-username(data-val= '#{user.username}' hidden)
-    header
-          img.img-responsive(src='/images/smlheader.png', alt='Responsive image', id='head')
           script.
             var url = window.location;
             // Will only work if string in href matches with location
@@ -54,6 +52,9 @@ html
             $('ul.nav a').filter(function() {
             return this.href == url;
             }).parent().addClass('active');
+    header
+          img.img-responsive(src='/images/smlheader.png', alt='Responsive image', id='head')
+
            
     .main-content.container-fluid
       block content
