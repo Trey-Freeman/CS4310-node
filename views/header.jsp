@@ -13,36 +13,25 @@
     <meta name="generator" content=
   "HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
 
-  <title>Harsimranjeet Singh</title>
+  <title>Alfa group</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <!-- Latest compiled and minified CSS -->
-  
   <script src="include/js/jquery-1.12.0.min.js" type="text/javascript">
-</script><!-- Latest compiled JavaScript -->
+  </script><!-- Latest compiled JavaScript -->
   
   
- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/css" />
   <link rel="stylesheet" href="include/styles/main.css" type="text/css" />
-  <%-- <link rel="stylesheet" href="include/styles/bootstrap.css" type="text/css" />> --%>
       
-
-  
-  <!-- jQuery library -->
-
-
-
-  <script src="include/js/bootstrap.min.js" type="text/javascript">
-</script>
-
+  <script src="include/js/bootstrap.min.js" type="text/javascript"></script>
  
 
- 
-
-<a href="${pageContext.request.contextPath}">
-<img src="${pageContext.request.contextPath}/include/header.png" class="img-responsive"  id= "head"  alt="Responsive image" />
-</a>
+  <a href="${pageContext.request.contextPath}">
+    <img src="${pageContext.request.contextPath}/include/header.png" class="img-responsive"  id= "head"  alt="Responsive image" />
+  </a>
   
     
   <nav class="navbar navbar-default navbar-fixed-top">
