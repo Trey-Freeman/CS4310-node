@@ -19,7 +19,6 @@ html
    
       #navbar-inverse.collapse.navbar-collapse
           ul#nav-buttons.nav.navbar-nav
-            li: a( href="/") Home
             li: a( href="/quote") Quote
             li: a( href="#timesheet" ) Timesheet
             li.dropdown
@@ -41,9 +40,22 @@ html
               li: a(href="/register") Register
             if (user)
               li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button') #{user.username}
-              li: a(href="/logout") Logout
-              #hidden-username(data-val= '#{user.username}' hidden)
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  span.profile-ava
+                    img(alt='', src='img/avatar1_small.jpg')
+                  span.username #{user.username}
+                  b.caret
+                ul.dropdown-menu.extended.logout
+                  .log-arrow-up
+                  li.eborder-top
+                    a(href='/profile')
+                      i.icon_profile
+                      |  My Profile
+                  li
+                    a(href='/logout')
+                      i.icon_key_alt
+                      |  Log Out
+
           script.
             var url = window.location;
             // Will only work if string in href matches with location
@@ -53,13 +65,13 @@ html
             return this.href == url;
             }).parent().addClass('active');
     header
-          img.img-responsive(src='/images/smlheader.png', alt='Responsive image', id='head')
-
+      img.img-responsive(src='/images/smlheader.png', alt='Responsive image', id='head')
            
+
     .main-content.container-fluid
       block content
     footer
-      img.img-responsive(src='/images/footer.png', alt='Responsive image')
+      img.img-responsive(src='/images/footer.png', alt='Responsive image', id='footer')
       script(src='/javascripts/main.js')
 
     block scripts

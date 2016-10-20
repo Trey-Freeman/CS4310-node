@@ -2,15 +2,16 @@ extend layout
 
 block content
   .container
-    .col-md-6.col-centered
-      h3 Tickets for #{user}
+    .col-md-3
+    .col-md-7
+      h1 Tickets for #{user}
         if (!tickets)
-          li Sorry, no tickets.
+          h2 Sorry, no tickets.
         else
           each ticket, i in tickets
-            ul.tickets
-              .row.row-centered
-                h4 Ticket #{i}
-                  li= ticket.location
-                  li= ticket.distance
+            h3 Ticket #{i}
+            p - Location: #{ticket.location}
+            p - Distance: #{ticket.distance}
+            br
+    .col-md-2
 block scripts

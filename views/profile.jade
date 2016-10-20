@@ -1,40 +1,28 @@
 extends layout
 
 block content
-  .row
-    .col-sm-2.col-md-2
-      img.img-rounded.img-responsive(src='../public/images/cat.jpg', alt='')
-    .col-sm-4.col-md-4
-      blockquote
-        p Name
-        small
-          cite(title='Source Title')
-            | Location 
-            i.glyphicon.glyphicon-map-marker
-      p
-        i.glyphicon.glyphicon-envelope
-        |  email
-        br
-        i.glyphicon.glyphicon-globe
-        |  website
-        br
-        i.glyphicon.glyphicon-gift
-        |  Age
-    .col-sm-2.col-md-2
-      img.img-rounded.img-responsive(src='http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg', alt='')
-    .col-sm-2.col-md-4
-      blockquote
-        p Name
-        small
-          cite(title='Source Title')
-            | Location  
-            i.glyphicon.glyphicon-map-marker
-      p
-        i.glyphicon.glyphicon-envelope
-        |  email
-        br
-        i.glyphicon.glyphicon-globe
-        |  website
-        br
-        i.glyphicon.glyphicon-gift
-        |  age
+      .row
+        .col-sm-2.col-md-3
+        .col-sm-2.col-md-2
+          img.img-rounded.img-responsive(src='http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg', alt='')
+        .col-sm-2.col-md-4
+          h1 User #{user.username}
+
+          form
+            p
+              label Email
+              input#dirSource.form-control(type='text', value='#{user.username}')
+            p
+              label Password
+              input#dirDestination.form-control(type='text', value='')
+
+            br
+            label Profile picture: 
+                input(type='file', name='file')
+            br
+            br
+            .col-md-6
+              a#paneReset(href='#reset' class="btn btn-danger btn-block") Cancel
+            .col-md-6
+              a#getDirections(href='#getDirections' class="btn btn-success btn-block") Save
+          .col-sm-2.col-md-3
