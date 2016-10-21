@@ -128,18 +128,21 @@
 	}
 
 	/* What to do when a user starts receiving a stream (local or remote)
-	* Display it to the video object for the given video element */
+	 * Display it to the video object for the given video element */
 	function onReceiveStream(stream, elementID){
 		var video = $('#' + elementID + ' video')[0];
 		console.log(video);
 		video.src = window.URL.createObjectURL(stream);
 	}
 
+	/* When receiving a message, create the new element representing this message in the chat box 
+	 * then scroll the chat window to the bottom */
 	function handleMessage(data) {
 		$('#messages').append('<p>' + data + '</p>');
 		$('#messages').scrollTop($('#messages')[0].scrollHeight);
 	}
 
+	/* Send message through socket to other users */
 	function sendMessage() {
 		var text = "<span class='username-span'>" + user + ": </span>" + $('#message-box').val();
 		var data;
