@@ -39,6 +39,7 @@ html
               li: a(href="/login") Login
               li: a(href="/register") Register
             if (user)
+              #hidden-username(data-val= '#{user.username}' hidden)
               li.dropdown
                 a.dropdown-toggle(data-toggle='dropdown', href='#')
                   span.profile-ava
