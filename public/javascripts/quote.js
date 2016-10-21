@@ -1,16 +1,9 @@
 (function() {
 	$(document).ready(function() {
-
-	    	$.post(location + 'XML', {})
-	    	.done(function(gasXML) {
-
-	    		var suggestions = gasXML;
-
-	    		console.log(33333);
-	    		console.log(gasXML);
-	    	})
-	    	.fail(function(error) {
-	    		console.log(error);
-	    	});
-	    });
+		// Demonstrate parsing an in-memory XML string
+		var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
+	    var xml = $.parseXML(xmlString, 'text/xml');
+	    var $xml = $(xml);
+	    console.log($xml.find('book')[0].attributes.title);
+	});
 })();
