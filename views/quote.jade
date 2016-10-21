@@ -4,11 +4,6 @@ block content
 
     .container
       h2 Trip calculator 
-        if (user) 
-          "#{user.username}" "#{suggestions}"
-        if (!user)
-          "not logged in" "#{suggestions}"
-          
       |     
       .new
         h3  Enter the values for the map.
@@ -93,10 +88,7 @@ block content
                 x:parse(xml='${gasInfo}', var='gasOutput')
                   | The National Premium Fuel Average is.. 
                   b
-                    x:out(select='$gasOutput/fuelPrices/premium')
-                  | .
-                  |         
-                  |  
+                    .Premium-Fuel 
                   c:if(test='${requestScope.origin!=null}')
                     c:import(var='mapInfo', url='http://maps.googleapis.com/maps/api/distancematrix/xml?origins=${requestScope.urlOrigin}&destinations=${requestScope.urlDestination}&units=imperial&mode=driving&language=en&sensor=false')
                       x:parse(xml='${mapInfo}', var='output')
@@ -213,7 +205,4 @@ block content
     script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
     script(type='text/javascript', src='javascripts/quote.js')
-
-    script(type='text/javascript', src='node_modules/sax/lib/sax.js')
-    script(type='text/javascript', src='lib/xmldoc.js')
 
