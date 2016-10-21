@@ -5,11 +5,10 @@ block content
     .container
       h2 Trip calculator 
         if (user) 
-          "#{user.username}"
+          "#{user.username}" "#{suggestions}"
         if (!user)
           "not logged in" "#{suggestions}"
-        if(user)
-          "#{suggestions}"
+          
       |     
       .new
         h3  Enter the values for the map.
@@ -209,15 +208,15 @@ block content
     |             
     |             
           
-    script(type='text/javascript', src='../node_modules/xmldoc/examples/example.js')
-    script(type='text/javascript', src='javascripts/map.js')
+    //script(type='text/javascript', src='../node_modules/xmldoc/examples/example.js')
+    //script(type='text/javascript', src='javascripts/map.js')
     script(type='text/javascript', src='javascripts/quote.js')
     script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
 
 
-    script(type='text/javascript', src='../node_modules/sax/lib/sax.js')
-    script(type='text/javascript', src='../lib/xmldoc.js')
+    script(type='text/javascript', src='node_modules/sax/lib/sax.js')
+    script(type='text/javascript', src='lib/xmldoc.js')
     script(type='text/javascript').
       // Demonstrate parsing an in-memory XML string
       var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
@@ -228,4 +227,4 @@ block content
       suggestions.eachChild(function(book) {
       document.write("<p>Found book with title: '" + book.attr.title + "'</p>");
       });
-      
+

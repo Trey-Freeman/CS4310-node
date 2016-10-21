@@ -214,7 +214,7 @@ router.post('/quoteXML', function(req,res) {
 
 router.post('/quoteXML', function(req,res) {
 
-
+/*
     var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>';
 
     var suggestions = new XmlDocument(xmlString);
@@ -231,9 +231,16 @@ router.post('/quoteXML', function(req,res) {
     //var xml = "<author><name>looooooong value</name></author>";
 
    // console.log("My document: \n" + new XmlDocument(xml).toString({trimmed:true}))
-
+*/
     //res.send(9999999);
-   // console.log(9999999999999);
+
+      var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
+      var suggestions = new XmlDocument(xmlString);
+      // Demonstrate how toString() will pretty-print an abbreviated version of the XML for debugging
+      console.log("Parsed: \\n" + suggestions);
+
+      
+    console.log(9999999999999);
 });
 
 
