@@ -84,24 +84,7 @@
 				$('#vid-streams').append("<div id='" + videoDivId + "' class='camera col-md-4 col-md-offset-2'><video></video></div>");
 				id++;
 				console.log('finished receiving call');
-				/*call.on('stream', function(stream) {
-					console.log('streaming');
-					onReceiveStream(stream, videoDivId);
-				});*/
 			});
-			//Handling a connection
-			/*peer.on('connection', function(conn) {
-				console.log('Connected');
-				//Possibly send video here
-				conn.send(getVideo(function(stream) {
-					return stream;
-				}));
-				//What to do when receiving a video
-				conn.on('data', function(data) {
-					$('#vid-streams').append("<video id='" + conn.id + "'class='col-md-4 col-md-offset-2'></video>");
-					onReceiveStream(data, conn.id);
-				});
-			});*/
 			console.log(data);
 			//Connect to all the users in the current room
 			data.users.forEach(function(roomUser) {
@@ -127,22 +110,28 @@
 		});
 	});
 
-	navigator.mediagetUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.mozGetUserMedia;
 
 	/* Tell the navigator to get user's webcam feed (video and audio included) */
 	function getVideo(callback) {
 		if(ismobile() || issafari() || isie() || isedge()) {
-			alert('Video not allowed');
+			alert('Camera is inaccessible');
 			return;
 		}
+		if(!navigator.getUserMedia) {
+			alert('Camera is inaccessible');
+			return;
+		}
+		var mediaOptions = {audio: false, video: true};
 		//navigator.mediaDevices.getUserMedia({audio: true, video: true}).then(callback).catch(function(error){alert('An error occured'); console.log(error);});
-		navigator.getUserMedia({audio: true, video: true}, callback, function(error) {alert('Camera is inaccessible'); console.log(error);});
+		navigator.getUserMedia(mediaOptions, callback, function(error) {alert('Camera is inaccessible'); console.log(error);});
 	}
 
 	/* What to do when a user starts receiving a stream (local or remote)
 	* Display it to the video object for the given video element */
 	function onReceiveStream(stream, elementID){
 		var video = $('#' + elementID + ' video')[0];
+		console.log(video);
 		video.src = window.URL.createObjectURL(stream);
 	}
 
