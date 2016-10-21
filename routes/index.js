@@ -1,5 +1,6 @@
 var express = require('express');
 var passport = require('passport');
+//var libxmljs = require("libxmljs");
 var path = require('path');
 var Email = require('../models/email');
 var Account = require('../models/account');
@@ -179,6 +180,35 @@ router.get('/email', function(req, res) {
 router.get('/quote', function(req, res) {
     res.render('quote', {user: req.user});
 });
+
+
+
+/*
+
+router.post('/quoteXML', function(req,res) {
+    var data = req.xmldata;
+    //Do the parsing code here
+    var xml =  '<?xml version="1.0" encoding="UTF-8"?>' +
+               '<root>' +
+                   '<child foo="bar">' +
+                       '<grandchild baz="fizbuzz">grandchild content</grandchild>' +
+                   '</child>' +
+                   '<sibling>with content!</sibling>' +
+               '</root>';
+
+    var xmlDoc = libxmljs.parseXml(xml);
+
+    // xpath queries
+    var gchild = xmlDoc.get('//grandchild');
+
+    console.log(gchild.text());  // prints "grandchild content"
+
+    var children = xmlDoc.root().childNodes();
+    var child = children[0];
+    res.send(9999999);
+    console.log(9999999999999);
+});
+*/
 
 
 
