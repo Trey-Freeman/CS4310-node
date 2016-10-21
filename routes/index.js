@@ -75,6 +75,21 @@ router.post('/action/email', function(req, res) {
         });
 });
 
+router.post('/action/profile', function(req, res) {
+    var profile = req.body;
+    Account.findOne({username: req.user.username}, function (err, user) {
+        user.email = profile.email;
+        user.pic = profile.file;
+
+        console.log(profile);
+
+        user.save(function (err) {
+            if (err) return res.send(500, { error: err });
+        });
+        res.render("profile", {user: user});
+    });
+});
+
 
 /* POST Handle a mailing list through post. If a first name, last name and email is provided, then set new email entry in mongo */
 
@@ -109,12 +124,15 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/profile', function(req, res) {
+    if(!req.isAuthenticated())
+        return res.redirect('/login');
+
     res.render('profile', { user : req.user });
 });
 
 router.get('/action/join', function(req, res) {
     res.render('join', { user : req.user });
-});
+});undefined
 
 /* POST handle a user tryin to join or create a room.
  * If a room exists and invalid password is provided, then send error
