@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 //var libxmljs = require("libxmljs");
+var XmlDocument = require('xmldoc');
 var path = require('path');
 var Email = require('../models/email');
 var Account = require('../models/account');
@@ -209,6 +210,31 @@ router.post('/quoteXML', function(req,res) {
     console.log(9999999999999);
 });
 */
+
+
+router.post('/quoteXML', function(req,res) {
+
+
+    var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>';
+
+    var suggestions = new XmlDocument(xmlString);
+
+    // Demonstrate how toString() will pretty-print the XML for debugging
+    console.log("Parsed: \n%s", suggestions);
+
+    // var xmlString = '<hello>world</hello>';
+    // var parsed = new XmlDocument(xmlString);
+
+    // console.log(parsed);
+
+
+    //var xml = "<author><name>looooooong value</name></author>";
+
+   // console.log("My document: \n" + new XmlDocument(xml).toString({trimmed:true}))
+
+    //res.send(9999999);
+   // console.log(9999999999999);
+});
 
 
 
