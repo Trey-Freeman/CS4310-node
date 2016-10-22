@@ -3,7 +3,7 @@ extends layout
 block content
 
     .container
-      h2 Trip calculator 
+      h2 Trip calculator
       |     
       .new
         h3  Enter the values for the map.
@@ -14,43 +14,31 @@ block content
             .col-sm-3
               .form-group
                 input(type='hidden', name='formType', value='create')
-                |   
-                |       
-                |           
-                |           
-                |             
-                #mapCanvas &nbsp;
-                |             
+                br
+                #mapCanvas           
                 #directionsPanel
                   .directionInputs
-                    label Origin
-                    |  
-                    input#dirSource.form-control(type='text', name='origin', value="${origin== null ? 'Salinas, CA' : origin}")
-                    |  
-                    br
-                    |                     
+                    label Origin 
+                    input#dirSource.form-control(type='text', name='origin', value="#{origin== null ? 'Salinas, CA' : origin}")  
+                    br                    
                     label Destination
-                    |  
-                    input#dirDestination.form-control(type='text', name='destination', value="${destination== null ? 'Allentown, PA' : destination}")
-                    |  
-                    br
-                |  
-                |             
+                    input#dirDestination.form-control(type='text', name='destination', value="#{destination== null ? 'Allentown, PA' : destination}")  
+                    br           
                 label Initial Price
                 |  
-                input.form-control(type='text', name='price', value="${price== null ? '4500' : price}")
+                input.form-control(type='text', name='price', value="#{price== null ? '4500' : price}")
                 |  
                 br
                 |             
                 label MPG
                 |  
-                input.form-control(type='text', name='mpg', value="${mpg== null ? '6' : mpg}")
+                input.form-control(type='text', name='mpg', value="#{mpg== null ? '6' : mpg}")
                 |  
                 br
                 |             
                 label Driver Pay Per Mile
                 |  
-                input.form-control(type='text', name='ppm', value="${ppm== null ? '0.40' : ppm}")
+                input.form-control(type='text', name='ppm', value="#{ppm== null ? '0.40' : ppm}")
                 |  
                 br
                 |             
@@ -194,15 +182,10 @@ block content
                 document.forms[0].elements["dist"].value = $dist;
                 document.forms[0].elements["gascost"].value = $gasCost;
                 document.forms[0].elements["totalCost"].value = $totalCost; --%>
-                });
-    |  
-    |             
-    |             
-    |             
+                });          
           
-    //script(type='text/javascript', src='../node_modules/xmldoc/examples/example.js')
-    //script(type='text/javascript', src='javascripts/map.js')
     script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
+    script(type='text/javascript', src='javascripts/map.js')
     script(type='text/javascript', src='javascripts/quote.js')
 

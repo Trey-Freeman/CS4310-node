@@ -5,6 +5,7 @@
 				directionsService, directionsDisplay, 
 				autoSrc, autoDest, pinA, pinB, 
 				
+				/*
 				markerA = new google.maps.MarkerImage('m1.png',
 						new google.maps.Size(24, 27),
 						new google.maps.Point(0, 0),
@@ -12,7 +13,7 @@
 				markerB = new google.maps.MarkerImage('m2.png',
 						new google.maps.Size(24, 28),
 						new google.maps.Point(0, 0),
-						new google.maps.Point(12, 28)), 
+						new google.maps.Point(12, 28)), */
 				
 				// Caching the Selectors		
 				$Selectors = {
@@ -118,8 +119,8 @@
 							
 							var _route = response.routes[0].legs[0]; 
 							
-							pinA = new google.maps.Marker({position: _route.start_location, map: map, icon: markerA}), 
-							pinB = new google.maps.Marker({position: _route.end_location, map: map, icon: markerB});																	
+							//pinA = new google.maps.Marker({position: _route.start_location, map: map, icon: markerA}), 
+							//pinB = new google.maps.Marker({position: _route.end_location, map: map, icon: markerB});																	
 						}
 					});
 				}, // directionsRender Ends
