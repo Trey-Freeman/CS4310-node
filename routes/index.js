@@ -1,6 +1,5 @@
 var express = require('express');
 var passport = require('passport');
-//var libxmljs = require("libxmljs");
 var XmlDocument = require('xmldoc');
 var path = require('path');
 var Email = require('../models/email');
@@ -182,62 +181,21 @@ router.get('/quote', function(req, res) {
     res.render('quote', {user: req.user});
 });
 
-
-
-/*
-
-router.post('/quoteXML', function(req,res) {
-    var data = req.xmldata;
-    //Do the parsing code here
-    var xml =  '<?xml version="1.0" encoding="UTF-8"?>' +
-               '<root>' +
-                   '<child foo="bar">' +
-                       '<grandchild baz="fizbuzz">grandchild content</grandchild>' +
-                   '</child>' +
-                   '<sibling>with content!</sibling>' +
-               '</root>';
-
-    var xmlDoc = libxmljs.parseXml(xml);
-
-    // xpath queries
-    var gchild = xmlDoc.get('//grandchild');
-
-    console.log(gchild.text());  // prints "grandchild content"
-
-    var children = xmlDoc.root().childNodes();
-    var child = children[0];
-    res.send(9999999);
-    console.log(9999999999999);
+router.get('/test', function(req, res) {
+    res.render('test', {user: req.user});
 });
-*/
+
+
+
 
 
 router.post('/quoteXML', function(req,res) {
 
-/*
-    var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>';
 
-    var suggestions = new XmlDocument(xmlString);
-
-    // Demonstrate how toString() will pretty-print the XML for debugging
-    console.log("Parsed: \n%s", suggestions);
-
-    // var xmlString = '<hello>world</hello>';
-    // var parsed = new XmlDocument(xmlString);
-
-    // console.log(parsed);
-
-
-    //var xml = "<author><name>looooooong value</name></author>";
-
-   // console.log("My document: \n" + new XmlDocument(xml).toString({trimmed:true}))
-*/
-    //res.send(9999999);
-
-      var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
-      var suggestions = new XmlDocument(xmlString);
-      // Demonstrate how toString() will pretty-print an abbreviated version of the XML for debugging
-      console.log("Parsed: \\n" + suggestions);
+        var xmlString = '<suggestions><book title="alphagroup"/><book title="Twister"/></suggestions>'
+        var xml = $.parseXML(xmlString, 'text/xml');
+        var $xml = $(xml);
+        console.log($xml.find('book')[0].attributes.title);
 
       
     console.log(9999999999999);
