@@ -185,22 +185,4 @@ router.get('/test', function(req, res) {
     res.render('test', {user: req.user});
 });
 
-
-
-
-
-router.post('/quoteXML', function(req,res) {
-
-
-        var xmlString = '<suggestions><book title="alphagroup"/><book title="Twister"/></suggestions>'
-        var xml = $.parseXML(xmlString, 'text/xml');
-        var $xml = $(xml);
-        console.log($xml.find('book')[0].attributes.title);
-
-      
-    console.log(9999999999999);
-});
-
-
-
 module.exports = router;
