@@ -3,11 +3,11 @@ html
   head
     title= title
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
+    link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', media='screen')
     link(rel='stylesheet', href='/stylesheets/main.css')
   body
-    script(src='//code.jquery.com/jquery.js')
-    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+    script(src='//code.jquery.com/jquery-3.1.1.js')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     nav.navbar.navbar-default( role="navigation" )
       .navbar-header
           button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#navbar-inverse", aria-expanded="false", aria-controls="navbar")
@@ -39,6 +39,7 @@ html
               li: a(href="/login") Login
               li: a(href="/register") Register
             if (user)
+              #hidden-username(data-val= '#{user.username}' hidden)
               li.dropdown
                 a.dropdown-toggle(data-toggle='dropdown', href='#')
                   span.profile-ava

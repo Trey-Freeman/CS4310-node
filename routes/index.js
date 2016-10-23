@@ -1,5 +1,6 @@
 var express = require('express');
 var passport = require('passport');
+var XmlDocument = require('xmldoc');
 var path = require('path');
 var Email = require('../models/email');
 var Account = require('../models/account');
@@ -179,6 +180,8 @@ router.get('/quote', function(req, res) {
     res.render('quote', {user: req.user});
 });
 
-
+router.get('/test', function(req, res) {
+    res.render('test', {user: req.user});
+});
 
 module.exports = router;
