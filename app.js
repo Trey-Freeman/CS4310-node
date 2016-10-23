@@ -1,5 +1,6 @@
 // dependencies
 var express = require('express');
+var multer = require('multer');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -13,6 +14,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+app.use(multer({dest:'./public/profile_pics'}).single('image'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

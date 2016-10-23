@@ -77,16 +77,15 @@ router.post('/action/email', function(req, res) {
 
 router.post('/action/profile', function(req, res) {
     var profile = req.body;
+    console.log(req.file);
     Account.findOne({username: req.user.username}, function (err, user) {
         user.email = profile.email;
-        user.pic = profile.file;
-
-        console.log(profile);
-
+        //user.pic = profile.file;
+        console.log(req.files);
         user.save(function (err) {
             if (err) return res.send(500, { error: err });
         });
-        res.render("profile", {user: user});
+        res.render("profile", {user: req.user});
     });
 });
 
