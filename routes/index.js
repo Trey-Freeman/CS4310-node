@@ -53,7 +53,7 @@ router.post('/action/ticket', function(req, res) {
 
 /* POST Handle a registration through post. If a username and password is provided, then set new account entry in mongo */
 router.post('/register', function(req, res) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+    Account.register(new Account({ username : req.body.username, pic : '/images/cat.jpg' }), req.body.password, function(err, account) {
         if (err) {
             return res.render('register', { account : account });
         }
@@ -83,11 +83,23 @@ router.post('/action/profile', function(req, res) {
     var file = req.file;
     Account.findOne({username: req.user.username}, function (err, user) {
         user.email = profile.email;
-        if (file !== undefined)
+
+        // If the user uploads a file delete the old
+        // and create a link in the model to that new picture.
+        if (file !== undefined){
+            var fs = require('fs');
+            var filePath = './public' + user.pic; //delete the old picture
+            fs.unlink(filePath ,function(err){
+                if(err) return console.log(err);
+                console.log('file deleted successfully');
+            });
             user.pic = "/profile_pics/" + file['filename'];
+        }
+
         user.save(function (err) {
             if (err) return res.send(500, { error: err });
         });
+
         res.render("profile", {user: user});
     });
 });
