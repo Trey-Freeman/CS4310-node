@@ -89,10 +89,15 @@ router.post('/action/profile', function(req, res) {
         if (file !== undefined){
             var fs = require('fs');
             var filePath = './public' + user.pic; //delete the old picture
-            fs.unlink(filePath ,function(err){
-                if(err) return console.log(err);
-                console.log('file deleted successfully');
-            });
+            
+            //Delete pic if not the default one
+            if (filePath != './public/images/cat.jpg') {
+               fs.unlink(filePath ,function(err){
+                    if(err) return console.log(err);
+                    console.log('file deleted successfully');
+                }); 
+            }
+                
             user.pic = "/profile_pics/" + file['filename'];
         }
 
