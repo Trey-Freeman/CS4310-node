@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var XmlDocument = require('xmldoc');
 var path = require('path');
+var Quote = require('../models/quote');
 var Email = require('../models/email');
 var Account = require('../models/account');
 var Ticket = require('../models/ticket');
@@ -75,6 +76,7 @@ router.post('/action/email', function(req, res) {
             res.redirect('/');
         });
 });
+
 
 router.post('/action/profile', function(req, res) {
     var profile = req.body;
@@ -160,6 +162,25 @@ router.get('/action/join', function(req, res) {
     rooms[req.body.name] = {password: req.body.password, users: [req.user]};
     res.render('chat', {user: req.user});
 });*/
+
+router.post('/create', function(req, res) {
+    console.log("create route");
+     var quote       = req.body;
+     var origin       = quote.origin;
+     var destination  = quote.destination;
+     var price        = quote.price;
+     var mpg          = quote.mpg;
+     var distance     = quote.distance;
+     console.log(origin);
+     res.render('test', {user: req.user, quote: req.quote, origin: origin});
+
+});
+
+
+
+
+
+
 
 router.get('/action/chat', function(req, res) {
     res.render('chat', {user: req.user});
