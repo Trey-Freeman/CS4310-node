@@ -1,34 +1,62 @@
-/*
-var Account = require('../models/account');
-var libxmljs = require("libxmljs");
+var express = require('express');
+var path = require('path');
+var Quote = require('../models/quote');
 var router = express.Router();
 
 
-router.post('/quoteXML2', function(req,res) {
-    var data = req.xmldata;
-    //Do the parsing code here
-    var xml =  '<?xml version="1.0" encoding="UTF-8"?>' +
-               '<root>' +
-                   '<child foo="bar">' +
-                       '<grandchild baz="fizbuzz">grandchild content</grandchild>' +
-                   '</child>' +
-                   '<sibling>with content!</sibling>' +
-               '</root>';
-
-    var xmlDoc = libxmljs.parseXml(xml);
-
-    // xpath queries
-    var gchild = xmlDoc.get('//grandchild');
-
-    console.log(gchild.text());  // prints "grandchild content"
-
-    var children = xmlDoc.root().childNodes();
-    var child = children[0];
-    res.send(9999999);
-    console.log(9999999999999);
+router.post('/quote/po', function(req, res) {
+    var quote = req.body;
+    Quote.create({
+           id           : quote.id;
+           origin       : quote.origin;
+           destination  : quote.destination;
+           price        : quote.price;
+           mpg          : quote.mpg;
+           distance     : quote.distance;
+           gasType      : quote.gasType; 
+           ppm          : quote.ppm;
+           gallons      : quote.gallons;
+           gasCost      : quote.gasCost;
+           totalCost    : quote.totalCost;
+           ppmCost      : quote.ppmCost;
+        }, function(err) {
+            if(err) return res.status(500).send(err);
+            res.redirect('/');
+        });
 });
+
+
+router.post('/quote/make', function(req, res) {
+    var quote = req.body;
+    Quote.create({
+           origin       : quote.origin;
+           destination  : quote.destination;
+           price        : quote.price;
+           mpg          : quote.mpg;
+           distance     : quote.distance;
+           gasType      : quote.gasType; 
+           ppm          : quote.ppm;
+           gallons      : quote.gallons;
+           gasCost      : quote.gasCost;
+           totalCost    : quote.totalCost;
+           ppmCost      : quote.ppmCost;
+        }, function(err) {
+            if(err) return res.status(500).send(err);
+            res.redirect('/');
+        });
+});
+
+router.post('/create', function(req, res) {
+     var quote       = req.body;
+     var origin       = quote.origin;
+     var destination  = quote.destination;
+     var price        = quote.price;
+     var mpg          = quote.mpg;
+     var distance     = quote.distance;
+
+});
+
 
 
 module.exports = router;
 
-*/

@@ -1,32 +1,184 @@
-doctype html
-html(lang='en')
-  head
-    title xmldoc browser test
-   body
-        h2 Trip calculator 
-            if (user) 
-              "#{user.username}" "#{suggestions}"
-            if (!user)
-              "not logged in" "#{suggestions}"
+extends layout
 
-script(src='//code.jquery.com/jquery.js')
-script(type='text/javascript', src='../node_modules/sax/lib/sax.js')
-script(type='text/javascript', src='../lib/xmldoc.js')
-script(type='text/javascript', src='../lib/xml2js.js')
-script(type='text/javascript').
-//
-        var parseString = require('xml2js').parseString;
-        var xml = "<root>Hello xml2js!</root>"
-        parseString(xml, function (err, suggestions) {
-            console.dir(suggestions);
-        });
+block content
 
-         / // Demonstrate parsing an in-memory XML string
-          var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
-          var suggestions = new XmlDocument(xmlString);
-          // Demonstrate how toString() will pretty-print an abbreviated version of the XML for debugging
-          console.log("Parsed: \\n" + suggestions);
-          // Demonstrate a simple eachChild() loop, printing our book titles
-          suggestions.eachChild(function(book) {
-          document.write("<p>Found book with title: '" + book.attr.title + "'</p>");
-          });
+    .container
+      h2 Trip calculator
+        if (quote) 
+          " #{quote}" " : success"
+        if (!quote)
+          " Fail " "todo: callback variable stored in routes?"
+      |     
+      .new
+        h3  Enter the values for the map.
+      |     
+      form.form-horizontal(action='/create', method='post', role='form')
+        .container-fluid
+          .row
+            .col-sm-3
+              .form-group
+                input(type='hidden', name='formType', value='quote')
+                br
+                #mapCanvas           
+                #directionsPanel
+                  .directionInputs
+                    label Origin 
+                    input#dirSource.form-control(type='text', name='origin', value="#{origin== null ? 'Salinas, CA' : origin}")  
+                    br                    
+                    label Destination
+                    input#dirDestination.form-control(type='text', name='destination', value="#{destination== null ? 'Allentown, PA' : destination}")  
+                    br           
+                label Initial Price
+                |  
+                input.form-control(type='text', name='price', value="#{price== null ? '4500' : price}")
+                |  
+                br
+                |             
+                label MPG
+                |  
+                input.form-control(type='text', name='mpg', value="#{mpg== null ? '6' : mpg}")
+                |  
+                br
+                |             
+                label Driver Pay Per Mile
+                |  
+                input.form-control(type='text', name='ppm', value="#{ppm== null ? '0.40' : ppm}")
+                |  
+                br
+                |             
+                |             
+                |            
+                |               
+                label(for='gasList') Select Fuel type:
+                |               
+                select#gasList.form-control(name='gasList')
+                  option Diesel
+                  |                 
+                  option CNG
+                  |                 
+                  option E85
+                  |                 
+                  option Electric
+                  |                 
+                  option LPG
+                  |                 
+                  option Regular
+                  |                 
+                  option Midgrade
+                  |                 
+                  option Premium
+                |              
+                |             
+                br
+                |             
+                button.btn.btn-primary.btn-block(type='submit', value='Submit') Create
+              |   
+              |   
+              |     
+              |     
+              c:import(var='gasInfo', url='http://www.fueleconomy.gov/ws/rest/fuelprices')
+                x:parse(xml='${gasInfo}', var='gasOutput')
+                  | The National Premium Fuel Average is.. 
+                  b
+                    .Premium-Fuel 
+                  c:if(test='${requestScope.origin!=null}')
+                    c:import(var='mapInfo', url='http://maps.googleapis.com/maps/api/distancematrix/xml?origins=${requestScope.urlOrigin}&destinations=${requestScope.urlDestination}&units=imperial&mode=driving&language=en&sensor=false')
+                      x:parse(xml='${mapInfo}', var='output')
+                        x:set(var='dist', select='$output//DistanceMatrixResponse/row/element/distance/value')
+            c:if(test='${requestScope.origin!=null}')
+              .col-sm-3
+                br
+                label Distance Traveled In Miles
+                |  
+                input#dist-field.form-control(type='text', name='dist', value='Calculating...')
+                br
+                |         
+                label Gallons Used
+                |  
+                input#gallons-field.form-control(type='text', name='gallons', value='Calculating...')
+                br
+                |         
+                label National Average Cost of Fuel
+                |  
+                input#gas-field.form-control(type='text', name='gas', value='Calculating...')
+                br
+                |         
+                label Cost of Diesel
+                |  
+                input#gasCost-field.form-control(type='text', name='gasCost', value='Calculating...')
+                br
+                |         
+                label Driver Pay Per Mile Cost
+                |  
+                input#ppm-field.form-control(type='text', name='ppmCost', value='Calculating...')
+                br
+                |         
+                label Ending Balance
+                |  
+                input#totalCost-field.form-control(type='text', name='totalCost', value='Calculating...')
+                br
+                |         
+                |         
+                |         
+                |          
+                input(type='hidden', name='formType', value='quote')
+                |          
+                button.btn.btn-primary.btn-block(type='submit', name='action', value='makeQuote') Make Quote
+                |  
+                br
+                |          
+                button.btn.btn-success.btn-block(type='submit', name='action', value='saveQuote') Save Quote
+                |  
+                br
+                |          
+                button.btn.btn-info.btn-block(type='submit', name='action', value='print') Print
+
+                br
+              |         
+              |         
+              |  
+              |     
+              |     
+              |     
+              |                  
+              .col-sm-6
+                div(style='overflow:hidden;width:850px;height:500px;resize:none;max-width:100%;')
+                  #gmap_canvas(style='height:100%; width:100%;max-width:100%;')
+                    iframe(style='height:100%;width:100%;border:0;', frameborder='0', src='https://www.google.com/maps/embed/v1/directions?origin=${requestScope.urlOrigin}&destination=${requestScope.urlDestination}&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU')
+                  a#enable-map-data.code-for-google-map(href='https://www.google.com')
+                |       
+                script(src='https://www.bootstrapskins.com/google-maps-authorization.js?id=662dfadd-2c44-ff05-e721-3920adb6b7eb&c=code-for-google-map&u=1455863258', defer='defer', async='async')
+              |       
+              |       
+              |       
+              //script.
+                $(document).ready(function() {
+                $("#gasList").val("${gasList}").attr('selected', 'selected');
+                if($( "#gasList option:selected" ).text() === "Diesel") {  var $gas = <x:out select="$gasOutput/fuelPrices/diesel" />; }
+                else if($( "#gasList option:selected" ).text() === "CNG") {     var $gas = <x:out select="$gasOutput/fuelPrices/cng" />; }
+                else if($( "#gasList option:selected" ).text() === "Electric") {var $gas = <x:out select="$gasOutput/fuelPrices/electric" />; }
+                else if($( "#gasList option:selected" ).text() === "LPG") {     var $gas = <x:out select="$gasOutput/fuelPrices/lpg" />; }
+                else if($( "#gasList option:selected" ).text() === "Regular") { var $gas = <x:out select="$gasOutput/fuelPrices/regular" />; }
+                else if($( "#gasList option:selected" ).text() === "Midgrade") {var $gas = <x:out select="$gasOutput/fuelPrices/midgrade" />; }
+                else if($( "#gasList option:selected" ).text() === "Premium") { var $gas = <x:out select="$gasOutput/fuelPrices/premium" />; }
+                var $pri =  ${price};
+                var $mp  =  ${mpg};
+                var $pm =  ${ppm};
+                var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
+                var $gallons = ($dist / $mp );
+                var $ppmCost = ($pm * $dist);
+                var $gasCost = ($gallons * $gas ) ;
+                var $totalCost = ($pri - $gasCost - $ppmCost);
+                $("#dist-field").val($dist.toFixed(3));
+                $("#gas-field").val($gas.toFixed(2));
+                $("#gallons-field").val($gallons.toFixed(2));
+                $("#gasCost-field").val($gasCost.toFixed(2));
+                $("#ppm-field").val($ppmCost.toFixed(2));
+                $("#totalCost-field").val($totalCost.toFixed(2));
+
+                });
+block scripts          
+  script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
+  script(type='text/javascript', src='javascripts/map.js')
+  script(type='text/javascript', src='javascripts/quote.js')
+

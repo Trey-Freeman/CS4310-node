@@ -160,7 +160,7 @@ block content
                 var $pri =  ${price};
                 var $mp  =  ${mpg};
                 var $pm =  ${ppm};
-                var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" />  / 1000000000 * 621371);
+                var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
                 var $gallons = ($dist / $mp );
                 var $ppmCost = ($pm * $dist);
                 var $gasCost = ($gallons * $gas ) ;
@@ -171,17 +171,7 @@ block content
                 $("#gasCost-field").val($gasCost.toFixed(2));
                 $("#ppm-field").val($ppmCost.toFixed(2));
                 $("#totalCost-field").val($totalCost.toFixed(2));
-                //$("#dist-field-hidden").val($dist.toFixed(3));
-                // $("#gas-field-hidden").val($gas);
-                <%--
-                var $org = ${sessionScope.map.origin};
-                var $des = ${sessionScope.map.distance};
-                alert($org);
-                $("#origin-field").val($org);
-                document.forms[0].elements["gas"].value = $gas;
-                document.forms[0].elements["dist"].value = $dist;
-                document.forms[0].elements["gascost"].value = $gasCost;
-                document.forms[0].elements["totalCost"].value = $totalCost; --%>
+
                 });
 block scripts          
   script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
