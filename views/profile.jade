@@ -3,15 +3,15 @@ extends layout
 block content
     .row
       .col-md-3
-        img.img-rounded.img-responsive(src='http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg', alt='')
+        img.img-rounded.img-responsive(src='#{user.pic}', alt='')
       .col-md-3
         form(role='form', action="/action/profile", method="post",  enctype="multipart/form-data", style='max-width: 300px;')
           .form-group
             label Email
-            input.email.form-control(type='text', name="email", placeholder='#{user.email}')
+            input.email.form-control(type='text', name="email", value='#{user.email}')
           .form-group
             label Profile picture:
-            input.file.form-control(type='file', name="image")
+            input.file.form-control(type='file', name="image", value='#{user.pic}')
           button.btn.btn-default(type='submit') Submit
             a(href='/')
           button.btn.btn-primary(type="button", action='/') Cancel

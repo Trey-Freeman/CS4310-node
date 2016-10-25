@@ -43,7 +43,7 @@ html
               li.dropdown
                 a.dropdown-toggle(data-toggle='dropdown', href='#')
                   span.profile-ava
-                    img(alt='', src='img/avatar1_small.jpg')
+                    img(alt='', src='#{user.pic}', style='width:20px; height:20px;')
                   span.username #{user.username}
                   b.caret
                 ul.dropdown-menu.extended.logout
