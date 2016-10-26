@@ -2,7 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var XmlDocument = require('xmldoc');
 var path = require('path');
-var Quote = require('../models/quote');
+// var Quote = require('../models/quote');
 var Email = require('../models/email');
 var Account = require('../models/account');
 var Ticket = require('../models/ticket');
@@ -178,41 +178,6 @@ router.get('/action/join', function(req, res) {
     rooms[req.body.name] = {password: req.body.password, users: [req.user]};
     res.render('chat', {user: req.user});
 });*/
-
-router.post('/create', function(req, res) {
-    console.log("create route");
-    console.log(req.body);
-     var body       = req.body;
-     var quote = new Quote({
-           id           : body.id,
-           origin       : body.origin,
-           destination  : body.destination,
-           price        : body.price,
-           mpg          : body.mpg,
-           distance     : body.distance,
-           gasType      : body.gasType, 
-           ppm          : body.ppm,
-           gallons      : body.gallons,
-           gasCost      : body.gasCost,
-           totalCost    : body.totalCost,
-           ppmCost      : body.ppmCost
-        }, function(err) {
-            if(err) return res.status(500).send(err);
-            res.redirect('/');
-        });
-     //quote.save (function(err){
-            // if(err) return res.status(500).send(err);
-            // res.redirect('/');
-     //});
-     console.log(quote);
-     res.render('test', {user: req.user, quote: quote});
-
-});
-
-
-
-
-
 
 
 router.get('/action/chat', function(req, res) {
