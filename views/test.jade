@@ -7,7 +7,7 @@ block content
         if (quote) 
           p  #{quote.origin} : success
         if (!quote)
-          " Fail " "todo: callback variable stored in routes?"
+          p  "no-quote-found"
       |     
       .new
         h3  Enter the values for the map.
@@ -23,13 +23,13 @@ block content
                 #directionsPanel
                   .directionInputs
                     label Origin 
-                    if quote
+                    if (quote)
                       input#dirSource.form-control(type='text', name='origin', value='#{quote.origin}')
                     else
                       input#dirSource.form-control(type='text', name='origin', value='Salinas, CA')
                     br                    
                     label Destination
-                    input#dirDestination.form-control(type='text', name='destination', value="#{destination== null ? 'Allentown, PA' : destination}")  
+                    input#dirDestination.form-control(type='text', name='destination', value="#{destination == null ? 'Allentown, PA' : destination}")  
                     br           
                 label Initial Price
                 |  
@@ -180,8 +180,8 @@ block content
                 $("#totalCost-field").val($totalCost.toFixed(2));
 
                 });
-block scripts          
-  script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
-  script(type='text/javascript', src='javascripts/map.js')
-  script(type='text/javascript', src='javascripts/quote.js')
+         
+    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
+    script(type='text/javascript', src='javascripts/quote.js')
+    script(type='text/javascript', src='javascripts/map.js')
 

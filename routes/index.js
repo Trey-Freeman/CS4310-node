@@ -64,8 +64,8 @@ router.post('/register', function(req, res) {
     });
 });
 
-
-router.post('/action/email', function(req, res) {
+//email mailing list user does need to be logged in, to view
+router.post('/email', function(req, res) {
     var email = req.body;
     Email.create({
         firstname: email.firstname,
@@ -179,7 +179,7 @@ router.get('/action/join', function(req, res) {
     res.render('chat', {user: req.user});
 });*/
 
-<<<<<<< HEAD
+
 router.post('/create', function(req, res) {
     console.log("create route");
     console.log(req.body);
@@ -210,8 +210,7 @@ router.post('/create', function(req, res) {
 
 });
 
-=======
->>>>>>> 667d2a8e09be6d0ad2affd2617404c375edaa1be
+
 
 router.get('/action/chat', function(req, res) {
     res.render('chat', {user: req.user});
