@@ -2,7 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var XmlDocument = require('xmldoc');
 var path = require('path');
-var Quote = require('../models/quote');
+// var Quote = require('../models/quote');
 var Email = require('../models/email');
 var Account = require('../models/account');
 var Ticket = require('../models/ticket');
@@ -179,6 +179,7 @@ router.get('/action/join', function(req, res) {
     res.render('chat', {user: req.user});
 });*/
 
+<<<<<<< HEAD
 router.post('/create', function(req, res) {
     console.log("create route");
     console.log(req.body);
@@ -209,6 +210,8 @@ router.post('/create', function(req, res) {
 
 });
 
+=======
+>>>>>>> 667d2a8e09be6d0ad2affd2617404c375edaa1be
 
 router.get('/action/chat', function(req, res) {
     res.render('chat', {user: req.user});
@@ -226,12 +229,8 @@ router.get('/email', function(req, res) {
     res.render('email', {user: req.user});
 });
 
-router.get('/quote', function(req, res) {
-    res.render('quote', {user: req.user});
-});
-
-router.get('/test', function(req, res) {
-    res.render('test', {user: req.user});
-});
+// router.get('/quote', function(req, res) {
+//     res.render('quote', {user: req.user});
+// });
 
 module.exports = router;

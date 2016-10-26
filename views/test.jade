@@ -3,7 +3,7 @@ extends layout
 block content
 
     .container
-      h2 Trip calculator
+      h2 Trip calculator #{distance}
         if (quote) 
           p  #{quote.origin} : success
         if (!quote)
@@ -12,7 +12,7 @@ block content
       .new
         h3  Enter the values for the map.
       |     
-      form.form-horizontal(action='/create', method='post', role='form')
+      form.form-horizontal(action='/quote/create', method='post', role='form')
         .container-fluid
           .row
             .col-sm-3
@@ -23,7 +23,10 @@ block content
                 #directionsPanel
                   .directionInputs
                     label Origin 
-                    input#dirSource.form-control(type='text', name='origin', value="#{origin== null ? 'Salinas, CA' : origin}")  
+                    if quote
+                      input#dirSource.form-control(type='text', name='origin', value='#{quote.origin}')
+                    else
+                      input#dirSource.form-control(type='text', name='origin', value='Salinas, CA')
                     br                    
                     label Destination
                     input#dirDestination.form-control(type='text', name='destination', value="#{destination== null ? 'Allentown, PA' : destination}")  
