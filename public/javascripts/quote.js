@@ -44,23 +44,32 @@
 
         $.ajax({
             type: 'GET',
-            url: 'http://maps.googleapis.com/maps/api/distancematrix/xml?origins=94587&destinations=90210&units=imperial&mode=driving&language=en&sensor=false',
-            crossDomain: true,
-            dataType: 'xml',
-            success: parseDistance 
+            url: 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=94587&destinations=90210&units=imperial&mode=driving&language=en',
+            dataType: 'jsonp',
+            jsonp: false,
+            jsonpCallback: "myJsonMethod",
+            success: function (json) {
+                console.log(json);
+            } 
           });
 
 
-        function parseDistance(xml)
-        {
+        // function parseDistance(xml)
+        // {
 
-        var $xml = $(xml);
-        //DistanceMatrixResponse/row/element/distance/value
-        var $dist = $xml.find("distance").text();
+        // var $xml = $(xml);
+        // //DistanceMatrixResponse/row/element/distance/value
+        // var $dist = $xml.find("distance").text();
 
-        console.log("distance " + $dist );
+        // console.log("distance " + $dist );
 
-        }
+        // }
+
+            // function parseDistance(json) {
+            //     console.log(json);
+            //     // var distance = json.rows[0].text;
+            //     // console.log(distance);
+            // }
 
         });   
 

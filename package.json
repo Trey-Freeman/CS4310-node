@@ -22,6 +22,7 @@
     "passport-local-mongoose": "^4.0.0",
     "peer": "^0.2.8",
     "peerjs": "^0.3.14",
+    "request": "^2.76.0",
     "rtc": "^3.4.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.5.0",

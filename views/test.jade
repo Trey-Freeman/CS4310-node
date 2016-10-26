@@ -3,7 +3,7 @@ extends layout
 block content
 
     .container
-      h2 Trip calculator
+      h2 Trip calculator #{distance}
         if (quote) 
           p  #{quote.origin} : success
         if (!quote)
@@ -24,7 +24,7 @@ block content
                   .directionInputs
                     label Origin 
                     if quote
-                      input#dirSource.form-control(type='text', name='origin', value='{#quote.origin}')
+                      input#dirSource.form-control(type='text', name='origin', value='#{quote.origin}')
                     else
                       input#dirSource.form-control(type='text', name='origin', value='Salinas, CA')
                     br                    
