@@ -1,17 +1,24 @@
 extends layout
 
 block content
-  .container
-    h1 Login Page
-    p.lead Login to Transport-HR
-    br
-    form(role='form', action="/login",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-        br
-        button.btn.btn-default(type='submit' class="btn btn-primary btn-block") Submit
-        &nbsp;
-        a(href='/logout')
-         button.btn.btn-primary(type="button" class="btn btn-warning btn-block" ) Cancel 
+  .row
+    .col-md-4
+    .col-md-8
+      h1 Login
+      p.lead Welcome back to Transport-HR !
+      br
+      form(role='form', action="/login",method="post", style='max-width: 300px;')
+        .form-group
+          label(for='email') Username:
+          input.form-control(type='text', name="username", placeholder='Username')
+        .form-group
+          label(for='email') Password:
+          input.form-control(type='password', name="password", placeholder='Password')
+          br
+          .col-md-6
+            a(href='/logout')
+              button.btn.btn-primary(type="button" class="btn btn-warning btn-block" ) Cancel 
+          .col-md-6
+            button.btn.btn-default(type='submit' class="btn btn-primary btn-block") Submit
+
+        
