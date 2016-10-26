@@ -210,11 +210,6 @@ router.post('/create', function(req, res) {
 });
 
 
-
-
-
-
-
 router.get('/action/chat', function(req, res) {
     res.render('chat', {user: req.user});
 });
