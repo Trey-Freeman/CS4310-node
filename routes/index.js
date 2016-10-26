@@ -53,7 +53,7 @@ router.post('/action/ticket', function(req, res) {
 
 /* POST Handle a registration through post. If a username and password is provided, then set new account entry in mongo */
 router.post('/register', function(req, res) {
-    Account.register(new Account({ username : req.body.username, pic : '/images/cat.jpg' }), req.body.password, function(err, account) {
+    Account.register(new Account({ username : req.body.username, email : req.body.email, pic : '/images/cat.jpg' }), req.body.password, function(err, account) {
         if (err) {
             return res.render('register', { account : account });
         }
