@@ -22,58 +22,106 @@ block content
                 #mapCanvas           
                 #directionsPanel
                   .directionInputs
+                  if (quote)
                     label Origin 
-                    if (quote)
-                      input#dirSource.form-control(type='text', name='origin', value='#{quote.origin}')
-                    else
-                      input#dirSource.form-control(type='text', name='origin', value='Salinas, CA')
+                    input#dirSource.form-control(type='text', name='origin', value='#{quote.origin}')
                     br                    
                     label Destination
-                    input#dirDestination.form-control(type='text', name='destination', value="#{destination == null ? 'Allentown, PA' : destination}")  
-                    br           
-                label Initial Price
-                |  
-                input.form-control(type='text', name='price', value="#{price== null ? '4500' : price}")
-                |  
-                br
-                |             
-                label MPG
-                |  
-                input.form-control(type='text', name='mpg', value="#{mpg== null ? '6' : mpg}")
-                |  
-                br
-                |             
-                label Driver Pay Per Mile
-                |  
-                input.form-control(type='text', name='ppm', value="#{ppm== null ? '0.40' : ppm}")
-                |  
-                br
-                |             
-                |             
-                |            
-                |               
-                label(for='gasList') Select Fuel type:
-                |               
-                select#gasList.form-control(name='gasList')
-                  option Diesel
-                  |                 
-                  option CNG
-                  |                 
-                  option E85
-                  |                 
-                  option Electric
-                  |                 
-                  option LPG
-                  |                 
-                  option Regular
-                  |                 
-                  option Midgrade
-                  |                 
-                  option Premium
-                |              
-                |             
-                br
-                |             
+                    input#dirDestination.form-control(type='text', name='destination', value='#{quote.destination}')
+                  else
+                    label Origin 
+                    input#dirSource.form-control(type='text', name='origin', value='Salinas, CA')  
+                    br                    
+                    label Destination
+                    input#dirDestination.form-control(type='text', name='destination', value='Allentown, PA')      
+                  br
+                if (quote)           
+                  label Initial Price
+                  |  
+                  input.form-control(type='text', name='price', value="#{quote.price}")
+                  |  
+                  br
+                  |             
+                  label MPG
+                  |  
+                  input.form-control(type='text', name='mpg', value="#{quote.mpg}")
+                  |  
+                  br
+                  |             
+                  label Driver Pay Per Mile
+                  |  
+                  input.form-control(type='text', name='ppm', value="#{quote.ppm}")
+                  |  
+                  br
+                  |             
+                  |             
+                  |            
+                  |               
+                  label(for='gasList') Select Fuel type:
+                  |               
+                  select#gasList.form-control(name='gasList')
+                    option Diesel
+                    |                 
+                    option CNG
+                    |                 
+                    option E85
+                    |                 
+                    option Electric
+                    |                 
+                    option LPG
+                    |                 
+                    option Regular
+                    |                 
+                    option Midgrade
+                    |                 
+                    option Premium
+                  |              
+                  |             
+                  br
+                else
+                  label Initial Price
+                  |  
+                  input.form-control(type='text', name='price', value='4500')
+                  |  
+                  br
+                  |             
+                  label MPG
+                  |  
+                  input.form-control(type='text', name='mpg', value='6')
+                  |  
+                  br
+                  |             
+                  label Driver Pay Per Mile
+                  |  
+                  input.form-control(type='text', name='ppm', value='0.40')
+                  |  
+                  br
+                  |             
+                  |             
+                  |            
+                  |               
+                  label(for='gasList') Select Fuel type:
+                  |               
+                  select#gasList.form-control(name='gasList')
+                    option Diesel
+                    |                 
+                    option CNG
+                    |                 
+                    option E85
+                    |                 
+                    option Electric
+                    |                 
+                    option LPG
+                    |                 
+                    option Regular
+                    |                 
+                    option Midgrade
+                    |                 
+                    option Premium
+                  |              
+                  |             
+                  br
+                  |                          
                 button.btn.btn-primary.btn-block(type='submit', value='Submit') Create
               |   
               |   
@@ -88,7 +136,7 @@ block content
                     c:import(var='mapInfo', url='http://maps.googleapis.com/maps/api/distancematrix/xml?origins=${requestScope.urlOrigin}&destinations=${requestScope.urlDestination}&units=imperial&mode=driving&language=en&sensor=false')
                       x:parse(xml='${mapInfo}', var='output')
                         x:set(var='dist', select='$output//DistanceMatrixResponse/row/element/distance/value')
-            c:if(test='${requestScope.origin!=null}')
+            if (quote)
               .col-sm-3
                 br
                 label Distance Traveled In Miles
@@ -147,7 +195,7 @@ block content
               .col-sm-6
                 div(style='overflow:hidden;width:850px;height:500px;resize:none;max-width:100%;')
                   #gmap_canvas(style='height:100%; width:100%;max-width:100%;')
-                    iframe(style='height:100%;width:100%;border:0;', frameborder='0', src='https://www.google.com/maps/embed/v1/directions?origin=${requestScope.urlOrigin}&destination=${requestScope.urlDestination}&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU')
+                    iframe(style='height:100%;width:100%;border:0;', frameborder='0', src='https://www.google.com/maps/embed/v1/directions?origin=#{quote.origin}&destination=#{quote.destination}&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU')
                   a#enable-map-data.code-for-google-map(href='https://www.google.com')
                 |       
                 script(src='https://www.bootstrapskins.com/google-maps-authorization.js?id=662dfadd-2c44-ff05-e721-3920adb6b7eb&c=code-for-google-map&u=1455863258', defer='defer', async='async')

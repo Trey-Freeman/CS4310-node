@@ -18,19 +18,21 @@
         function parseXml(xml)
         {
 
-        var $xml = $(xml);
-        var $cng = $xml.find("cng").text();
-        var diesel = $xml.find("diesel").text();
-        var lpg = $xml.find("lpg").text();
-        var regular = $xml.find("regular").text();
-        var midgrade = $xml.find("midgrade").text();
-        var premium = $xml.find("premium").text();
-        var e85 = $xml.find("e85").text();
+         var $xml = $(xml);
+         var $cng = $xml.find("cng").text();
+         var diesel = $xml.find("diesel").text();
+         var lpg = $xml.find("lpg").text();
+         var regular = $xml.find("regular").text();
+         var midgrade = $xml.find("midgrade").text();
+         var premium = $xml.find("premium").text();
+         var electric = $xml.find("electric").text();
+         var e85 = $xml.find("e85").text();
         
 
         console.log("cng " + $cng);
         console.log("diesel " + diesel);
         console.log("lpg " + lpg);
+        console.log("electric " + electric);
         console.log("regular " + regular);
         console.log("midgrade " + midgrade);
         console.log("premium " + premium);
@@ -40,18 +42,44 @@
 
         }
 
+        // $("#gasList").val("${gasList}").attr('selected', 'selected');
+        //         if($( "#gasList option:selected" ).text() === "Diesel") {  var $gas = diesel; }
+        //         else if($( "#gasList option:selected" ).text() === "CNG") {     var $gas = $cng; }
+        //         else if($( "#gasList option:selected" ).text() === "Electric") {var $gas = electric; }
+        //         else if($( "#gasList option:selected" ).text() === "LPG") {     var $gas = lpg; }
+        //         else if($( "#gasList option:selected" ).text() === "Regular") { var $gas = regular; }
+        //         else if($( "#gasList option:selected" ).text() === "Midgrade") {var $gas = midgrade; }
+        //         else if($( "#gasList option:selected" ).text() === "Premium") { var $gas = premium; }
+        //         alert($gas);
+
+                // var $pri =  #{quote.price};
+                // var $mp  =  #{quote.mpg};
+                // var $pm =  #{quote.ppm};
+                // var $dist = '1';
+                // var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
+                // var $gallons = ($dist / $mp );
+                // var $ppmCost = ($pm * $dist);
+                // var $gasCost = ($gallons * $gas ) ;
+                // var $totalCost = ($pri - $gasCost - $ppmCost);
+                // $("#dist-field").val($dist.toFixed(3));
+                // $("#gas-field").val($gas.toFixed(2));
+                // $("#gallons-field").val($gallons.toFixed(2));
+                // $("#gasCost-field").val($gasCost.toFixed(2));
+                // $("#ppm-field").val($ppmCost.toFixed(2));
+                // $("#totalCost-field").val($totalCost.toFixed(2));
 
 
-        $.ajax({
-            type: 'GET',
-            url: 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=94587&destinations=90210&units=imperial&mode=driving&language=en',
-            dataType: 'jsonp',
-            jsonp: false,
-            jsonpCallback: "myJsonMethod",
-            success: function (json) {
-                console.log(json);
-            } 
-          });
+
+        // $.ajax({
+        //     type: 'GET',
+        //     url: 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=94587&destinations=90210&units=imperial&mode=driving&language=en',
+        //     dataType: 'jsonp',
+        //     jsonp: false,
+        //     jsonpCallback: "myJsonMethod",
+        //     success: function (json) {
+        //         console.log(json);
+        //     } 
+        //   });
 
 
         // function parseDistance(xml)
