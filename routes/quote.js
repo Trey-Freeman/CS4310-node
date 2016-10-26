@@ -6,6 +6,7 @@ var router = express.Router();
 
 router.post('/quote/po', function(req, res) {
     var quote = req.body;
+    console.log(req.body);
     Quote.create({
            id           : quote.id;
            origin       : quote.origin;
@@ -55,8 +56,6 @@ router.post('/create', function(req, res) {
      var distance     = quote.distance;
 
 });
-
-
 
 module.exports = router;
 
