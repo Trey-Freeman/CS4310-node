@@ -74,7 +74,8 @@ router.post('/create', function(req, res) {
            gallons      : body.gallons,
            gasCost      : body.gasCost,
            totalCost    : body.totalCost,
-           ppmCost      : body.ppmCost
+           ppmCost      : body.ppmCost,
+           gasList      : body.gasList
         }, function(err) {
             if(err) return res.status(500).send(err);
             res.redirect('/');

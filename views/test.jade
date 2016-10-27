@@ -127,15 +127,8 @@ block content
               |   
               |     
               |     
-              c:import(var='gasInfo', url='http://www.fueleconomy.gov/ws/rest/fuelprices')
-                x:parse(xml='${gasInfo}', var='gasOutput')
-                  | The National Premium Fuel Average is.. 
-                  b
-                    .Premium-Fuel 
-                  c:if(test='${requestScope.origin!=null}')
-                    c:import(var='mapInfo', url='http://maps.googleapis.com/maps/api/distancematrix/xml?origins=${requestScope.urlOrigin}&destinations=${requestScope.urlDestination}&units=imperial&mode=driving&language=en&sensor=false')
-                      x:parse(xml='${mapInfo}', var='output')
-                        x:set(var='dist', select='$output//DistanceMatrixResponse/row/element/distance/value')
+              p The National Premium Fuel Average is.. 
+                .Premium-Fuel 
             if (quote)
               .col-sm-3
                 br
@@ -228,8 +221,8 @@ block content
                 $("#totalCost-field").val($totalCost.toFixed(2));
 
                 });
-         
-    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places')
-    script(type='text/javascript', src='javascripts/quote.js')
-    script(type='text/javascript', src='javascripts/map.js')
+block scripts       
+    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places&key=AIzaSyDL1zJXtvfGQ3V59JGz5-8HxHleWIv8znE')
+    script(type='text/javascript', src='/javascripts/quote.js')
+    script(type='text/javascript', src='/javascripts/map.js')
 

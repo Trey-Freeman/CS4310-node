@@ -40,23 +40,28 @@
 
         $('div.Premium-Fuel').contents()[0].data = '$' + premium;
 
-        }
+        var e = document.getElementById("gasList");
+        var gs = e.options[e.selectedIndex].text;
+        if(typeof quote !== 'undefined')  {gs = quote.gasList; }
+        console.log("selected gas: " + gs);
+        if(typeof quote !== 'undefined') {console.log("quote origin: " + quote.origin); }
+        
 
-        // $("#gasList").val("${gasList}").attr('selected', 'selected');
-        //         if($( "#gasList option:selected" ).text() === "Diesel") {  var $gas = diesel; }
-        //         else if($( "#gasList option:selected" ).text() === "CNG") {     var $gas = $cng; }
-        //         else if($( "#gasList option:selected" ).text() === "Electric") {var $gas = electric; }
-        //         else if($( "#gasList option:selected" ).text() === "LPG") {     var $gas = lpg; }
-        //         else if($( "#gasList option:selected" ).text() === "Regular") { var $gas = regular; }
-        //         else if($( "#gasList option:selected" ).text() === "Midgrade") {var $gas = midgrade; }
-        //         else if($( "#gasList option:selected" ).text() === "Premium") { var $gas = premium; }
-        //         alert($gas);
+        $("#gasList").val(gs).attr('selected', 'selected');
+                if($( "#gasList option:selected" ).text() === "Diesel") {       var $gas = diesel; }
+                else if($( "#gasList option:selected" ).text() === "CNG") {     var $gas = $cng; }
+                else if($( "#gasList option:selected" ).text() === "Electric"){ var $gas = electric; }
+                else if($( "#gasList option:selected" ).text() === "LPG") {     var $gas = lpg; }
+                else if($( "#gasList option:selected" ).text() === "Regular") { var $gas = regular; }
+                else if($( "#gasList option:selected" ).text() === "Midgrade") {var $gas = midgrade; }
+                else if($( "#gasList option:selected" ).text() === "Premium") { var $gas = premium; }
+                console.log("$gas " + $gas);
 
-                // var $pri =  #{quote.price};
-                // var $mp  =  #{quote.mpg};
-                // var $pm =  #{quote.ppm};
+                // var $pri =  quote.price;
+                // var $mp  =  quote.mpg;
+                // var $pm =  quote.ppm;
                 // var $dist = '1';
-                // var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
+                // //var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
                 // var $gallons = ($dist / $mp );
                 // var $ppmCost = ($pm * $dist);
                 // var $gasCost = ($gallons * $gas ) ;
@@ -66,7 +71,13 @@
                 // $("#gallons-field").val($gallons.toFixed(2));
                 // $("#gasCost-field").val($gasCost.toFixed(2));
                 // $("#ppm-field").val($ppmCost.toFixed(2));
-                // $("#totalCost-field").val($totalCost.toFixed(2));
+                // $("#totalCost-field").val($totalCost.toFixed(2));        
+
+        }
+
+
+
+
 
 
 

@@ -13,7 +13,8 @@ var Quote = new Schema({
    gallons      : String,
    gasCost      : String,
    totalCost    : String,
-   ppmCost      : String
+   ppmCost      : String,
+   gasList      : String
 
   //email: { type: String,, required: true, unique: true }
 });
