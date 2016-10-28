@@ -1,31 +1,49 @@
 extends layout
 
 block content
-  .row
-    .col-md-4
-    .col-md-8
-      h1 Sign Up
-      p.lead Welcome to Transport-HR !
-      br
-      form(role='form', action="/register",method="post", style='max-width: 300px;')
-        .form-group
-          label(for='email') Username:
-          input.form-control#username(type='text', name="username", placeholder='Enter Username' required)
-        .form-group
-          label(for='email') Email address:
-          input.form-control#email(type='email', name="email", placeholder='Enter Email' required)
-        .form-group
-          label(for='email') Password:
-          input.form-control#password(type='password', name="password", placeholder='Password' required)
-        .form-group
-          label(for='email') Repeat password:
-          input.form-control#password-conf(type='password', name='password-conf', placeholder='Confirm Password' required)
-          br
-          .col-md-6
-            a(href='/')
-              button.btn.btn-primary(type="button" class="btn btn-warning btn-block" ) Cancel 
-          .col-md-6
-            button.btn.btn-default(type='submit' class="btn btn-primary btn-block") Submit
+  .col-md-4
+  .col-md-8
+    h1 Sign Up
+    p.lead Welcome to Transport-HR !
+    br
+    form(role='form', action="/register",method="post", style='max-width: 300px;', onsubmit='return validatePassword(password, confirmPassword);')
+      .form-group
+        label(for='username') Username:
+        input.form-control#username(type='text', name="username", placeholder='Enter Username' required)
+      .form-group
+        label(for='email') Email address:
+        input.form-control#email(type='email', name="email", placeholder='Enter Email' required)
+      .form-group
+        label(for='password') Password:
+        input.form-control#password(type='password', name="password", placeholder='Password' required)
+      .form-group
+        label(for='confirmPassword') Repeat password:
+        input.form-control#password-conf(type='password', name='confirmPassword', placeholder='Confirm Password' required)
+
+        br
+      .col-md-6
+        a(href='/')
+          button.btn.btn-primary(type="button" class="btn btn-warning btn-block" ) Cancel 
+      .col-md-6
+        button.btn.btn-default(type='submit', class="btn btn-primary btn-block") Submit
 
 block scripts
   script(type='text/javascript', src='/javascripts/register.js')
+
+  script.
+    function validatePassword(fld, fld2) {
+      var error = "";
+      var illegalChars = /[\W_]/; // allow only letters and numbers
+   
+      if (fld.value != fld2.value) {
+          error = "Passwords must match . \n";
+          fld.style.background = 'Yellow';
+          fld2.style.background = 'Yellow';
+          alert(error);
+          return false;
+   
+      } else {
+          fld.style.background = 'White';
+      }
+     return true;
+    }
