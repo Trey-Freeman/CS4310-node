@@ -11,7 +11,7 @@ var router = express.Router();
 
 //When someone types in localhost:3000/quote takes them to test.jade
 router.get('/', function(req, res) {
-    res.render('test', {user: req.user});
+    res.render('quote', {user: req.user});
 });
 
 
@@ -85,8 +85,10 @@ router.post('/create', function(req, res) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
               var distance = json.rows[0].elements[0].distance.value
+          } else {
+            return res.redirect('/quote')
           }
-          return res.render('test', {user: req.user, quote: JSON.stringify(quote), distance: distance});
+          return res.render('test', {user: req.user, quote: quote, distance: distance});
       });
 });
 

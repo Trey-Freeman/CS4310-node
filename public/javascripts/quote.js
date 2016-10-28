@@ -1,11 +1,26 @@
 (function() {
     $(document).ready(function() {
         //var quote = #{quote};
-        var quoteObject = $('#hiddenquote').attr('data-val');
-        if(quoteObject)
-            var quote =  JSON.parse(quoteObject);
-        console.log(typeof quote);
-        console.log("quote origin: " + " "+ quote.origin);
+        //var quoteObject = $('#hiddenquote').attr('data-val');
+        //if(quoteObject)
+            //var quote =  JSON.parse(quoteObject);
+        //console.log(typeof quote);
+        var quote = $('#hiddenquote').attr('data-val');
+        var distance = $('#hiddendistance').attr('data-val');
+        var ppm = $('#hiddenppm').attr('data-val');
+        var mpg = $('#hiddenmpg').attr('data-val');
+        var price = $('#hiddenprice').attr('data-val');
+
+        console.log("quote origin: " + " "+ quote);
+        console.log("quote distance: " + " "+ distance);
+        console.log("quote ppm: " + " "+ ppm);
+        console.log("quote price: " + " "+ price);
+        console.log("quote mpg: " + " "+ mpg);
+
+
+
+
+ 
         // Demonstrate parsing an in-memory XML string
         var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
         var xml = $.parseXML(xmlString, 'text/xml');
@@ -49,12 +64,12 @@
         var e = document.getElementById("gasList");
         var gs = e.options[e.selectedIndex].text;
         console.log(" gs: " + gs);
-        if(typeof quote !== 'undefined')  {gs = quote.gasList; }
+        if(typeof quote !== 'undefined')  {gs = quote; }
         console.log("selected gas: " + gs);
-        if(typeof quote !== 'undefined') {console.log("quote origin: " + quote.origin + " qt: " + quote); }
+        //if(typeof quote !== 'undefined') {console.log("quote origin: " + quote.origin + " qt: " + quote); }
         
 
-        // $("#gasList").val(gs).attr('selected', 'selected');
+        $("#gasList").val(gs).attr('selected', 'selected');
                 if($( "#gasList option:selected" ).text() === "Diesel") {       var $gas = diesel; }
                 else if($( "#gasList option:selected" ).text() === "CNG") {     var $gas = $cng; }
                 else if($( "#gasList option:selected" ).text() === "Electric"){ var $gas = electric; }
@@ -64,21 +79,21 @@
                 else if($( "#gasList option:selected" ).text() === "Premium") { var $gas = premium; }
                 console.log("$gas " + $gas);
 
-                // var $pri =  quote.price;
-                // var $mp  =  quote.mpg;
-                // var $pm =  quote.ppm;
-                // var $dist = '1';
-                // //var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
-                // var $gallons = ($dist / $mp );
-                // var $ppmCost = ($pm * $dist);
-                // var $gasCost = ($gallons * $gas ) ;
-                // var $totalCost = ($pri - $gasCost - $ppmCost);
-                // $("#dist-field").val($dist.toFixed(3));
-                // $("#gas-field").val($gas.toFixed(2));
-                // $("#gallons-field").val($gallons.toFixed(2));
-                // $("#gasCost-field").val($gasCost.toFixed(2));
-                // $("#ppm-field").val($ppmCost.toFixed(2));
-                // $("#totalCost-field").val($totalCost.toFixed(2));        
+                var $pri =  price;
+                var $mp  =  mpg;
+                var $pm =  ppm;
+                var $dist =  ( Number(distance) / 1000000000 * 621371);
+                //var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
+                var $gallons = ($dist / $mp );
+                var $ppmCost = ($pm * $dist);
+                var $gasCost = ($gallons * $gas ) ;
+                var $totalCost = ($pri - $gasCost - $ppmCost);
+                $("#dist-field").val(Number($dist).toFixed(3));
+                $("#gas-field").val(Number($gas).toFixed(2));
+                $("#gallons-field").val(Number($gallons).toFixed(2));
+                $("#gasCost-field").val(Number($gasCost).toFixed(2));
+                $("#ppm-field").val(Number($ppmCost).toFixed(2));
+                $("#totalCost-field").val(Number($totalCost).toFixed(2));        
 
         }
 
