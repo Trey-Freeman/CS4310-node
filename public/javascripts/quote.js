@@ -1,5 +1,11 @@
 (function() {
     $(document).ready(function() {
+        //var quote = #{quote};
+        var quoteObject = $('#hiddenquote').attr('data-val');
+        if(quoteObject)
+            var quote =  JSON.parse(quoteObject);
+        console.log(typeof quote);
+        console.log("quote origin: " + " "+ quote.origin);
         // Demonstrate parsing an in-memory XML string
         var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
         var xml = $.parseXML(xmlString, 'text/xml');
@@ -42,12 +48,13 @@
 
         var e = document.getElementById("gasList");
         var gs = e.options[e.selectedIndex].text;
+        console.log(" gs: " + gs);
         if(typeof quote !== 'undefined')  {gs = quote.gasList; }
         console.log("selected gas: " + gs);
-        if(typeof quote !== 'undefined') {console.log("quote origin: " + quote.origin); }
+        if(typeof quote !== 'undefined') {console.log("quote origin: " + quote.origin + " qt: " + quote); }
         
 
-        $("#gasList").val(gs).attr('selected', 'selected');
+        // $("#gasList").val(gs).attr('selected', 'selected');
                 if($( "#gasList option:selected" ).text() === "Diesel") {       var $gas = diesel; }
                 else if($( "#gasList option:selected" ).text() === "CNG") {     var $gas = $cng; }
                 else if($( "#gasList option:selected" ).text() === "Electric"){ var $gas = electric; }

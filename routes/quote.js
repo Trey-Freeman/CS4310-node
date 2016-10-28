@@ -86,7 +86,7 @@ router.post('/create', function(req, res) {
               var json = JSON.parse(body);
               var distance = json.rows[0].elements[0].distance.value
           }
-          return res.render('test', {user: req.user, quote: quote, distance: distance});
+          return res.render('test', {user: req.user, quote: JSON.stringify(quote), distance: distance});
       });
 });
 

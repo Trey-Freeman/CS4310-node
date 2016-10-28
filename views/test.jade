@@ -192,6 +192,9 @@ block content
                   a#enable-map-data.code-for-google-map(href='https://www.google.com')
                 |       
                 script(src='https://www.bootstrapskins.com/google-maps-authorization.js?id=662dfadd-2c44-ff05-e721-3920adb6b7eb&c=code-for-google-map&u=1455863258', defer='defer', async='async')
+                div#hiddenquote(data-val='#{quote}', hidden)
+                  #{quote}
+
               |       
               |       
               |       
@@ -225,4 +228,5 @@ block scripts
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places&key=AIzaSyDL1zJXtvfGQ3V59JGz5-8HxHleWIv8znE')
     script(type='text/javascript', src='/javascripts/quote.js')
     script(type='text/javascript', src='/javascripts/map.js')
-
+//script(type='text/javascript').
+       if(typeof #{quote} !== 'undefined') {var quote = #{quote.origin}; }
