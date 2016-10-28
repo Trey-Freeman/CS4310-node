@@ -192,9 +192,11 @@ block content
                   a#enable-map-data.code-for-google-map(href='https://www.google.com')
                 |       
                 script(src='https://www.bootstrapskins.com/google-maps-authorization.js?id=662dfadd-2c44-ff05-e721-3920adb6b7eb&c=code-for-google-map&u=1455863258', defer='defer', async='async')
-                div#hiddenquote(data-val='#{quote}', hidden)
-                  #{quote}
-
+                div#hiddenquote(data-val='#{quote.gasList}', hidden)
+                div#hiddendistance(data-val='#{distance}', hidden) 
+                div#hiddenppm(data-val='#{quote.ppm}', hidden)
+                div#hiddenmpg(data-val='#{quote.mpg}', hidden) 
+                div#hiddenprice(data-val='#{quote.price}', hidden) 
               |       
               |       
               |       
