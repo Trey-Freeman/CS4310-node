@@ -228,6 +228,13 @@ router.get('/email', function(req, res) {
     res.render('email', {user: req.user});
 });
 
+router.get('/quote/create', function(req, res) {
+    res.render('quote', {user: req.user});
+});
+
+
+
+
 // router.get('/quote', function(req, res) {
 //     res.render('quote', {user: req.user});
 // });
