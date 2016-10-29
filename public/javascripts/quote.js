@@ -11,21 +11,21 @@
         var mpg = $('#hiddenmpg').attr('data-val');
         var price = $('#hiddenprice').attr('data-val');
 
-        console.log("quote origin: " + " "+ quote);
-        console.log("quote distance: " + " "+ distance);
-        console.log("quote ppm: " + " "+ ppm);
-        console.log("quote price: " + " "+ price);
-        console.log("quote mpg: " + " "+ mpg);
+        // console.log("quote origin: " + " "+ quote);
+        // console.log("quote distance: " + " "+ distance);
+        // console.log("quote ppm: " + " "+ ppm);
+        // console.log("quote price: " + " "+ price);
+        // console.log("quote mpg: " + " "+ mpg);
 
 
 
 
  
         // Demonstrate parsing an in-memory XML string
-        var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
-        var xml = $.parseXML(xmlString, 'text/xml');
-        var $xml = $(xml);
-        console.log($xml.find('book')[0].attributes.title);
+        // var xmlString = '<suggestions><book title="Twilight"/><book title="Twister"/></suggestions>'
+        // var xml = $.parseXML(xmlString, 'text/xml');
+        // var $xml = $(xml);
+        // console.log($xml.find('book')[0].attributes.title);
 
         $.ajax({
             type: 'GET',
@@ -50,22 +50,22 @@
          var e85 = $xml.find("e85").text();
         
 
-        console.log("cng " + $cng);
-        console.log("diesel " + diesel);
-        console.log("lpg " + lpg);
-        console.log("electric " + electric);
-        console.log("regular " + regular);
-        console.log("midgrade " + midgrade);
-        console.log("premium " + premium);
-        console.log("e85 " + e85);
+        // console.log("cng " + $cng);
+        // console.log("diesel " + diesel);
+        // console.log("lpg " + lpg);
+        // console.log("electric " + electric);
+        // console.log("regular " + regular);
+        // console.log("midgrade " + midgrade);
+        // console.log("premium " + premium);
+        // console.log("e85 " + e85);
 
         $('div.Premium-Fuel').contents()[0].data = '$' + premium;
 
         var e = document.getElementById("gasList");
         var gs = e.options[e.selectedIndex].text;
-        console.log(" gs: " + gs);
+        //console.log(" gs: " + gs);
         if(typeof quote !== 'undefined')  {gs = quote; }
-        console.log("selected gas: " + gs);
+        //console.log("selected gas: " + gs);
         //if(typeof quote !== 'undefined') {console.log("quote origin: " + quote.origin + " qt: " + quote); }
         
 
@@ -77,7 +77,7 @@
                 else if($( "#gasList option:selected" ).text() === "Regular") { var $gas = regular; }
                 else if($( "#gasList option:selected" ).text() === "Midgrade") {var $gas = midgrade; }
                 else if($( "#gasList option:selected" ).text() === "Premium") { var $gas = premium; }
-                console.log("$gas " + $gas);
+                //console.log("$gas " + $gas);
 
                 var $pri =  price;
                 var $mp  =  mpg;
