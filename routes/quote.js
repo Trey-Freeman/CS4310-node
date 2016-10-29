@@ -81,14 +81,14 @@ router.post('/create', function(req, res) {
             res.redirect('/');
         });
 
-     request.post( 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=94587&destinations=90210&units=imperial&mode=driving&language=en', function (error, response, body) {
+     request.post( 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' + body.origin + '&destinations=' + body.destination + '&units=imperial&mode=driving&language=en', function (error, response, body) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
               var distance = json.rows[0].elements[0].distance.value
           } else {
             return res.redirect('/quote')
           }
-          return res.render('test', {user: req.user, quote: quote, distance: distance});
+          return res.render('quote', {user: req.user, quote: quote, distance: distance});
       });
 });
 

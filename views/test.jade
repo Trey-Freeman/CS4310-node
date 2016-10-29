@@ -197,38 +197,8 @@ block content
                 div#hiddenppm(data-val='#{quote.ppm}', hidden)
                 div#hiddenmpg(data-val='#{quote.mpg}', hidden) 
                 div#hiddenprice(data-val='#{quote.price}', hidden) 
-              |       
-              |       
-              |       
-              //script.
-                $(document).ready(function() {
-                $("#gasList").val("${gasList}").attr('selected', 'selected');
-                if($( "#gasList option:selected" ).text() === "Diesel") {  var $gas = <x:out select="$gasOutput/fuelPrices/diesel" />; }
-                else if($( "#gasList option:selected" ).text() === "CNG") {     var $gas = <x:out select="$gasOutput/fuelPrices/cng" />; }
-                else if($( "#gasList option:selected" ).text() === "Electric") {var $gas = <x:out select="$gasOutput/fuelPrices/electric" />; }
-                else if($( "#gasList option:selected" ).text() === "LPG") {     var $gas = <x:out select="$gasOutput/fuelPrices/lpg" />; }
-                else if($( "#gasList option:selected" ).text() === "Regular") { var $gas = <x:out select="$gasOutput/fuelPrices/regular" />; }
-                else if($( "#gasList option:selected" ).text() === "Midgrade") {var $gas = <x:out select="$gasOutput/fuelPrices/midgrade" />; }
-                else if($( "#gasList option:selected" ).text() === "Premium") { var $gas = <x:out select="$gasOutput/fuelPrices/premium" />; }
-                var $pri =  ${price};
-                var $mp  =  ${mpg};
-                var $pm =  ${ppm};
-                var $dist= ( <x:out select="$output/DistanceMatrixResponse/row/element/distance/value" /> / 1000000000 * 621371);
-                var $gallons = ($dist / $mp );
-                var $ppmCost = ($pm * $dist);
-                var $gasCost = ($gallons * $gas ) ;
-                var $totalCost = ($pri - $gasCost - $ppmCost);
-                $("#dist-field").val($dist.toFixed(3));
-                $("#gas-field").val($gas.toFixed(2));
-                $("#gallons-field").val($gallons.toFixed(2));
-                $("#gasCost-field").val($gasCost.toFixed(2));
-                $("#ppm-field").val($ppmCost.toFixed(2));
-                $("#totalCost-field").val($totalCost.toFixed(2));
 
-                });
 block scripts       
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places&key=AIzaSyDL1zJXtvfGQ3V59JGz5-8HxHleWIv8znE')
     script(type='text/javascript', src='/javascripts/quote.js')
     script(type='text/javascript', src='/javascripts/map.js')
-//script(type='text/javascript').
-       if(typeof #{quote} !== 'undefined') {var quote = #{quote.origin}; }
