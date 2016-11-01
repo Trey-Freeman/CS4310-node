@@ -105,6 +105,13 @@ router.post('/create', function(req, res) {
           else if (inputValue == "/quote/make") {
             return res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
           }
+          else if (inputValue == "/quote/print") {
+            return res.render('printQuote', {user: req.user, quote: quote, distance: distance});
+          }
+          else if (inputValue == "/quote/po") {
+            //todo: save to db
+            return res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
+          }
            else {
             console.log('route error');
           }            
