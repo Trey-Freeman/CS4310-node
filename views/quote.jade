@@ -163,15 +163,15 @@ block content
                 |          
                 input(type='hidden', name='formType', value='quote')
                 |          
-                button.btn.btn-primary.btn-block(type='submit', name='action', value='makeQuote') Make Quote
+                button.btn.btn-primary.btn-block(type='submit', name='action', value='/quote/make', action='/quote/make') Make Quote
                 |  
                 br
                 |          
-                button.btn.btn-success.btn-block(type='submit', name='action', value='saveQuote') Save Quote
+                button.btn.btn-success.btn-block(type='submit', name='action', value='saveQuote', action='/po') Save Quote
                 |  
                 br
                 |          
-                button.btn.btn-info.btn-block(type='submit', name='action', value='print') Print
+                button.btn.btn-info.btn-block(type='submit', name='action', value='print', action='/print') Print
 
                 br
               |         

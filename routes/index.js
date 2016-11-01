@@ -205,7 +205,7 @@ router.post('/create', function(req, res) {
             // res.redirect('/');
      //});
      console.log(quote);
-     res.render('test', {user: req.user, quote: quote});
+     res.render('quote', {user: req.user, quote: quote});
 
 });
 
@@ -228,6 +228,10 @@ router.get('/email', function(req, res) {
 
 router.get('/quote/create', function(req, res) {
     res.render('quote', {user: req.user});
+});
+
+router.get('/viewQuote', function(req, res) {
+    res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
 });
 
 
