@@ -65,7 +65,11 @@ router.post('/make', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
-    var request = require('request');
+  var request = require('request');
+
+  var inputValue = req.body.action;
+
+
 
      var body       = req.body;
      var quote = new Quote({
@@ -94,8 +98,18 @@ router.post('/create', function(req, res) {
           } else {
             return res.redirect('/quote')
           }
-          return res.render('quote', {user: req.user, quote: quote, distance: distance});
+
+          if (inputValue == "Submit") {
+            return res.render('quote', {user: req.user, quote: quote, distance: distance});
+          }
+          else if (inputValue == "/quote/make") {
+            return res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
+          }
+           else {
+            console.log('route error');
+          }            
       });
+
 });
 
 

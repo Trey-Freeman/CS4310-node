@@ -6,93 +6,96 @@ block content
       button.btn.btn-success.btn-block(type='button', name='back', onclick='history.back()') Go Back
       br
       br
-      .col-xs-12
-        .invoice-title
-          if (quote)
-            h2 Quote
-            h3.pull-right
-              b PO # #{quote.quoteId}
-        hr
+      if (quote)
+          .col-xs-12
+            .invoice-title
+              if (quote.quoteId)
+                h2 Quote
+                h3.pull-right
+                  b PO # #{quote.quoteId}
+            hr
+            .row
+              .col-xs-6
+                address
+                  strong Billed To:
+                  br
+                  |     					John Smith
+                  br
+                  |     					1234 Main
+                  br
+                  |     					Apt. 4B
+                  br
+                  |     					Springfield, ST 54321
+              .col-xs-6.text-right
+                address
+                  strong Shipped From:
+                  br
+                  |                                     #{quote.origin}
+            .row
+              .col-xs-6
+                address
+                  strong Payment Method:
+                  br
+                  |     					Net 30
+                  br
+                  //- |     					${sessionScope.user.email}
+              .col-xs-6.text-right
+                address
+                  strong Shipped To:
+                  br
+                  |                                     #{quote.destination}
         .row
-          .col-xs-6
-            address
-              strong Billed To:
-              br
-              |     					John Smith
-              br
-              |     					1234 Main
-              br
-              |     					Apt. 4B
-              br
-              |     					Springfield, ST 54321
-          .col-xs-6.text-right
-            address
-              strong Shipped From:
-              br
-              |                                     #{quote.origin}
-        .row
-          .col-xs-6
-            address
-              strong Payment Method:
-              br
-              |     					Net 30
-              br
-              //- |     					${sessionScope.user.email}
-          .col-xs-6.text-right
-            address
-              strong Shipped To:
-              br
-              |                                     #{quote.destination}
-    .row
-      .col-md-12
-        .panel.panel-default
-          .panel-heading
-            h3.panel-title
-              strong Order summary
-          .panel-body
-            .table-responsive
-              table.table.table-condensed
-                thead
-                  tr
-                    td
-                      strong Trip
-                    td.text-center
-                      strong Distance Traveled
-                    td.text-center
-                      strong Pay Per Mile
-                    td.text-center
-                      strong Fuel Use (#{quote.gasList})
-                    td.text-right
-                      strong Driver Pay
-                tbody
-                  // foreach ($order->lineItems as $line) or some such thing here
-                  tr
-                    td  #{quote.origin} -to- #{quote.destination}
-                    td.text-center  #{distance} miles
-                    td.text-center $#{quote.ppm}
-                    td.text-center #{quote.gallons} gal
-                    td.text-right
-                      | Per Mile: $#{quote.ppmCost}
-                      br
-                      |  Fuel: $#{quote.gasCost}
-                  tr
-                    td.thick-line
-                    td.thick-line
-                    td.thick-line
-                    td.thick-line.text-center
-                      strong Subtotal
-                    td.thick-line.text-right $#{quote.ppmCost + quote.gasCost}
-                  tr
-                    td.no-line
-                    td.no-line
-                    td.no-line
-                    td.no-line.text-center
-                      strong Fuel Surcharge
-                    td.no-line.text-right $0.00
-                  tr
-                    td.no-line
-                    td.no-line
-                    td.no-line
-                    td.no-line.text-center
-                      strong Total
-                    td.no-line.text-right  $#{quote.ppmCost + quote.gasCost}
+          .col-md-12
+            .panel.panel-default
+              .panel-heading
+                h3.panel-title
+                  strong Order summary
+              .panel-body
+                .table-responsive
+                  table.table.table-condensed
+                    thead
+                      tr
+                        td
+                          strong Trip
+                        td.text-center
+                          strong Distance Traveled
+                        td.text-center
+                          strong Pay Per Mile
+                        td.text-center
+                          strong Fuel Use (#{quote.gasList})
+                        td.text-right
+                          strong Driver Pay
+                    tbody
+                      // foreach ($order->lineItems as $line) or some such thing here
+                      tr
+                        td  #{quote.origin} -to- #{quote.destination}
+                        td.text-center  #{quote.distance} miles
+                        td.text-center $#{quote.ppm}
+                        td.text-center #{quote.gallons} gal
+                        td.text-right
+                          | Per Mile: $#{quote.ppmCost}
+                          br
+                          |  Fuel: $#{quote.gasCost}
+                      tr
+                        td.thick-line
+                        td.thick-line
+                        td.thick-line
+                        td.thick-line.text-center
+                          strong Subtotal
+                        td.thick-line.text-right $#{Number(quote.ppmCost) + Number(quote.gasCost)}
+                      tr
+                        td.no-line
+                        td.no-line
+                        td.no-line
+                        td.no-line.text-center
+                          strong Fuel Surcharge
+                        td.no-line.text-right $0.00
+                      tr
+                        td.no-line
+                        td.no-line
+                        td.no-line
+                        td.no-line.text-center
+                          strong Total
+                        td.no-line.text-right  $#{Number(quote.ppmCost) + Number(quote.gasCost)}
+      if (!quote)
+        h2 Error Quote not Found
