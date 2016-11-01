@@ -65,6 +65,7 @@ router.post('/make', function(req, res) {
 });
 
 router.post('/create', function(req, res) {
+
   var request = require('request');
 
   var inputValue = req.body.action;
@@ -90,7 +91,7 @@ router.post('/create', function(req, res) {
             if(err) return res.status(500).send(err);
             res.redirect('/');
         });
-
+     //console.log(quote[collection].getIndexes());
      request.post( 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' + body.origin + '&destinations=' + body.destination + '&units=imperial&mode=driving&language=en', function (error, response, body) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
@@ -106,10 +107,15 @@ router.post('/create', function(req, res) {
             return res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
           }
           else if (inputValue == "/quote/print") {
+
             return res.render('printQuote', {user: req.user, quote: quote, distance: distance});
           }
           else if (inputValue == "/quote/po") {
             //todo: save to db
+             quote.save (function(err){
+                    if(err) return res.status(500).send(err);
+                    res.redirect('/');
+             });
             return res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
           }
            else {
