@@ -6,7 +6,7 @@
  <link rel="shortcut icon" type="image/x-icon" href="/images/th.jpeg" />
  <!--  Jquery DNS   -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <title>Car Payment Calculater</title>
+  <title>Timesheet</title>
   <meta charset = "UTF-8">
   <link rel="stylesheet" href="/stylesheets/style1.css">
   <link rel="stylesheet" href="/stylesheets/timesheet.css">
