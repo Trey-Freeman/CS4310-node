@@ -71,7 +71,6 @@ router.post('/create', function(req, res) {
   var inputValue = req.body.action;
 
 
-
      var body       = req.body;
      var quote = new Quote({
            id           : body.id,
@@ -92,6 +91,27 @@ router.post('/create', function(req, res) {
             res.redirect('/');
         });
      //console.log(quote[collection].getIndexes());
+      // var myDocument = Quote.findOne();
+
+      // if (myDocument) {
+      //    var myName = myDocument.name;
+
+      //    console.log(myName);
+      // }
+      // console.log(Quote.findOne(
+      //   { _id:  }
+      //   ));
+      // var tst = Quote.find({},{origin:1, _id:1});
+    //   var tst = Quote.findOne({_id: "5818f3356b85473b50d0e278"}, function(err, quotes) {
+    //     //Username to TitleCase
+
+    //     // var qoteid = req.quote.origin;
+    //     // console.log(" ******** " + quoteid);
+    //     console.log(" ******** " + quotes.origin);
+    // });
+       
+      //JSON.stringify(tst);
+      
      request.post( 'http://maps.googleapis.com/maps/api/distancematrix/json?origins=' + body.origin + '&destinations=' + body.destination + '&units=imperial&mode=driving&language=en', function (error, response, body) {
           if (!error && response.statusCode == 200) {
               var json = JSON.parse(body);
@@ -112,11 +132,19 @@ router.post('/create', function(req, res) {
           }
           else if (inputValue == "/quote/po") {
             //todo: save to db
+
              quote.save (function(err){
                     if(err) return res.status(500).send(err);
-                    res.redirect('/');
              });
-            return res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
+            Quote.count(function(err, quotes) {
+
+              //console.log(quotes)
+            var count = 1 + Number(quotes)
+             //console.log(count);
+            return res.render('viewQuote', {user: req.user, quote: quote, distance: distance, count: count});
+
+            })
+            
           }
            else {
             console.log('route error');
