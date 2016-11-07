@@ -25,8 +25,8 @@ router.get('/register', function(req, res) {
     res.render('register');
 });
 
-router.get('/trip', function(req, res) {
-    res.render('trip');
+router.get('/new_ticket', function(req, res) {
+    res.render('new_ticket');
 });
 
 router.get('/action/tickets', function(req, res) {

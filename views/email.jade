@@ -3,12 +3,10 @@ extends layout
 block content
 
   .container
+    header.page-header
+      h1.page-title Join our email list
     .col-md-3
     .col-md-6
-      title Alpha's Mailing List
-      h1 Join our email list
-      p To join our email list, enter your name and email address below.
-    
       .form-group
         form.form-horizontal(action="/action/email", method='post', role='form')
           //input(type='hidden', name='action', value='add')
