@@ -4,16 +4,12 @@ block content
   .container
     header.page-header
         h1.page-title Tickets for #{user}
-    .col-md-3
-    .col-md-7
-      
-        if (!tickets)
-          h2 Sorry, no tickets.
-        else
-          each ticket, i in tickets
-            h3 Ticket #{i}
-            p - Location: #{ticket.location}
+    
+    if (!tickets)
+      h2 Sorry, no tickets.
+    else
+      each ticket, i in tickets
+        h3 Ticket #{i}
+        p - Location: #{ticket.location}
             p - Distance: #{ticket.distance}
-            br
-    .col-md-2
-block scripts
+
