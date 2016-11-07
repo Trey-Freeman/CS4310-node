@@ -3,7 +3,7 @@ extends layout
 block content
 
   .container
-    .col-md-1
+    .col-md-3
     .col-md-6
       title Alpha's Mailing List
       h1 Join our email list
@@ -13,17 +13,15 @@ block content
         form.form-horizontal(action="/action/email", method='post', role='form')
           //input(type='hidden', name='action', value='add')
           label Email: 
-          input#email-field.form-control(type='email', name='email', value='email@google.com')
+          input#email-field.form-control(type='email', name='email', placeholder='Email')
           br
           label First Name: 
-          input#firstname-field.form-control(type='text', name='firstname', value='firstname')
+          input#firstname-field.form-control(type='text', name='firstname', placeholder='First name')
           br
           label Last Name: 
-          input#lastname-field.form-control(type='text', name='lastname', value='lastname')
+          input#lastname-field.form-control(type='text', name='lastname', placeholder='Last name')
           br
           input.btn.btn-primary.btn-block(type='submit', value='Join Now')
-    .col-md-1
-    .col-md-4
-      img#head.img-responsive.center-block(src='images/MailingList.png', alt='Responsive image')
+    .col-md-3
 
     //script(type='text/javascript', src='/javascripts/email.js')

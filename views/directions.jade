@@ -1,34 +1,34 @@
 extends layout
 
 block content
-    script.
-      var image_x = document.getElementById('head');
-      image_x.parentNode.removeChild(image_x);
-    script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDL1zJXtvfGQ3V59JGz5-8HxHleWIv8znE')
-    link(href='stylesheets/style1.css', type='text/css', rel='stylesheet')
+  link(href='stylesheets/map.css', type='text/css', rel='stylesheet')
+
+  .container
     br
-    .container
-        .col-md-3
-            #directionsPanel
-              a#useGPS(class="btn btn-info btn-block" href='#geoLocation') Use Current Location
-              .directionInputs
-                form
-                  p
-                    label Origin
-                    input#dirSource.form-control(type='text', value='')
-                  p
-                    label Destination
-                    input#dirDestination.form-control(type='text', value='')
-                  a#getDirections(href='#getDirections' class="btn btn-success btn-block") Get Directions
-                  br
-                  br
-                  a#paneReset(href='#reset' class="btn btn-danger btn-block") Reset
-              #directionSteps
-                p.msg Direction Steps Will Render Here
-              a#paneToggle.out(href='#toggleBtn')
-        .col-md-9
-            #mapCanvas
-    script(type='text/javascript', src='javascripts/map.js')
+    .col-md-3
+        #directionsPanel
+          a#useGPS(class="btn btn-info btn-block" href='#geoLocation') Use Current Location
+          .directionInputs
+            form
+              p
+                label Origin
+                input#dirSource.form-control(type='text', value='')
+              p
+                label Destination
+                input#dirDestination.form-control(type='text', value='')
+              a#getDirections(href='#getDirections' class="btn btn-success btn-block") Get Directions
+              br
+              br
+              a#paneReset(href='#reset' class="btn btn-danger btn-block") Reset
+          #directionSteps
+            p.msg Direction Steps Will Render Here
+          a#paneToggle.out(href='#toggleBtn')
+    .col-md-9
+        #mapCanvas
+
+block scripts
+  script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyDL1zJXtvfGQ3V59JGz5-8HxHleWIv8znE')
+  script(type='text/javascript', src='javascripts/map.js')
 //script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?key=&sensor=false')
   script(type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
 

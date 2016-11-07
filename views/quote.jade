@@ -3,11 +3,9 @@ extends layout
 block content
 
     .container
-      h2 Trip calculator
-      |     
-      .new
-        h3  Enter the values for the map.
-      |     
+      header.page-header
+        h1.page-title Trip calculator
+      
       form.form-horizontal(action='/quote/create', method='post', role='form')
         .container-fluid
           .row

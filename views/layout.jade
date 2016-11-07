@@ -1,54 +1,75 @@
 doctype html
-html
+html(lang='en')
   head
-    title= title
+    meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', media='screen')
+    meta(name='description', content='')
+    title HR Hub
+    //link(rel='shortcut icon', href='../publicassets/images/gt_favicon.png')
+    link(rel='stylesheet', media='screen', href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700')
+    link(rel='stylesheet', type='text/css', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
+    // Custom styles for our template
+    link(rel='stylesheet', href='/stylesheets/bootstrap-theme.css', media='screen')
     link(rel='stylesheet', href='/stylesheets/main.css')
-  body
-    script(src='//code.jquery.com/jquery-3.1.1.js')
-    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
-    nav.navbar.navbar-default( role="navigation" )
-      .navbar-header
-          button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#navbar-inverse", aria-expanded="false", aria-controls="navbar")
-              span.sr-only Toggle navigation
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-          a.navbar-brand(href="/") HR Hub
-   
-      #navbar-inverse.collapse.navbar-collapse
-          ul#nav-buttons.nav.navbar-nav
-            li: a( href="/quote") Quote
-            li: a( href="/timesheet" ) Timesheet
+    
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='/javascripts/html5shiv.js')
+      script(src='/javascripts/respond.min.js')
+  
+  body.home
+    // Fixed navbar
+    .navbar.navbar-inverse.navbar-fixed-top.headroom
+      .container
+        .navbar-header
+          // Button for smallest screens
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') HR Hub
+            
+        .navbar-collapse.collapse
+          ul#nav-buttons.nav.navbar-nav.pull-right
+            li
+              a(href='/') Home
+            li
+              a(href='/quote') Quote
+            li
+              a(href='/timesheet') Timesheet
             li.dropdown
-              a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Trip Tickets 
-                  span.caret
-              ul.dropdown-menu( role="menu" )
-                    li: a( href="/trip" ) New Ticket
-                    li: a( href="/action/tickets" ) View Tickets
-                    li: a( href="#" ) Edit Tickets
-                    li: a( href="#" ) Delete Tickets
-            li: a( href="/directions" ) Directions
-            li: a( href="/email" ) Mailing List
-            li: a( href="/action/chat") Live Chat
-            li: a( href="/contact") Contact Us
-
-          ul.nav.navbar-nav.navbar-right
+              a.dropdown-toggle(href='#', data-toggle='dropdown')
+                | Trip Tickets 
+                b.caret
+              ul.dropdown-menu
+                li
+                  a(href='/trip') New Ticket
+                li.active
+                  a(href='/action/tickets') View Tickets
+                li
+                  a(href='#') Edit Ticket
+                li
+                  a(href='#') Delete Ticket
+            li
+              a(href='/directions') Directions
+            li
+              a(href='/email') Mailing List
+            li
+              a(href='/action/chat') Live Chat
+            li
+              a(href='/contact') Contact Us
             if (!user)
-              li: a(href="/login") Login
-              li: a(href="/register") Register
+              li
+                a.btn(href='/login') SIGN IN / SIGN UP
             if (user)
               #hidden-username(data-val= '#{user.username}' hidden)
               li.dropdown
                 a.dropdown-toggle(data-toggle='dropdown', href='#')
-                  span.profile-ava
-                    img(alt='', src='#{user.pic}', style='width:20px; height:20px;')
                   span.username #{user.username}
                   b.caret
-                ul.dropdown-menu.extended.logout
-                  .log-arrow-up
-                  li.eborder-top
+                ul.dropdown-menu
+                  li
                     a(href='/profile')
                       i.icon_profile
                       |  My Profile
@@ -56,25 +77,77 @@ html
                     a(href='/logout')
                       i.icon_key_alt
                       |  Log Out
+        // /.nav-collapse
+    // /.navbar
+    
+    header#head.secondary
+  
+    block content
 
-          script.
-            var url = window.location;
-            // Will only work if string in href matches with location
-            $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
-            // Will also work for relative and absolute hrefs
-            $('ul.nav a').filter(function() {
-            return this.href == url;
-            }).parent().addClass('active');
-    header
-      img.img-responsive(src='/images/smlheader.png', alt='Responsive image', id='head')
-           
+    // Social links
+    section#social
+      .container
+        .wrapper.clearfix
+          .addthis_toolbox.addthis_default_style
+            a.addthis_button_facebook_like(fb:like:layout='button_count')
+            a.addthis_button_tweet
+            a.addthis_button_linkedin_counter
+            a.addthis_button_google_plusone(g:plusone:size='medium')
+    // /social links
+    footer#footer.top-space
+      .footer1
+        .container
+          .row
+            .col-md-3.widget
+              h3.widget-title Contact
+              .widget-body
+                p
+                  | +234 23 9873237
+                  br
+                  a(href='mailto:#') contact@alfa.com
+                  br
+                  br
+                  |                 25800 Carlos Bee Blvd Hayward, CA 94542
+            .col-md-3.widget
+              h3.widget-title Follow us
+              .widget-body
+                p.follow-me-icons
+                  a(href='')
+                    i.fa.fa-twitter.fa-2
+                  a(href='')
+                    i.fa.fa-dribbble.fa-2
+                  a(href='')
+                    i.fa.fa-github.fa-2
+                  a(href='')
+                    i.fa.fa-facebook.fa-2
+            .col-md-6.widget
+              h3.widget-title Text widget
+              .widget-body
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?
+                p
+                  | Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.
+          // /row of widgets
 
-    .main-content.container-fluid
-      block content
-    footer
-      img.img-responsive(src='/images/footer.png', alt='Responsive image', id='footer')
-      script(src='/javascripts/main.js')
+    .footer2
+      .container
+          p.text-center
+            | Copyright © 2016, Alfa group
+      
+      // JavaScript libs are placed at the end of the document so the pages load faster
+      script(src='//code.jquery.com/jquery-3.1.1.js')
+      script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+      script(src='/javascripts/headroom.min.js')
+      script(src='/javascripts/jQuery.headroom.min.js')
+      script(src='/javascripts/template.js')
+
+      script.
+        var url = window.location;
+        // Will only work if string in href matches with location
+        $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+        // Will also work for relative and absolute hrefs
+        $('ul.nav a').filter(function() {
+        return this.href == url;
+        }).parent().addClass('active');
 
     block scripts
-
-

@@ -2,6 +2,7 @@ extends layout
 
 block content
     .row
+      br
       .col-md-3
       .col-md-3
         img.img-rounded.img-responsive(src='#{user.pic}', alt='')
@@ -18,7 +19,7 @@ block content
             input.file.form-control(type='file', name="image", value='#{user.pic}')
           .col-md-6
             a(href='/')
-              button.btn.btn-primary(type="button", class="btn btn-warning btn-block") Cancel
+              button.btn.btn-default(type="button", class="btn btn-warning btn-block") Cancel
           .col-md-6
-            button.btn.btn-default(type='submit', class="btn btn-primary btn-block") Submit
+            button.btn.btn-primary(type='submit', class="btn btn-primary btn-block") Submit
           

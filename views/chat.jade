@@ -11,8 +11,9 @@ block content
           input.form-control#room-name(type='text', name="name", placeholder='Enter Room #' required)
       .form-group
         input.form-control#room-password(type='password', name="password", placeholder='Enter Room Password' required)
-      button.btn.btn-default#submit(type='button' role='button') Create/Join Room
-      a.btn.btn-primary(type='button' role='button' href='/') Cancel
+      a.btn.btn-default(type='button' role='button' href='/') Cancel
+      button.btn.btn-primary#submit(type='button' role='button') Create/Join Room
+      
   #chat-view(hidden)
     #vid-streams.row
       #my-camera.camera.col-md-4.col-md-offset-2
