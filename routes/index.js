@@ -234,7 +234,9 @@ router.get('/viewQuote', function(req, res) {
     res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
 });
 
-
+router.get('/summaryQuote', function(req, res) {
+    res.render('summaryQuote');
+});
 
 
 // router.get('/quote', function(req, res) {
