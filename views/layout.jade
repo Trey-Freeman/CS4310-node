@@ -40,19 +40,8 @@ html(lang='en')
               li
                 a(href='/timesheet') Timesheet
             if (user)
-              li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown')
-                  | Trip Tickets 
-                  b.caret
-                ul.dropdown-menu
-                  li
-                    a(href='/action/new_ticket') New Ticket
-                  li
-                    a(href='/action/tickets') View Tickets
-                  li
-                    a(href='#') Edit Ticket
-                  li
-                    a(href='#') Delete Ticket
+              li
+                a(href='/action/tickets') Trip Tickets
             li
               a(href='/directions') Directions
             li
