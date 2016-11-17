@@ -1,17 +1,36 @@
 extend layout
 
 block content
+  link(href='stylesheets/table.css', type='text/css', rel='stylesheet')
   .container
-    .col-md-3
-    .col-md-7
-      h1 Tickets for #{user}
-        if (!tickets)
-          h2 Sorry, no tickets.
-        else
+    header.page-header
+        h1.page-title Tickets for #{user}
+    
+    if (!tickets)
+      h2 Sorry, no tickets.
+    else
+      table#table.table.table-hover.table-mc-light-blue
+        thead
+          tr
+            th ID
+            th Location
+            th Distance
+            th Edit
+            th Remove
+        tbody
           each ticket, i in tickets
-            h3 Ticket #{i}
-            p - Location: #{ticket.location}
-            p - Distance: #{ticket.distance}
-            br
-    .col-md-2
-block scripts
+            tr
+              td(data-title='ID', width='10%') #{i}
+              td(data-title='Location', width='40%') #{ticket.location}
+              td(data-title='Distance', width='30%') #{ticket.distance}
+              td(data-title='Edit', width='10%') 
+                a(href='#')
+                  span.glyphicon.glyphicon-pencil(aria-hidden='true')
+              td(data-title='Remove', width='10%')
+                a(href='#')
+                  span.glyphicon.glyphicon-trash(aria-hidden='true')
+      
+      form(action='/action/new_ticket')
+        input(type='submit', value='New ticket', class="btn btn-primary")
+
+

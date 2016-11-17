@@ -1,31 +1,52 @@
 extends layout
 
 block content
-  .col-md-4
-  .col-md-8
-    h1 Sign Up
-    p.lead Welcome to Transport-HR !
-    br
-    form(role='form', action="/register",method="post", style='max-width: 300px;', onsubmit='return validatePassword(password, confirmPassword);')
-      .form-group
-        label(for='username') Username:
-        input.form-control#username(type='text', name="username", placeholder='Enter Username' required)
-      .form-group
-        label(for='email') Email address:
-        input.form-control#email(type='email', name="email", placeholder='Enter Email' required)
-      .form-group
-        label(for='password') Password:
-        input.form-control#password(type='password', name="password", placeholder='Password' required)
-      .form-group
-        label(for='confirmPassword') Repeat password:
-        input.form-control#password-conf(type='password', name='confirmPassword', placeholder='Confirm Password' required)
+  // container
+  .container
+    .row
+      article.col-xs-12.maincontent
+        header.page-header
+          h1.page-title Registration
+        .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+          .panel.panel-default
+            .panel-body
+              h3.thin.text-center Register a new account!
+              p.text-center.text-muted
+                | Or if you already have an account 
+                a(href='/login') Sign in here
+              hr
+              form(role='form', action="/register",method="post", onsubmit='return validatePassword(password, confirmPassword);')
+                .top-margin
+                  label
+                    | Username 
+                    span.text-danger *
+                  input.form-control(type='text', name="username" required)
+                .top-margin
+                  label
+                    | Email 
+                    span.text-danger *
+                  input.form-control(type='email', name="email" required)
+                  .row.top-margin
+                    .col-sm-6
+                      label
+                        | Password 
+                        span.text-danger *
+                      input.form-control(type='password', name="password" required)
+                    .col-sm-6
+                      label
+                        | Confirm Password 
+                        span.text-danger *
+                      input.form-control(type='password', name="confirmPassword" required)
+                  hr
+                  .row
+                    .col-lg-8
+                      label.checkbox
+                        input(type='checkbox' required)
+                        |                       I've read the 
+                        a(href='#') Terms and Conditions
+                    .col-lg-4.text-right
+                      button.btn.btn-action(type='submit') Register
 
-        br
-      .col-md-6
-        a(href='/')
-          button.btn.btn-primary(type="button" class="btn btn-warning btn-block" ) Cancel 
-      .col-md-6
-        button.btn.btn-default(type='submit', class="btn btn-primary btn-block") Submit
 
 block scripts
   script(type='text/javascript', src='/javascripts/register.js')
@@ -47,3 +68,52 @@ block scripts
       }
      return true;
     }
+
+
+    .container
+      .row
+        // Article main content
+        article.col-xs-12.maincontent
+          header.page-header
+            h1.page-title Registration
+          .col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+            .panel.panel-default
+              .panel-body
+                h3.thin.text-center Register a new account
+                p.text-center.text-muted
+                  | Lorem ipsum dolor sit amet, 
+                  a(href='signin.html') Login
+                  |  adipisicing elit. Quo nulla quibusdam cum doloremque incidunt nemo sunt a tenetur omnis odio.
+                hr
+                form
+                  .top-margin
+                    label First Name
+                    input.form-control(type='text')
+                  .top-margin
+                    label Last Name
+                    input.form-control(type='text')
+                  .top-margin
+                    label
+                      | Email Address 
+                      span.text-danger *
+                    input.form-control(type='text')
+                  .row.top-margin
+                    .col-sm-6
+                      label
+                        | Password 
+                        span.text-danger *
+                      input.form-control(type='text')
+                    .col-sm-6
+                      label
+                        | Confirm Password 
+                        span.text-danger *
+                      input.form-control(type='text')
+                  hr
+                  .row
+                    .col-lg-8
+                      label.checkbox
+                        input(type='checkbox')
+                        |                       I've read the 
+                        a(href='page_terms.html') Terms and Conditions
+                    .col-lg-4.text-right
+                      button.btn.btn-action(type='submit') Register

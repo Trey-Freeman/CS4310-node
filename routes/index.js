@@ -25,8 +25,8 @@ router.get('/register', function(req, res) {
     res.render('register');
 });
 
-router.get('/trip', function(req, res) {
-    res.render('trip');
+router.get('/action/new_ticket', function(req, res) {
+    res.render('new_ticket');
 });
 
 router.get('/action/tickets', function(req, res) {
@@ -234,7 +234,9 @@ router.get('/viewQuote', function(req, res) {
     res.render('viewQuote', {user: req.user, quote: quote, distance: distance});
 });
 
-
+router.get('/summaryQuote', function(req, res) {
+    res.render('summaryQuote');
+});
 
 
 // router.get('/quote', function(req, res) {

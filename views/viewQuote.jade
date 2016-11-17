@@ -9,10 +9,10 @@ block content
       if (quote)
           .col-xs-12
             .invoice-title
-              if (quote.quoteId)
+              if (count)
                 h2 Quote
                 h3.pull-right
-                  b PO # #{quote.quoteId}
+                  b PO # #{count}
             hr
             .row
               .col-xs-6
