@@ -7,7 +7,7 @@
 - Andrea Sánchez Blanco
 - Steven Rivera-James
 - Thomas “Trey” Freeman
-- Harsimranjeet “Simi” Singh
+- “Simi” Singh
 - Zaid Laffta
 
 ## Description

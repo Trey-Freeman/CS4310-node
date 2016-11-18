@@ -50,6 +50,10 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+
+
+
 // passport config
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
