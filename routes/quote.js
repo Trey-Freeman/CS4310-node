@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var Quote = require('../models/quote');
 var router = express.Router();
+const http = require('http');
 
 // router.all('/*', function(req, res, next) {
 //     if(!req.isAuthenticated())
