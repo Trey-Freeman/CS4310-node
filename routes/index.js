@@ -5,7 +5,6 @@ var path = require('path');
 // var Quote = require('../models/quote');
 var Email = require('../models/email');
 var Account = require('../models/account');
-var Ticket = require('../models/ticket');
 var router = express.Router();
 var rooms = {};
 
