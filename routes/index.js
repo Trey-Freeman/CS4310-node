@@ -30,8 +30,8 @@ router.get('/action/new_ticket', function(req, res) {
 });
 
 router.get('/action/tickets', function(req, res) {
-    if(!req.isAuthenticated())
-        return res.render('tickets', {tickets: []});
+    // if(!req.isAuthenticated())
+    //     return res.render('tickets', {tickets: []});
     Ticket.find({account: req.user._id}, function(err, tickets) {
         //Username to TitleCase
         var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();

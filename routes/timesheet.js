@@ -1,4 +1,5 @@
 var express = require('express');
+var Timesheet = require('../models/timesheet');
 var path = require('path');
 var exec = require("child_process").exec;
 var request = require('request');
@@ -22,17 +23,22 @@ router.post('/save', function(req, res) {
         account: req.user._id,
         startDate: timesheet.startDate,
         endDate: timesheet.endDate,
-        comments: timesheet.comments,
+        hours: timesheet.hours,
+        rate: timesheet.rate,
+        comments: timesheet.comments
         }, function(err) {
             if(err) return res.status(500).send(err);
-            res.redirect('/');
     });
-
+    console.log(timesheet);
     res.render('timesheets');
 });
 
-router.get('/list', function(req, res){
-    res.render('timesheets');
+router.get('/list', function(req, res) {
+    Timesheet.find({account: req.user._id}, function(err, timesheets) {
+      console.log(timesheets);
+        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
+        res.render('timesheets', {user: username, timesheets: timesheets});
+    });
 });
 
 module.exports = router;
