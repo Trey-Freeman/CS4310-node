@@ -1,0 +1,42 @@
+extend layout
+
+block content
+  link(href='stylesheets/table.css', type='text/css', rel='stylesheet')
+  .container
+    header.page-header
+        h1.page-title Time Sheets for #{user}
+    
+    if (!timesheets)
+      h2 Sorry, no Time Sheets found.
+    else
+      table#table.table.table-hover.table-mc-light-blue
+        thead
+          tr
+            th ID
+            th Start Date
+            th End Date
+            th Hours
+            th Rate
+            th Comments
+            th Edit
+            th Remove
+        tbody
+          each sheet, i in timesheets
+            tr
+              td(data-title='ID') #{i}
+              td(data-title='startDate') #{sheet.startDate}
+              td(data-title='endDate') #{sheet.endDate}
+              td(data-title='hours') #{sheet.hours}
+              td(data-title='rate') $#{sheet.rate}
+              td(date-title='comments') #{sheet.comments}
+              td(data-title='Edit', width='10%') 
+                a(href='#')
+                  span.glyphicon.glyphicon-pencil(aria-hidden='true')
+              td(data-title='Remove', width='10%')
+                a(href='#')
+                  span.glyphicon.glyphicon-trash(aria-hidden='true')
+      
+      form(action='/action/new_timesheet')
+        input(type='submit', value='New timesheet', class="btn btn-primary")
+
+
