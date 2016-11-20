@@ -9,7 +9,7 @@
 
         $.ajax({
             type: 'GET',
-            url: 'http://www.fueleconomy.gov/ws/rest/fuelprices',
+            url: '//www.fueleconomy.gov/ws/rest/fuelprices',
             crossDomain: true,
             dataType: 'xml',
             success: parseXml
@@ -61,28 +61,3 @@
             }
         });
 })();
-
-
-/* I think google is blocking cross site ajax requests, which is strange....
-
-TODO: xml parsing the google distance api
-
-for internal requests....
-
-http://stackoverflow.com/questions/25761481/simple-ajax-request-to-localhost-nodejs-server/28089807#28089807
-
-
-    // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
-
-    */
