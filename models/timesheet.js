@@ -3,8 +3,10 @@ var Schema = mongoose.Schema;
 
 var Timesheet = new Schema({
   account: String,
-  startdate: Date,
-  enddate: Date,
+  startDate: Date,
+  endDate: Date,
+  hours: Number,
+  rate: Number,
   createdAt: { type: Date, default: Date.now },
   comments: String
 });
