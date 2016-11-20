@@ -23,11 +23,11 @@ block content
         tbody
           each sheet, i in timesheets
             tr
-              td(data-title='ID', width='10%') #{i}
-              td(data-title='startDate', width='40%') #{sheet.startDate}
-              td(data-title='endDate', width='30%') #{sheet.endDate}
-              td(data-title='hours', width='30%') #{sheet.hours}
-              td(data-title='rate', width='30%') #{sheet.rate}
+              td(data-title='ID') #{i}
+              td(data-title='startDate') #{sheet.startDate}
+              td(data-title='endDate') #{sheet.endDate}
+              td(data-title='hours') #{sheet.hours}
+              td(data-title='rate') $#{sheet.rate}
               td(date-title='comments') #{sheet.comments}
               td(data-title='Edit', width='10%') 
                 a(href='#')

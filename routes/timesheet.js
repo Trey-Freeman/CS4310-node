@@ -41,4 +41,8 @@ router.get('/list', function(req, res) {
     });
 });
 
+router.get('/action/new', function(req, res) {
+    res.render('timesheet');
+});
+
 module.exports = router;

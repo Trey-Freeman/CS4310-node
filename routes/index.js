@@ -25,32 +25,6 @@ router.get('/register', function(req, res) {
     res.render('register');
 });
 
-router.get('/action/new_ticket', function(req, res) {
-    res.render('new_ticket');
-});
-
-router.get('/action/tickets', function(req, res) {
-    // if(!req.isAuthenticated())
-    //     return res.render('tickets', {tickets: []});
-    Ticket.find({account: req.user._id}, function(err, tickets) {
-        //Username to TitleCase
-        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
-        res.render('tickets', {user: username, tickets: tickets});
-    });
-});
-
-router.post('/action/ticket', function(req, res) {
-    var ticket = req.body;
-    Ticket.create({
-        account: req.user._id,
-        location: ticket.location,
-        distance: ticket.distance
-        }, function(err) {
-            if(err) return res.status(500).send(err);
-            res.redirect('/');
-        });
-});
-
 /* POST Handle a registration through post. If a username and password is provided, then set new account entry in mongo */
 router.post('/register', function(req, res) {
     Account.register(new Account({ username : req.body.username, email : req.body.email, pic : '/images/cat.jpg' }), req.body.password, function(err, account) {
@@ -73,8 +47,7 @@ router.post('/action/email', function(req, res) {
         email: email.email
         }, function(err) {
             if(err) return res.status(500).send(err);
-            res.redirect('/');
-        });
+    });
 });
 
 
