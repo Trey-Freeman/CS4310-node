@@ -1,12 +1,16 @@
 (function() {
 	var socket;
 	var room;
+    var users;
 	var user;
 
 	$(document).ready(function() {
 		//Set the username retreived from the hidden elements containing this user's username
 		user = $('#hidden-username').attr('data-val')
 		
+        //initialize users object
+        users = {};
+
 		//initialize our socket
 		socket = io.connect();
 		
@@ -37,11 +41,13 @@
 
 		//If the user joined/created a room successfully, do animation
 		socket.on('joined', function(data) {
+            //update our users list
+            users = data.users;
+
 			socket.emit('list-user', {
 				room,
 				user: user
 			});
-			console.log(data);
 			/* Get video from webcam */
 			getVideo(function(stream) {
 				if (stream) {
@@ -51,7 +57,6 @@
 				}	
 			});
 			console.log('joined');
-
 			//For sanity
 			room = data.room;
 		    $('#join-view').slideUp(1000, function() {
@@ -85,15 +90,13 @@
 				id++;
 				console.log('finished receiving call');
 			});
-			console.log(data);
+
 			//Connect to all the users in the current room
-			data.users.forEach(function(roomUser) {
-				console.log(roomUser);
-				console.log(peer);
+			for (roomUser in data.users) {
 				$('#user-list').append('<li>' + roomUser + '</li>');
-				var call = peer.call(roomUser, window.localStream);
-				console.log(call);
-			}); 
+                if(roomUser !== user)
+				    var call = peer.call(roomUser, window.localStream);
+			} 
 		});
 		//If the user received a message, then show that message
 		socket.on('message', function(data) {
@@ -102,7 +105,10 @@
 		});
 
 		socket.on('list-user', function(newUser) {
-			$('#user-list').append('<li>' + newUser + '</li>');
+            if(!(newUser in users)) {
+                $('#user-list').append('<li>' + newUser + '</li>');
+                users[newUser] = 1;
+            }
 		});
 
 		socket.on('failed login', function() {
@@ -110,47 +116,47 @@
 		});
 	});
 
-	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.mozGetUserMedia;
+    /* Tell the navigator to get user's webcam feed (video and audio included) */
+    function getVideo(callback) {
+        if(ismobile() || issafari() || isie() || isedge()) {
+            alert('Camera is inaccessible');
+            return;
+        }
+        if(!navigator.getUserMedia) {
+            alert('Camera is inaccessible');
+            return;
+        }
+        var mediaOptions = {audio: false, video: true};
+        if(isfirefox())
+            navigator.mediaDevices.getUserMedia({audio: true, video: true}).then(callback).catch(function(error){alert('An error occured'); console.log(error);});
+        else
+            navigator.getUserMedia(mediaOptions, callback, function(error) {alert('Camera is inaccessible'); console.log(error);});
+    }
 
-	/* Tell the navigator to get user's webcam feed (video and audio included) */
-	function getVideo(callback) {
-		if(ismobile() || issafari() || isie() || isedge()) {
-			alert('Camera is inaccessible');
-			return;
-		}
-		if(!navigator.getUserMedia) {
-			alert('Camera is inaccessible');
-			return;
-		}
-		var mediaOptions = {audio: false, video: true};
-		//navigator.mediaDevices.getUserMedia({audio: true, video: true}).then(callback).catch(function(error){alert('An error occured'); console.log(error);});
-		navigator.getUserMedia(mediaOptions, callback, function(error) {alert('Camera is inaccessible'); console.log(error);});
-	}
+    /* What to do when a user starts receiving a stream (local or remote)
+     * Display it to the video object for the given video element */
+    function onReceiveStream(stream, elementID){
+        var video = $('#' + elementID + ' video')[0];
+        console.log(video);
+        video.src = window.URL.createObjectURL(stream);
+    }
 
-	/* What to do when a user starts receiving a stream (local or remote)
-	 * Display it to the video object for the given video element */
-	function onReceiveStream(stream, elementID){
-		var video = $('#' + elementID + ' video')[0];
-		console.log(video);
-		video.src = window.URL.createObjectURL(stream);
-	}
+    /* When receiving a message, create the new element representing this message in the chat box 
+     * then scroll the chat window to the bottom */
+    function handleMessage(data) {
+        $('#messages').append('<p>' + data + '</p>');
+        $('#messages').scrollTop($('#messages')[0].scrollHeight);
+    }
 
-	/* When receiving a message, create the new element representing this message in the chat box 
-	 * then scroll the chat window to the bottom */
-	function handleMessage(data) {
-		$('#messages').append('<p>' + data + '</p>');
-		$('#messages').scrollTop($('#messages')[0].scrollHeight);
-	}
+    /* Send message through socket to other users */
+    function sendMessage() {
+        var text = "<span class='username-span'>" + user + ": </span>" + $('#message-box').val();
+        var data;
+        $('#message-box').val('');
+        socket.emit('message', {room: room, user: user, message: text});
+    }
 
-	/* Send message through socket to other users */
-	function sendMessage() {
-		var text = "<span class='username-span'>" + user + ": </span>" + $('#message-box').val();
-		var data;
-		$('#message-box').val('');
-		socket.emit('message', {room: room, user: user, message: text});
-	}
-
-	// store navigator properties to use later
+    // store navigator properties to use later
     var appVersion = (navigator && navigator.appVersion || '').toLowerCase();
     var userAgent = (navigator && navigator.userAgent || '').toLowerCase();
     var vendor = (navigator && navigator.vendor || '').toLowerCase();
@@ -313,4 +319,8 @@
         var op = string.match(/^[<>]=?|/)[0];
         return comparator[op] ? comparator[op](version, n) : (version == n || n !== n);
     }
+    
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.mozGetUserMedia;
+
+	
 })();

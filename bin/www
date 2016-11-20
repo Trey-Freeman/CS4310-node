@@ -46,29 +46,30 @@ io.sockets.on('connection', function(socket) {
 			else {
 				//join the room
 				socket.join(data.room);	
+				//Add user to this room's users
+				rooms[data.room].users[data.user] = 1;
 				//send back the room, socket id, and send the users
 				socket.emit('joined', {
 					room: data.room,
 					id: socket.id,
 					users: rooms[data.room].users
 				});
-				//Add user to this room's users
-				rooms[data.room].users.push(data.user);
+				
 				//Send notification to the other users that this user joined
 				io.to(data.room).emit('list-user', data.user);		
 			}
 		} else { //create the room and add the user (need to handle removing users from a room)
 			rooms[data.room] = {
 				password: data.password,
-				users: [data.user]
+				users: {}
 			};
 			socket.join(data.room);
 			//Add user to this room's users
-			rooms[data.room].users.push(data.user);	
+			rooms[data.room].users[data.user] = 1;	
 			socket.emit('joined', {
 				room: data.room,
 				id: socket.id,
-				users: []
+				users: rooms[data.room].users
 			});
 			//Send notification to the other users that this user joined
 			io.to(data.room).emit('list-user', data.user);	
@@ -76,7 +77,7 @@ io.sockets.on('connection', function(socket) {
 	});
 	//when message is received, send message to all users in the room
 	socket.on('message', function(data) {
-		if (data.room in rooms && rooms[data.room].users.indexOf(data.user) !== -1) {
+		if (data.room in rooms && rooms[data.room].users[data.user]) {
 			io.to(data.room).emit('message', data.message);
 		} else {
 			//Do something
