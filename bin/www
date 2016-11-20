@@ -33,6 +33,7 @@ var users = {};
 /* handle incoming connections from clients */
 io.sockets.on('connection', function(socket) {
 	//Add User to global users list
+	//(might need to refactor this logic because a user can user another browser i.e another socket)
 	socket.on('addUser', function(data) {
 		users[socket.id] = data.user;
 	});

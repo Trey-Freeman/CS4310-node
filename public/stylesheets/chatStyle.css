@@ -7,6 +7,7 @@ video {
 	height: 400px;
 	border: solid thin;
 	margin-bottom: 0px;
+	list-style: none;
 }
 
 #message-box-wrapper {
