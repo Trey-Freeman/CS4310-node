@@ -30,22 +30,32 @@ html(lang='en')
             li
               a(href='/') Home
             li
-              a(href='/quote') Quote
-            if (user)
-              li
-                a(href='/timesheet') Timesheet
-            if (user)
-              li
-                a(href='/action/tickets') Trip Tickets
-            li
-              a(href='/directions') Directions
-            li
               a(href='/email') Mailing List
             if (user)
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  span.timesheet Quote
+                  b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/quote') New Quote
+                    li
+                      a(href='/quote/list') List Quotes
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#')
+                  span.timesheet Timesheet
+                  b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/timesheet') New Timesheet
+                    li
+                      a(href='/timesheet/list') List Timesheets
+              li
+                  a(href='/directions') Directions
               li
                 a(href='/action/chat') Live Chat
-            li
-              a(href='/contact') Contact Us
+              li
+                a(href='/contact') Contact Us
             if (!user)
               li
                 a.btn(href='/login') SIGN IN / SIGN UP

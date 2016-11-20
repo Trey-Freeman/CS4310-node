@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Quote = new Schema({
+   account      : String,
    id           : String,
    origin       : String,
    destination  : String,

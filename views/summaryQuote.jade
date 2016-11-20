@@ -2,7 +2,7 @@ extends layout
 
 block content 
     h1 Welcome to the Summary Quote Page!!
-    p You are logged in as 
+    p You are logged in as #{user.username}
     table#DataGrid.table
       tr
         th PO#
@@ -18,21 +18,21 @@ block content
         th PPM Cost
         th Profit
         th ACTION
-      c:foreach(var='map', items='${requestScope.maplist}')
+      each quote, i in quotes
         // for book in book
         tr
-          td.id-cell ${quote.id}
-          td.origin-cell ${quote.origin}
-          td.destination-cell ${quote.destination}
-          td.price-cell ${quote.price}
-          td.mpg-cell ${quote.mpg}
-          td.distance-cell ${quote.distance}
-          td.gasType-cell ${quote.gasType}
-          td.ppm-cell ${quote.ppm}
-          td.gallons-cell ${quote.gallons}
-          td.gasCost-cell ${quote.gasCost}
-          td.ppmCost-cell ${quote.ppmCost}
-          td.totalCost-cell ${quote.totalCost}
+          td.id-cell #{quote.id}
+          td.origin-cell #{quote.origin}
+          td.destination-cell #{quote.destination}
+          td.price-cell #{quote.price}
+          td.mpg-cell #{quote.mpg}
+          td.distance-cell #{quote.distance}
+          td.gasType-cell #{quote.gasType}
+          td.ppm-cell #{quote.ppm}
+          td.gallons-cell #{quote.gallons}
+          td.gasCost-cell #{quote.gasCost}
+          td.ppmCost-cell #{quote.ppmCost}
+          td.totalCost-cell #{quote.totalCost}
           td
             // Trigger the modal with a button
             .btn-group-vertical
@@ -41,24 +41,24 @@ block content
               ul.dropdown-menu(role='menu')
                 form.form-horizontal(action='QuoteServlet', method='post', role='form')
                   li
-                    button.edit-button.btn.btn-warning.btn-block(id='${quote.id}', type='button', data-toggle='modal', data-target='#editForm') Edit
+                    button.edit-button.btn.btn-warning.btn-block(id='#{quote.id}', type='button', data-toggle='modal', data-target='#editForm') Edit
                   input(type='hidden', name='formType', value='delete')
-                  input#delete-field(type='hidden', name='id', value='${quote.id}')
+                  input#delete-field(type='hidden', name='id', value='#{quote.id}')
                   li
-                    button.delete-button.btn.btn-danger.btn-block(id='${quote.id}', type='Submit') Delete PO: ${quote.id}
+                    button.delete-button.btn.btn-danger.btn-block(id='#{quote.id}', type='Submit') Delete PO: #{quote.id}
                 form.form-horizontal(action='mapCreate', method='post', role='form')
                   input(type='hidden', name='formType', value='quote')
-                  input(type='hidden', name='id', value='${quote.id}')
-                  input(type='hidden', name='origin', value='${quote.origin}')
-                  input(type='hidden', name='destination', value='${quote.destination}')
-                  input(type='hidden', name='price', value='${quote.price}')
-                  input(type='hidden', name='mpg', value='${quote.mpg}')
-                  input(type='hidden', name='distance', value='${quote.distance}')
-                  input(type='hidden', name='gasType', value='${quote.gasType}')
-                  input(type='hidden', name='ppm', value='${quote.gallons}')
-                  input(type='hidden', name='gasCost', value='${quote.gasCost}')
-                  input(type='hidden', name='ppmCost', value='${quote.ppmCost}')
-                  input(type='hidden', name='totalCost', value='${quote.totalCost}')
+                  input(type='hidden', name='id', value='#{quote.id}')
+                  input(type='hidden', name='origin', value='#{quote.origin}')
+                  input(type='hidden', name='destination', value='#{quote.destination}')
+                  input(type='hidden', name='price', value='#{quote.price}')
+                  input(type='hidden', name='mpg', value='#{quote.mpg}')
+                  input(type='hidden', name='distance', value='#{quote.distance}')
+                  input(type='hidden', name='gasType', value='#{quote.gasType}')
+                  input(type='hidden', name='ppm', value='#{quote.gallons}')
+                  input(type='hidden', name='gasCost', value='#{quote.gasCost}')
+                  input(type='hidden', name='ppmCost', value='#{quote.ppmCost}')
+                  input(type='hidden', name='totalCost', value='#{quote.totalCost}')
                   li
                     button.btn.btn-primary.btn-block(type='submit', name='action', value='makeQuote') Quote
       tr.success
