@@ -1,54 +1,36 @@
 @charset "UTF-8";
 
-article, aside, footer, header, main, nav, section {
+/*article, aside, footer, header, main, nav, section {
   display: block;
-}
+}*/
 
-html, body, h1, h2, h3, ul, li, a, p, 
-article, footer, header, main, nav, section {
-  padding: 5pxpx;
-  margin: 15px;
-}
-
-.banner {
-  background-color: #11233b;
-  color: #666633;
-  padding: 10px 20px;
-}
-
-body {
-  width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+.body {
+  padding: 5px;
+  margin: 30px;
   background-color: #e0ebeb;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
 }
 
-#navi {
-  background-color: #666633;
-  padding: 1px;
-  margin-top: 1px;
-  font-size: 10%;
-}
-
 li a {
   color: white;
 }
+
 #lottary{
   color: Red;
   text-align: left;
   
 }
 
-li {
+/*li {
   display: inline;
   margin-left: 15px;
   margin-right: 15px;
   font-size: 20px;
   font-variant: small-caps
-}
-table {
+}*/
+
+/*table {
   width: 1000px;
     margin: 10px 10px 10px 10px;
   border: 5px solid black;
@@ -57,8 +39,8 @@ table {
 
 table, th, td {
     border: 5px solid #666633;
-}
-#container{
+}*/
+/*#container{
  height: 450px;
  width: 690px;
  margin: 15px auto;
@@ -107,4 +89,4 @@ table, th, td {
     }
   .accordion-content.default {
     display: block;
-    }
+    }*/
