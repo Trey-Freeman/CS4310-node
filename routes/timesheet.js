@@ -14,7 +14,7 @@ router.all('/*', function(req, res, next) {
 
 /* Test Code for Zaid's PHP timesheet */
 router.get('/', function(req, res){
-    res.render('timesheet', {user: req.user});
+    return res.render('timesheet', {user: req.user});
 });
 
 router.post('/save', function(req, res) {
@@ -27,21 +27,21 @@ router.post('/save', function(req, res) {
         rate: timesheet.rate,
         comments: timesheet.comments
         }, function(err) {
-            if(err) return res.status(500).send(err);
+            if(err) return res.status(500).send('Error saving new timesheet');
+            return res.redirect('/timesheet/list');
     });
-    res.redirect('/timesheet/list');
 });
 
 router.get('/list', function(req, res) {
     Timesheet.find({account: req.user._id}, function(err, timesheets) {
-      console.log(timesheets);
+        if(err) return res.status(500).send(err);
         var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
-        res.render('timesheets', {user: username, timesheets: timesheets});
+        return res.render('timesheets', {user: username, timesheets: timesheets});
     });
 });
 
 router.get('/action/new', function(req, res) {
-    res.render('timesheet');
+    return res.render('timesheet');
 });
 
 module.exports = router;
