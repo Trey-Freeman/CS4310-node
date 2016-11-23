@@ -15,6 +15,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var quote = require('./routes/quote');
 var timesheet = require('./routes/timesheet');
+var application = requite('./routes/application');
 
 var app = express();
 
