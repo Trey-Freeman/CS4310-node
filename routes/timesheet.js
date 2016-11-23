@@ -14,7 +14,7 @@ router.all('/*', function(req, res, next) {
 
 /* Test Code for Zaid's PHP timesheet */
 router.get('/', function(req, res){
-    res.render('timesheet');
+    res.render('timesheet', {user: req.user});
 });
 
 router.post('/save', function(req, res) {
@@ -29,7 +29,6 @@ router.post('/save', function(req, res) {
         }, function(err) {
             if(err) return res.status(500).send(err);
     });
-    console.log(timesheet);
     res.redirect('/timesheet/list');
 });
 
