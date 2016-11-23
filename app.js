@@ -20,7 +20,7 @@ var application = require('./routes/application');
 var app = express();
 
 app.use(multer({dest:'./public/profile_pics'}).single('image'));
-
+//test
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
