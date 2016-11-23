@@ -30,7 +30,7 @@ router.post('/save', function(req, res) {
             if(err) return res.status(500).send(err);
     });
     console.log(timesheet);
-    res.render('timesheets');
+    res.redirect('/timesheet/list');
 });
 
 router.get('/list', function(req, res) {
