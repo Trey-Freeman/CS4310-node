@@ -3,151 +3,98 @@ extends layout
 block content
   .container
     header.page-header
-        h1.page-title Send us your application!
-
-    form#EmploymentApplicationTranspotHub(action='//submit.form', method='post', onsubmit='return ValidateForm(this);')
-      table(border='0', cellpadding='5', cellspacing='0')
-        tr
-          td(style='width: 50%')
-            label(for='First_Name')
-              b First name *
-            br
-            input(name='First_Name', type='text', maxlength='50', style='width: 260px')
-          td(style='width: 50%')
-            label(for='Last_Name')
-              b Last name *
-            br
-            input(name='Last_Name', type='text', maxlength='50', style='width: 260px')
-        tr
-          td(colspan='2')
-            label(for='ssn')
-              b Enter your last four of SSN *
-            br
-            input(name='ssn', type='text', maxlength='100', style='width: 535px')
-            label
-              br
-              h4  Address 
-        tr
-          td(style='width: 50%')
-            label(for='street')
-              b Street *
-            br
-            input(name='Street', type='text', maxlength='50', style='width: 260px')
-          td(style='width: 50%')
-            label(for='city')
-              b City *
-            br
-            input(name='city', type='text', maxlength='50', style='width: 260px')
-        tr
-          td(style='width: 50%')
-            label(for='state')
-              b State *
-            br
-            input(name='state', type='text', maxlength='50', style='width: 260px')
-          td(style='width: 50%')
-            label(for='zip')
-              b Zip code *
-            br
-            input(name='zip', type='text', maxlength='50', style='width: 260px')
-        tr
-          td(colspan='2')
-            label(for='ssn')
-              b PO Box if used for mailing address
-            br
-            input(name='ssn', type='text', maxlength='100', style='width: 535px')
-            label
-              br
-              h4  Education 
-        tr
-          td(style='width: 50%')
-            label(for='school')
-              b School
-            br
-            input(name='school', type='text', maxlength='50', style='width: 260px')
-          td(style='width: 50%')
-            label(for='degree')
-              b Degree
-            br
-            input(name='degree', type='text', maxlength='50', style='width: 260px')
-        tr
-          td(style='width: 50%')
-            label(for='Yeargrad')
-              b Graduation date
-            br
-            input(name='Gdate', type='text', maxlength='50', style='width: 260px')
-          td(style='width: 50%')
-            label(for='major')
-              b Major/area of study
-            br
-            input(name='major', type='text', maxlength='50', style='width: 260px')
-        tr
-          td(colspan='2')
-            label(for='Email_Address')
-              b Email *
-            br
-            input(name='Email_Address', type='text', maxlength='100', style='width: 535px')
-        tr
-          td(colspan='2')
-            label(for='Portfolio')
-              b Linkedin, website, github
-            br
-            input(name='Portfolio', type='text', maxlength='255', value='http://', style='width: 535px')
-        tr
-          td(colspan='2')
-            label(for='Position')
-              b Position you are applying for *
-            br
-            input(name='Position', type='text', maxlength='100', style='width: 535px')
-        tr
-          td
-            label(for='Salary')
-              b Desired salary
-            br
-            input(name='Salary', type='text', maxlength='50', style='width: 260px')
-          td
-            label(for='StartDate')
-              b When can you start?
-            br
-            input(name='StartDate', type='text', maxlength='50', style='width: 260px')
-        tr
-          td
-            label(for='Phone')
-              b Phone *
-            br
-            input(name='Phone', type='text', maxlength='50', style='width: 260px')
-          td
-            label(for='Fax')
-              b Fax
-            br
-            input(name='Fax', type='text', maxlength='50', style='width: 260px')
-        tr
-          td(colspan='2')
-            label(for='Relocate')
-              b Are you willing to relocate?
-            br
-            input(name='Relocate', type='radio', value='Yes', checked='checked')
-            |  Yes      
-            input(name='Relocate', type='radio', value='No')
-            |  No      
-            input(name='Relocate', type='radio', value='NotSure')
-            |  Not sure
-        tr
-          td(colspan='2')
-            label(for='Organization')
-              b Last company you worked for
-            br
-            input(name='Organization', type='text', maxlength='100', style='width: 535px')
-        tr
-          td(colspan='2')
-            label(for='Resume')
-              b Resume
-            br
-            textarea(name='Resume', rows='7', cols='40', style='width: 535px')
-        tr
-          td(colspan='2', style='text-align: center;')
-            script.
-            br
-            input.btn.btn-primary.btn-block(name='skip_submit', type='submit', value='Send Application')
+      h1.page-title Send us your application!
+      h3  Personal information
+      .form-group
+        form#EmploymentApplicationTranspotHub(action='//submit.form', method='post', onsubmit='return ValidateForm(this);')
+          .row
+            .col-sm-6
+              label First name *
+              input.form-control(name='First_Name', type='text', maxlength='50', required='')
+            .col-sm-6
+              label(for='Last_Name') Last name *
+              input.form-control(name='Last_Name', type='text', maxlength='50', required='')
+          br
+          label(for='ssn') Enter your last four of SSN *
+          input.form-control(name='ssn', type='text', maxlength='100', required='')
+          
+          h3  Address 
+          label(for='street') Street *
+          input.form-control(name='Street', type='text', maxlength='50', required='')
+          br
+          .row
+            .col-sm-6
+              label(for='city') City *
+              input.form-control(name='city', type='text', maxlength='50', required='')
+            .col-sm-6
+              label(for='state') State *
+              input.form-control(name='state', type='text', maxlength='50', required='')
+          .row
+            .col-sm-6
+              label(for='zip') Zip code *
+              input.form-control(name='zip', type='text', maxlength='50', required='')
+            .col-sm-6
+              label(for='ssn') PO Box if used for mailing address
+              input.form-control(name='ssn', type='text', maxlength='100')
+                
+          h3  Education 
+          
+          label(for='school') School
+          input.form-control(name='school', type='text', maxlength='50')
+          br
+          label(for='degree') Degree
+          input.form-control(name='degree', type='text', maxlength='50')
+          br
+          .row
+            .col-sm-6
+              label(for='Yeargrad') Graduation date
+              input.form-control(name='Gdate', type='date')
+            .col-sm-6
+              label(for='major') Major/area of study
+              input.form-control(name='major', type='text', maxlength='50')
+          br
+          .row
+            .col-sm-6
+              label(for='Email_Address') Email *                
+              input.form-control(name='Email_Address', type='text', maxlength='100', required='')
+            .col-sm-6
+              label(for='Portfolio') Linkedin, website, github
+              input.form-control(name='Portfolio', type='text', maxlength='255', value='http://')
+          br
+          label(for='Position') Position you are applying for *
+          input.form-control(name='Position', type='text', maxlength='100', required='')
+          br
+          label(for='Salary') Desired salary
+          input.form-control(name='Salary', type='text', maxlength='50')
+          br
+          .row
+            .col-sm-4
+              label(for='StartDate') When can you start?
+              input.form-control(name='StartDate', type='text', maxlength='50')
+            .col-sm-4
+              label(for='Phone') Phone *
+              input.form-control(name='Phone', type='text', maxlength='50', required='')
+            .col-sm-4
+              label(for='Fax') Fax
+              input.form-control(name='Fax', type='text', maxlength='50')
+          br
+          label(for='Relocate') Are you willing to relocate?
+          input(name='Relocate', type='radio', value='Yes', checked='checked') 
+          | Yes      
+          input(name='Relocate', type='radio', value='No') 
+          | No
+          input(name='Relocate', type='radio', value='NotSure') 
+          | Not sure
+          br
+          label(for='Organization') Last company you worked for
+          input.form-control(name='Organization', type='text', maxlength='100')
+          br
+          label(for='Resume') Resume
+          textarea.form-control(name='Resume', rows='7')
+          br
+          script.
+          
+          input.btn.btn-primary.btn-block(name='skip_submit', type='submit', value='Send Application')
             
 
 block scripts
