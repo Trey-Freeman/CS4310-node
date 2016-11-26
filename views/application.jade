@@ -6,7 +6,7 @@ block content
       h1.page-title Send us your application!
       h3  Personal information
       .form-group
-        form#EmploymentApplicationTranspotHub(action='//submit.form', method='post', onsubmit='return ValidateForm(this);')
+        form#EmploymentApplicationTranspotHub(action='/application/new', method='post', onsubmit='return ValidateForm(this);')
           .row
             .col-sm-6
               label First name *
@@ -34,8 +34,8 @@ block content
               label(for='zip') Zip code *
               input.form-control(name='zip', type='text', maxlength='50', required='')
             .col-sm-6
-              label(for='ssn') PO Box if used for mailing address
-              input.form-control(name='ssn', type='text', maxlength='100')
+              label(for='address') PO Box if used for mailing address
+              input.form-control(name='address', type='text', maxlength='100')
                 
           h3  Education 
           
