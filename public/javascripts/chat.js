@@ -20,7 +20,7 @@
 		});
 
 		//On click, submit to socketio t0 join a room
-		$('#submit').on('click', function() {
+		$('#submit').on('click tap', function() {
 			console.log('joining');
 			room = $('#room-name').val()
 			socket.emit('room', {room: room,
@@ -118,7 +118,7 @@
 
     /* Tell the navigator to get user's webcam feed (video and audio included) */
     function getVideo(callback) {
-        if(ismobile() || issafari() || isie() || isedge()) {
+        if(issafari() || isie() || isedge()) {
             alert('Camera is inaccessible');
             return;
         }
