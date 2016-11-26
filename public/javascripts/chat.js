@@ -94,8 +94,10 @@
 			//Connect to all the users in the current room
 			for (roomUser in data.users) {
 				$('#user-list').append('<li>' + roomUser + '</li>');
-                if(roomUser !== user)
+                if(roomUser !== user) {
+                    console.log('Calling' + roomUser);
 				    var call = peer.call(roomUser, window.localStream);
+                }
 			} 
 		});
 		//If the user received a message, then show that message
