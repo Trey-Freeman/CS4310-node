@@ -40,8 +40,14 @@ router.get('/list', function(req, res) {
     });
 });
 
-router.get('/action/new', function(req, res) {
-    return res.render('timesheet');
+router.post('/delete', function(req, res) {
+    console.log(req.body);
+    var timesheetID = req.body.id
+    Timesheet.remove({ _id: timesheetID }, function(err) {
+        if (err) return res.status(500).send(err);
+    });
+    res.send('success');
 });
+
 
 module.exports = router;
