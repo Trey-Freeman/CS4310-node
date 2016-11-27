@@ -158,10 +158,18 @@ router.post('/create', function(req, res) {
 
 router.get('/list', function(req, res) {
     Quote.find({account: req.user._id}, function(err, quotes) {
-        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
-        res.render('summaryQuote', {user: username, quotes: quotes});
+        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();       
+        res.render('summaryQuote', {user: req.user, quotes: quotes});
     });
 });
+
+router.post('/delete', function(req, res) {
+    var quoteID = req.body.id
+    Quote.remove({ _id: quoteID }, function(err) {
+        if (err) return res.status(500).send(err);
+    });
+    res.send('success');
+})
 
 
 module.exports = router;

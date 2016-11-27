@@ -13,7 +13,6 @@ router.all('/*', function(req, res, next) {
     next();
 });
 
-/* Test Code for Zaid's PHP timesheet */
 router.get('/', function(req, res){
     return res.render('timesheet', {user: req.user});
 });
@@ -38,13 +37,13 @@ router.get('/list', function(req, res) {
         if(err) return res.status(500).send(err);
         if(user.admin) {
             Timesheet.find({}, function(err, timesheets) {
-                console.log(timesheets);
                 if(err) return res.status(500).send(err);
                 var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
                 return res.render('timesheets', {user: user, timesheets: timesheets});
             });
         } else {
             Timesheet.find({account: req.user._id}, function(err, timesheets) {
+                console.log(timesheets);
                 if(err) return res.status(500).send(err);
                 var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
                 return res.render('timesheets', {user: user, timesheets: timesheets});
@@ -55,7 +54,6 @@ router.get('/list', function(req, res) {
 });
 
 router.post('/delete', function(req, res) {
-    console.log(req.body);
     var timesheetID = req.body.id
     Timesheet.remove({ _id: timesheetID }, function(err) {
         if (err) return res.status(500).send(err);
