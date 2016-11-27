@@ -322,7 +322,9 @@
         return comparator[op] ? comparator[op](version, n) : (version == n || n !== n);
     }
     
-	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.mozGetUserMedia;
+	navigator.getUserMedia = navigator.getUserMedia 
+        || navigator.webkitGetUserMedia || navigator.mozGetUserMedia 
+            || navigator.oGetUserMedia || navigator.msGetUserMedia;
 
 	
 })();

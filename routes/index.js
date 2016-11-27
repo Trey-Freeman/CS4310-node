@@ -125,32 +125,6 @@ router.get('/action/join', function(req, res) {
     res.render('join', { user : req.user });
 });undefined
 
-/* POST handle a user tryin to join or create a room.
- * If a room exists and invalid password is provided, then send error
- * If the password is valid, send a success signal
- * If it doesn't exist, then create it and add the user to the room*/
-/*router.post('/action/checkChat', function(req, res) {
-    if (req.body.name in rooms) {
-        if (req.body.password !== rooms[req.body.name])
-            return res.status(500).send('Invaliad room password');
-        return res.send('Success!');
-    }
-    rooms[req.body.name] = {password: req.body.password, users: [req.user]};
-});*/
-
-/* */
-/*router.post('/action/chat', function(req, res) {
-    if(req.body.name in rooms) {
-        //TODO: find a better way to error out for this
-        if (req.body.password !== rooms[req.body.name])
-            return next();
-        rooms[req.body.name].users.push(req.user);
-        return res.render('chat', {user: req.user});
-    }
-    rooms[req.body.name] = {password: req.body.password, users: [req.user]};
-    res.render('chat', {user: req.user});
-});*/
-
 router.post('/create', function(req, res) {
     console.log("create route");
     console.log(req.body);
@@ -172,11 +146,6 @@ router.post('/create', function(req, res) {
             if(err) return res.status(500).send(err);
             res.redirect('/');
         });
-     //quote.save (function(err){
-            // if(err) return res.status(500).send(err);
-            // res.redirect('/');
-     //});
-     console.log(quote);
      res.render('quote', {user: req.user, quote: quote});
 
 });
@@ -208,6 +177,10 @@ router.get('/viewQuote', function(req, res) {
 
 router.get('/summaryQuote', function(req, res) {
     res.render('summaryQuote');
+});
+
+router.get('/snake', function(req, res) {
+    res.render('snake');
 });
 
 
