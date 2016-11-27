@@ -1,10 +1,10 @@
 extend layout
 
 block content
-  link(href='stylesheets/table.css', type='text/css', rel='stylesheet')
+  link(type='text/css', rel='stylesheet')
   .container
     header.page-header
-        h1.page-title Time Sheets for #{user}
+        h1.page-title Time Sheets for #{user.username}
     
     if (!timesheets)
       h2 Sorry, no Time Sheets found.

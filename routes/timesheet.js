@@ -34,19 +34,20 @@ router.post('/save', function(req, res) {
 });
 
 router.get('/list', function(req, res) {
-    Account.find({account: req.user._id}, function(err, user) {
+    Account.findOne({_id: req.user._id}, function(err, user) {
         if(err) return res.status(500).send(err);
         if(user.admin) {
             Timesheet.find({}, function(err, timesheets) {
+                console.log(timesheets);
                 if(err) return res.status(500).send(err);
                 var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
-                return res.render('timesheets', {user: username, timesheets: timesheets});
+                return res.render('timesheets', {user: user, timesheets: timesheets});
             });
         } else {
             Timesheet.find({account: req.user._id}, function(err, timesheets) {
                 if(err) return res.status(500).send(err);
                 var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
-                return res.render('timesheets', {user: username, timesheets: timesheets});
+                return res.render('timesheets', {user: user, timesheets: timesheets});
             });
         }
     })
