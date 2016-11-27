@@ -1,5 +1,6 @@
 var express = require('express');
 var Timesheet = require('../models/timesheet');
+var Account = require('../models/account');
 var path = require('path');
 var exec = require("child_process").exec;
 var request = require('request');
@@ -33,11 +34,23 @@ router.post('/save', function(req, res) {
 });
 
 router.get('/list', function(req, res) {
-    Timesheet.find({account: req.user._id}, function(err, timesheets) {
+    Account.find({account: req.user._id}, function(err, user) {
         if(err) return res.status(500).send(err);
-        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
-        return res.render('timesheets', {user: username, timesheets: timesheets});
-    });
+        if(user.admin) {
+            Timesheet.find({}, function(err, timesheets) {
+                if(err) return res.status(500).send(err);
+                var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
+                return res.render('timesheets', {user: username, timesheets: timesheets});
+            });
+        } else {
+            Timesheet.find({account: req.user._id}, function(err, timesheets) {
+                if(err) return res.status(500).send(err);
+                var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
+                return res.render('timesheets', {user: username, timesheets: timesheets});
+            });
+        }
+    })
+    
 });
 
 router.get('/action/new', function(req, res) {
