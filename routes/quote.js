@@ -158,7 +158,7 @@ router.post('/create', function(req, res) {
 
 router.get('/list', function(req, res) {
     Quote.find({account: req.user._id}, function(err, quotes) {
-        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();
+        var username = req.user.username.charAt(0).toUpperCase() + req.user.username.substr(1).toLowerCase();       
         res.render('summaryQuote', {user: username, quotes: quotes});
     });
 });
