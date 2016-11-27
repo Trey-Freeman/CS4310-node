@@ -15,7 +15,7 @@ block content
                 | Or if you already have an account 
                 a(href='/login') Sign in here
               hr
-              form(role='form', action="/register",method="post", onsubmit='return validatePassword(password, confirmPassword);')
+              form(role='form', action="/register",method="post")
                 .top-margin
                   label
                     | Username 
@@ -50,24 +50,6 @@ block content
 
 block scripts
   script(type='text/javascript', src='/javascripts/register.js')
-
-  script.
-    function validatePassword(fld, fld2) {
-      var error = "";
-      var illegalChars = /[\W_]/; // allow only letters and numbers
-   
-      if (fld.value != fld2.value) {
-          error = "Passwords must match . \n";
-          fld.style.background = 'Yellow';
-          fld2.style.background = 'Yellow';
-          alert(error);
-          return false;
-   
-      } else {
-          fld.style.background = 'White';
-      }
-     return true;
-    }
 
 
     .container
