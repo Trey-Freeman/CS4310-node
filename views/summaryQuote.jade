@@ -20,7 +20,7 @@ block content
         th ACTION
       each quote, i in quotes
         // for book in book
-        tr
+        tr(id='#{id}')
           td.id-cell #{quote.id}
           td.origin-cell #{quote.origin}
           td.destination-cell #{quote.destination}

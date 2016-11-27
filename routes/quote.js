@@ -163,6 +163,14 @@ router.get('/list', function(req, res) {
     });
 });
 
+router.post('/delete', function(req, res) {
+    var quoteID = req.body.id
+    Quote.remove({ _id: quoteID }, function(err) {
+        if (err) return res.status(500).send(err);
+    });
+    res.send('success');
+})
+
 
 module.exports = router;
 
