@@ -1,38 +1,31 @@
 extends layout
 
 block content
-    html
-      head
-        title Timesheet
-        meta(charset='UTF-8')
-        link(rel='stylesheet', href='/stylesheets/timesheet.css')
-        link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
-      .body
-            h1 This is the company time sheet log.
-            p
+    link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+    .container
+        .row
+            h1.col-xs-12 This is the company time sheet log.
+            p.col-xs-12
               | In the field below, you need to full out the information.
               | Once you hit submit your event will be saved in a secured server. This log event is build according to the highest security standards.
-            | Your HR will be notified via email.
-            div
-              form(action='timesheet/save', method='post')
+            .col-xs-12 Your HR will be notified via email.
+        .row
+            form(action='timesheet/save', method='post').col-xs-12
                 h2 Event log sheet
-                span.error * required field.
-                br
-                br
-                | Start Date:
-                input.input(name='startDate', type='text', value='', class='datepicker')
-                span.error * 
-                | End Date:
-                input.input(name='endDate', type='text', value='', class='datepicker')
-                span.error * 
+                span
+                    | Start Date:
+                    input.input(name='startDate', type='text', value='', class='datepicker' required)
+                span
+                    | End Date:
+                    input.input(name='endDate', type='text', value='', class='datepicker' required)
                 br
                 br
                 | Hours:
-                input.input(name='hours', type='text', value='')
-                span.error * 
+                input.input(name='hours', type='text', value='' required)
+                span.error
                 | Rate:
-                input.input(name='rate', type='text', value='')
-                span.error * 
+                input.input(name='rate', type='text', value='' required)
+                span.error
                 br
                 br  
                 | Comments:
