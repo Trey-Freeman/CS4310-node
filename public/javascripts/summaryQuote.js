@@ -1,14 +1,13 @@
 //id, origin,  destination,  price,  mpg, distance,  gasType,  ppm,  gallons,  gasCost, ppmCost, totalCost
 $(document).ready(function() {
 
-  ('.delete').click( function(e){
-    e.preventDefault();
+  $('.delete').click( function(){
     var rowID = $(this).data()['row'];
     var quoteID = $(this).data()['id'];
     $.ajax({
       type:'POST',
       url:'/quote/delete',
-      data: { id: sheetID },
+      data: { id: quoteID },
       success: function(data){
           console.log(data);
           $('#' + rowID).remove();

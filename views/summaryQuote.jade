@@ -34,14 +34,13 @@ block content
           td.ppmCost-cell #{quote.ppmCost}
           td.totalCost-cell #{quote.totalCost}
           td
-            // Trigger the modal with a button
             .btn-group-vertical
               button.btn.btn-info.dropdown-toggle.btn-block(type='button', data-toggle='dropdown')
                 span.caret
               ul.dropdown-menu(role='menu')
                   li
-                    button.edit-button.btn.btn-warning.btn-block(id='#{quote._id}', type='button', data-toggle='modal', data-row='#{i}', data-quote='#{quote.id}') Edit
+                    button.edit-button.btn.btn-warning.btn-block(id='#{quote._id}', class='edit', data-row='#{i}', data-id='#{quote.id}') Edit
                   li
-                    button.delete-button.btn.btn-danger.btn-block(id='#{quote._id}', class='delete',data-row='#{i}', data-id='#{quote._id}') Delete PO: #{i}
+                    button.delete-button.btn.btn-danger.btn-block(id='#{quote._id}', class='delete', data-row='#{i}',data-id='#{quote._id}') Delete
 block scripts
-  script(type='text/javascript', src='/javascripts/timesheets.js')
+  script(type='text/javascript', src='/javascripts/summaryQuote.js')
