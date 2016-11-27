@@ -22,7 +22,7 @@ block content
             th Remove
         tbody
           each sheet, i in timesheets
-            tr
+            tr(id='#{i}')
               td(data-title='ID') #{i}
               td(data-title='startDate') #{sheet.startDate}
               td(data-title='endDate') #{sheet.endDate}
@@ -33,10 +33,13 @@ block content
                 a(href='#')
                   span.glyphicon.glyphicon-pencil(aria-hidden='true')
               td(data-title='Remove', width='10%')
-                a(href='#')
-                  span.glyphicon.glyphicon-trash(aria-hidden='true')
+                button(class='delete' data-row='#{i}' data-id='#{sheet.id}')
+                  span.glyphicon.glyphicon-trash( aria-hidden='true')
       
       form(action='/timesheet')
         input(type='submit', value='New timesheet', class="btn btn-primary")
+
+block scripts
+  script(type='text/javascript', src='/javascripts/timesheets.js')
 
 
