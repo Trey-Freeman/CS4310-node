@@ -11,7 +11,7 @@ block content
         th Price
         th MPG
         th Distance
-        th Gas Cost
+        th Avg Gas
         th PPM
         th Gallons
         th Gas Cost
@@ -42,5 +42,19 @@ block content
                     button.edit-button.btn.btn-warning.btn-block(id='#{quote._id}', class='edit', data-row='#{i}', data-id='#{quote.id}') Edit
                   li
                     button.delete-button.btn.btn-danger.btn-block(id='#{quote._id}', class='delete', data-row='#{i}',data-id='#{quote._id}') Delete
+      tr
+        td Total OR Average
+        td # of PO's:&nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+        td &nbsp;
+                
 block scripts
   script(type='text/javascript', src='/javascripts/summaryQuote.js')

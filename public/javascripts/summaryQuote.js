@@ -83,17 +83,17 @@ $(document).ready(function() {
       }
     }
   });
-  $count = $count / 10; //10 rows divide to find number of elements
+  $count = $count / 10; //10 rows divide to find number of elements 
   $("#DataGrid tr:last td:eq(2)").text($count.toFixed(2));
-  $("#DataGrid tr:last td:eq(3)").text(c3Total.toFixed(2));
+  $("#DataGrid tr:last td:eq(3)").text("$" + c3Total.toFixed(2));
   $("#DataGrid tr:last td:eq(4)").text((c4Total / $count).toFixed(2));
   $("#DataGrid tr:last td:eq(5)").text(c5Total.toFixed(2));
   $("#DataGrid tr:last td:eq(6)").text((c6Total / $count).toFixed(2));
-  $("#DataGrid tr:last td:eq(7)").text((c7Total / $count).toFixed(2));
+  $("#DataGrid tr:last td:eq(7)").text("$" + (c7Total / $count).toFixed(2));
   $("#DataGrid tr:last td:eq(8)").text(c8Total.toFixed(2));
-  $("#DataGrid tr:last td:eq(9)").text(c9Total.toFixed(2));
-  $("#DataGrid tr:last td:eq(10)").text(c10Total.toFixed(2));
-  $("#DataGrid tr:last td:eq(11)").text(c11Total.toFixed(2));
-  $("#DataGrid tr:last td:eq(12)").text(c12Total.toFixed(2));
+  $("#DataGrid tr:last td:eq(9)").text("$" + c9Total.toFixed(2));
+  $("#DataGrid tr:last td:eq(10)").text("$" + c10Total.toFixed(2));
+  $("#DataGrid tr:last td:eq(11)").text("$" + c11Total.toFixed(2));
+  $("#DataGrid tr:last td:eq(12)").text("$" + c12Total.toFixed(2));
   // $('#DataGrid').sumtr({sumCells : '.totalCost-cell'});
 });
