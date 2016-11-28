@@ -4,7 +4,7 @@ block content
   link(type='text/css', rel='stylesheet')
   .container
     header.page-header
-        h1.page-title Time Sheets for #{user.username}
+        h1.page-title Timesheets for #{user.username}
     
     if (!timesheets)
       h2 Sorry, no Time Sheets found.
@@ -33,8 +33,8 @@ block content
                 a(href='#')
                   span.glyphicon.glyphicon-pencil(aria-hidden='true')
               td(data-title='Remove', width='10%')
-                button(class='delete' data-row='#{i}' data-id='#{sheet._id}')
-                  span.glyphicon.glyphicon-trash( aria-hidden='true')
+                button(data-row='#{i}' data-id='#{sheet._id}')
+                  span.glyphicon.glyphicon-trash(aria-hidden='true')
       
       form(action='/timesheet')
         input(type='submit', value='New timesheet', class="btn btn-primary")

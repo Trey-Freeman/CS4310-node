@@ -1,60 +1,64 @@
 extends layout
 
 block content 
-    h1 Welcome to the Summary Quote Page!!
-    p You are logged in as #{user.username}
-    table#DataGrid.table
-      tr
-        th PO#
-        th Origin
-        th Delivery
-        th Price
-        th MPG
-        th Distance
-        th Avg Gas
-        th PPM
-        th Gallons
-        th Gas Cost
-        th PPM Cost
-        th Profit
-        th ACTION
-      each quote, i in quotes
-        // for book in book
-        tr(id='#{i}')
-          td.id-cell #{i}
-          td.origin-cell #{quote.origin}
-          td.destination-cell #{quote.destination}
-          td.price-cell #{quote.price}
-          td.mpg-cell #{quote.mpg}
-          td.distance-cell #{quote.distance}
-          td.gasType-cell #{quote.gasType}
-          td.ppm-cell #{quote.ppm}
-          td.gallons-cell #{quote.gallons}
-          td.gasCost-cell #{quote.gasCost}
-          td.ppmCost-cell #{quote.ppmCost}
-          td.totalCost-cell #{quote.totalCost}
-          td
-            .btn-group-vertical
-              button.btn.btn-info.dropdown-toggle.btn-block(type='button', data-toggle='dropdown')
-                span.caret
-              ul.dropdown-menu(role='menu')
-                  li
-                    button.edit-button.btn.btn-warning.btn-block(id='#{quote._id}', class='edit', data-row='#{i}', data-id='#{quote.id}') Edit
-                  li
-                    button.delete-button.btn.btn-danger.btn-block(id='#{quote._id}', class='delete', data-row='#{i}',data-id='#{quote._id}') Delete
-      tr
-        td Total OR Average
-        td # of PO's:&nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
-        td &nbsp;
+  .container
+    header.page-header
+      h1.page-title List of Quotes
+    if (!quotes)
+        h2 Sorry, no Quotes found.
+    else
+      table#DataGrid.table
+        tr
+          th PO#
+          th Origin
+          th Delivery
+          th Price
+          th MPG
+          th Distance
+          th Avg Gas
+          th PPM
+          th Gallons
+          th Gas Cost
+          th PPM Cost
+          th Profit
+          th ACTION
+        each quote, i in quotes
+          // for book in book
+          tr(id='#{i}')
+            td.id-cell #{i}
+            td.origin-cell #{quote.origin}
+            td.destination-cell #{quote.destination}
+            td.price-cell #{quote.price}
+            td.mpg-cell #{quote.mpg}
+            td.distance-cell #{quote.distance}
+            td.gasType-cell #{quote.gasType}
+            td.ppm-cell #{quote.ppm}
+            td.gallons-cell #{quote.gallons}
+            td.gasCost-cell #{quote.gasCost}
+            td.ppmCost-cell #{quote.ppmCost}
+            td.totalCost-cell #{quote.totalCost}
+            td
+              .btn-group-vertical
+                button.btn.btn-info.dropdown-toggle.btn-block(type='button', data-toggle='dropdown')
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                    li
+                      button.edit-button.btn.btn-warning.btn-block(id='#{quote._id}', class='edit', data-row='#{i}', data-id='#{quote.id}') Edit
+                    li
+                      button.delete-button.btn.btn-danger.btn-block(id='#{quote._id}', class='delete', data-row='#{i}',data-id='#{quote._id}') Delete
+        tr
+          td Total OR Average
+          td # of PO's:&nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
+          td &nbsp;
                 
 block scripts
   script(type='text/javascript', src='/javascripts/summaryQuote.js')

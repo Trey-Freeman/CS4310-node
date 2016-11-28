@@ -4,36 +4,32 @@ block content
     link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
     .container
         .row
-            h1.col-xs-12 This is the company time sheet log.
+            h1.col-xs-12 Company timesheet log
             p.col-xs-12
               | In the field below, you need to full out the information.
               | Once you hit submit your event will be saved in a secured server. This log event is build according to the highest security standards.
             .col-xs-12 Your HR will be notified via email.
+        br
         .row
-            form(action='timesheet/save', method='post').col-xs-12
-                h2 Event log sheet
-                span
-                    | Start Date:
-                    input.input(name='startDate', type='text', value='', class='datepicker' required)
-                span
-                    | End Date:
-                    input.input(name='endDate', type='text', value='', class='datepicker' required)
+            form(action='timesheet/save', method='post')
+                .row
+                    .col-sm-3
+                        label Start Date
+                        input.input.form-control(name='startDate', type='text', value='', class='datepicker' required)
+                    .col-sm-3
+                        label End Date
+                        input.input.form-control(name='endDate', type='text', value='', class='datepicker' required)
+                    .col-sm-3
+                        label Hours
+                        input.input.form-control(name='hours', type='text', value='' required)
+                    .col-sm-3
+                        label Rate
+                        input.input.form-control(name='rate', type='text', value='' required)
                 br
+                label Comments
+                textarea.form-control(name='comments', type='text', rows="9")
                 br
-                | Hours:
-                input.input(name='hours', type='text', value='' required)
-                span.error
-                | Rate:
-                input.input(name='rate', type='text', value='' required)
-                span.error
-                br
-                br  
-                | Comments:
-                br
-                textarea#comment(name='comments', type='text', value='', rows='15', cols='80')
-                br
-                br
-                input.submit(name='submit', type='submit', value='Submit')
+                input.btn.btn-action(name='submit', type='submit', value='Submit')
 
 block scripts
     script(src='//code.jquery.com/ui/1.12.1/jquery-ui.js')    
