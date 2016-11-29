@@ -3,7 +3,11 @@ extends layout
 block content
   .container
     .row
+      br
       button.btn.btn-success.btn-block(type='button', name='back', onclick='history.back()') Go Back
+      br
+      form(action='/quote/list')
+            input(type='submit', value='View All Quotes', class="btn btn-primary btn-block")
       br
       br
       if (quote)
