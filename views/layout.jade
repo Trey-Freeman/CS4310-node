@@ -31,6 +31,8 @@ html(lang='en')
               a(href='/') Home
             li
               a(href='/email') Mailing List
+            li
+              a(href='/contact') Contact Us
             if (user)
               li.dropdown
                 a.dropdown-toggle(data-toggle='dropdown', href='#')
@@ -54,8 +56,6 @@ html(lang='en')
                   a(href='/directions') Directions
               li
                 a(href='/action/chat') Live Chat
-              li
-                a(href='/contact') Contact Us
             if (!user)
               li
                 a(href='/application') Careers
