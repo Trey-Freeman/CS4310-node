@@ -99,11 +99,12 @@ router.post('/edit/:timesheetId', function(req, res) {
 
 router.post('/delete', function(req, res) {
     var timesheetID = req.body.id
+
     Timesheet.remove({ _id: timesheetID }, function(err) {
         if (err) return res.status(500).send(err);
     });
     res.send('success');
+    
 });
-
 
 module.exports = router;

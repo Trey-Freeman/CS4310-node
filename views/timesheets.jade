@@ -7,7 +7,7 @@ block content
         h1.page-title Timesheets for #{user.username}
     
     if (!timesheets)
-      h2 Sorry, no Time Sheets found.
+      h2 Sorry, no Timesheets found.
     else
       table#table.table.table-hover.table-mc-light-blue
         thead
@@ -33,13 +33,10 @@ block content
                 a(href='/timesheet/edit/#{sheet._id}?n=#{i}')
                   span.glyphicon.glyphicon-pencil(aria-hidden='true')
               td(data-title='Remove', width='10%')
-                button(data-row='#{i}' data-id='#{sheet._id}')
+                a(class='delete' data-row='#{i}' data-id='#{sheet.id}')
                   span.glyphicon.glyphicon-trash(aria-hidden='true')
       
-      form(action='/timesheet')
-        input(type='submit', value='New timesheet', class="btn btn-primary")
+      a(class="btn btn-primary", href="/timesheet") New timesheet
 
 block scripts
   script(type='text/javascript', src='/javascripts/timesheets.js')
-
-
