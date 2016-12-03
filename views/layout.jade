@@ -32,6 +32,8 @@ html(lang='en')
             li
               a(href='/email') Mailing List
             li
+              a(href='/application') Careers
+            li
               a(href='/contact') Contact Us
             if (user)
               li.dropdown
@@ -57,8 +59,6 @@ html(lang='en')
               li
                 a(href='/action/chat') Live Chat
             if (!user)
-              li
-                a(href='/application') Careers
               li
                 a.btn(href='/login') SIGN IN / SIGN UP
             if (user)

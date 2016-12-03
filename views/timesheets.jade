@@ -12,7 +12,7 @@ block content
       table#table.table.table-hover.table-mc-light-blue
         thead
           tr
-            th ID
+            th #
             th Start Date
             th End Date
             th Hours
@@ -23,14 +23,14 @@ block content
         tbody
           each sheet, i in timesheets
             tr(id='#{i}')
-              td(data-title='ID') #{i}
+              td(data-title='#') #{i}
               td(data-title='startDate') #{sheet.startDate}
               td(data-title='endDate') #{sheet.endDate}
               td(data-title='hours') #{sheet.hours}
               td(data-title='rate') $#{sheet.rate}
               td(date-title='comments') #{sheet.comments}
               td(data-title='Edit', width='10%') 
-                a(href='#')
+                a(href='/timesheet/edit/#{sheet._id}?n=#{i}')
                   span.glyphicon.glyphicon-pencil(aria-hidden='true')
               td(data-title='Remove', width='10%')
                 button(data-row='#{i}' data-id='#{sheet._id}')

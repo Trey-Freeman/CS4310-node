@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    link(rel='stylesheet', href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+    .container
+        .row
+            h1.col-xs-12 Edit timesheet
+        br
+        .row
+            form(action='/timesheet/edit/#{timesheetId}', method='post')
+                .row
+                    .col-sm-3
+                        label Start Date
+                        input.input.form-control(name='startDate', type='text', value='#{timesheets[n].startDate}', class='datepicker' required)
+                    .col-sm-3
+                        label End Date
+                        input.input.form-control(name='endDate', type='text', value='#{timesheets[n].endDate}', class='datepicker' required)
+                    .col-sm-3
+                        label Hours
+                        input.input.form-control(name='hours', type='text', value='#{timesheets[n].hours}' required)
+                    .col-sm-3
+                        label Rate
+                        input.input.form-control(name='rate', type='text', value='#{timesheets[n].rate}' required)
+                br
+                label Comments
+                textarea.form-control(name='comments', type='text', rows="9") #{timesheets[n].comments}
+                br
+                input.btn.btn-action(name='submit', type='submit', value='Save')
+
+block scripts
+    script(src='//code.jquery.com/ui/1.12.1/jquery-ui.js')    
+    script.
+        $(document).ready(function () {
+            $(".datepicker").datepicker();
+        });
