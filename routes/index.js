@@ -185,8 +185,8 @@ router.get('/snake', function(req, res) {
 });
 
 
-// router.get('/quote', function(req, res) {
-//     res.render('quote', {user: req.user});
-// });
+router.get('/complaint', function(req, res) {
+    res.render('complaint');
+});
 
 module.exports = router;

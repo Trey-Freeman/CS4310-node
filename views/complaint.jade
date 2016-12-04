@@ -1,0 +1,111 @@
+extends layout
+
+block content
+
+  form#ComplaintTranspotHub(action='//submit.form', method='post', onsubmit='return ValidateForm(this);')
+    script(type='text/javascript').
+      function ValidateForm(frm) {
+      if (frm.First_Name.value == "") { alert('First name is required.'); frm.First_Name.focus(); return false; }
+      if (frm.Last_Name.value == "") { alert('Last name is required.'); frm.Last_Name.focus(); return false; }
+      if (frm.Email_Address.value == "") { alert('Email address is required.'); frm.Email_Address.focus(); return false; }
+      if (frm.Email_Address.value.indexOf("@") < 1 || frm.Email_Address.value.indexOf(".") < 1) { alert('Please enter a valid email address.'); frm.Email_Address.focus(); return false; }
+      if (frm.Phone.value == "") { alert('Phone is required.'); frm.Phone.focus(); return false; }
+      return true; }
+    h3 Complaint Form
+    h5 Our Customers Are Important
+    p
+      | Customers are the most important people for any organisation.
+      | They are the resource upon which the success of the business depends. 
+      br
+      | We take our customer's complaint seriously
+    p
+      | Please send us details about the incident you would like to report. Our Complaint Center will 
+      | analyze your complaint and take the appropriate measures 
+      br
+      | in order that the reported situation
+      | will not occur at any other time in the future.
+    table(border='0', cellpadding='5', cellspacing='0')
+      tr
+        td(style='width: 50%')
+          label(for='First_Name')
+            b First name *
+          br
+          input(name='First_Name', type='text', maxlength='50', style='width: 260px')
+        td(style='width: 50%')
+          label(for='Last_Name')
+            b Last name *
+          br
+          input(name='Last_Name', type='text', maxlength='50', style='width: 260px')
+      tr
+        td(colspan='2')
+          label
+            br
+            h4  How we can reach you 
+      tr
+        td(style='width: 50%')
+          label(for='PhoneNum')
+            b Phone number *
+          br
+          input(name='phoneNum', type='text', maxlength='50', style='width: 260px')
+        td(style='width: 50%')
+          label(for='emailaddress')
+            b Email Address *
+          br
+          input(name='emailaddress', type='text', maxlength='50', style='width: 260px')
+      tr
+        td(colspan='2')
+      tr
+        td(style='width: 50%')
+          label(for='street')
+            b Street 
+          br
+          input(name='Street', type='text', maxlength='50', style='width: 260px')
+        td(style='width: 50%')
+          label(for='city')
+            b City 
+          br
+          input(name='city', type='text', maxlength='50', style='width: 260px')
+      tr
+        td(style='width: 50%')
+          label(for='state')
+            b State 
+          br
+          input(name='state', type='text', maxlength='50', style='width: 260px')
+        td(style='width: 50%')
+          label(for='zip')
+            b Zip code 
+          br
+          input(name='zip', type='text', maxlength='50', style='width: 260px')
+      tr
+        td(colspan='2')
+          label(for='pobox')
+            b PO Box if used for mailing address
+          br
+          input(name='pobox', type='text', maxlength='100', style='width: 535px')
+      tr
+        td(colspan='2')
+          label(for='contact')
+            b How you would like us to contact you
+          br
+          input(name='contact', type='radio', value='Email', checked='checked')
+          |  Email  
+          br
+          input(name='contact', type='radio', value='Phone')
+          |  Phone   
+          br
+          input(name='contact', type='radio', value='Mail')
+          |  Requler Mail  
+          br
+          input(name='contact', type='radio', value='Any')
+          |  no prefrance. 
+          br
+      tr
+        td(colspan='2')
+          label(for='complain')
+            b Complain/suggestion
+          br
+          textarea(name='complain', rows='7', cols='40', style='width: 535px')
+      tr
+        td(colspan='2', style='text-align: center;')
+          script.
+          input(name='Sent', type='submit', value='SendComplain')
