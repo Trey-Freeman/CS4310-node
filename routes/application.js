@@ -5,7 +5,7 @@ var path = require('path');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-    res.render('application');
+    res.render('application', {user: req.user});
 });
 
 router.post('/new', function (req, res) {

@@ -129,7 +129,7 @@ router.get('/action/join', function(req, res) {
 router.post('/create', function(req, res) {
     console.log("create route");
     console.log(req.body);
-     var body       = req.body;
+     var body = req.body;
      var quote = new Quote({
            id           : body.id,
            origin       : body.origin,
@@ -186,7 +186,13 @@ router.get('/snake', function(req, res) {
 
 
 router.get('/complaint', function(req, res) {
-    res.render('complaint');
+    res.render('complaint', {user: req.user});
 });
+
+router.post('/submitComplaint', function(req, res) {
+    var body = req.body;
+    res.render('index');
+});
+
 
 module.exports = router;
