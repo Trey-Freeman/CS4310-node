@@ -20,14 +20,3 @@ It is an easy to use, web based application that will help dispatchers and drive
 * Have team specific meetings/chats through the use of our private chat rooms.
 * Contacting the admin in case of technical difficulty.
 * Review driver time sheets and payments.
-
-
-TODO:
-1. Admin Users and Views Special for the Admins
-2. Error messages and pages
-3. Video Conferencing
-4. Hookup Job Applications to the database.
-5. Delete and edit doesn't exist for our stuff.
-6. Make Snake?
-7. Complaints
-8. Fix any bugs
