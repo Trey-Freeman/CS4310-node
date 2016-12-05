@@ -20,3 +20,13 @@ It is an easy to use, web based application that will help dispatchers and drive
 * Have team specific meetings/chats through the use of our private chat rooms.
 * Contacting the admin in case of technical difficulty.
 * Review driver time sheets and payments.
+
+## Build instructions.
+
+1. Install MogoDB and nodeJS.
+3. Create a database in MongoDB called 'passport_local_mongoose_express4'
+4. Start MongoDB in the console using 'mongod' command, or run the mongoDB executable.
+5. Clone the repository.
+5. Navigate to the project directory.
+6. Run 'node ./bin/www' to start the web-server.
+7. Navigate to localhost:3000 in your browser.
