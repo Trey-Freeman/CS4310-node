@@ -1,7 +1,10 @@
 #Transport-Hub
 
 **Group project for CS4130 at CSU East Bay**
+
 **Team Name: Alfa**
+
+Live preview [here](http://hr-hub.herokuapp.com/)
 
 ## Authors
 - Andrea Sánchez Blanco
@@ -21,7 +24,7 @@ It is an easy to use, web based application that will help dispatchers and drive
 * Contacting the admin in case of technical difficulty.
 * Review driver time sheets and payments.
 
-## Build instructions.
+## Build instructions
 
 1. Install MogoDB and nodeJS.
 3. Create a database in MongoDB called 'passport_local_mongoose_express4'
